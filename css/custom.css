@@ -1,0 +1,56 @@
+article, header > h3, header > h4, small > h5, small > h6, .mar6 {
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+
+nav > ul > li, article > header, .pad6 {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	margin-bottom: 0px;
+}
+
+article > header {
+	margin-bottom: 6px;
+}
+
+article {
+	padding-bottom: 6px;
+}
+
+.toggledroite {
+	float: right;
+}
+
+.slider {
+    display: grid;
+    grid-template: 1/1;
+}
+
+.slide {
+    grid-area: 1/1;
+    display: block;
+    transition: all .3s 0s cubic-bezier(.5, 0, .5, 1);
+    transition-property: opacity, transform;
+}
+
+.slide[hidden] {
+    transition-delay: 0;
+    opacity: 0;
+    transform: scale(0);
+    max-height: 0;
+  }
+
+.nombres {
+	margin: auto;
+}
+
+.fraction {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 1em;
+  align-items: center;
+}
+
+.numerateur {
+  border-bottom: 2px solid grey;
+}

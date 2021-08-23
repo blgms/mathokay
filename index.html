@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/pico.min.css">
+		<link rel="stylesheet" href="css/custom.css">
+		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/exercices.js"></script>   
+		<title>Math'Okay</title>
+	</head>
+	<body onpageshow="demarrage()">
+		<header class="pad6">
+			<nav class="container-fluid">
+				<ul>
+					<li>
+						<hgroup>
+							<h4>Math'Okay</h4>
+							<h5>Automatismes</h5>
+						</hgroup>
+					</li>
+				</ul>
+				<ul id="btnNav">
+					<li id="liBtnGo"><button id="btnGo" onclick="lancement()" disabled>Go&nbsp;!</button></li>
+					<li id="liBtnConfig" hidden><button class="secondary" onclick="slider(1)">Config</button></li>
+					<li id="liBtnQuestions" hidden><button onclick="slider(2)">Questions</button></li>
+					<li id="liBtnReponses" hidden><button onclick="slider(3)">Réponses</button></li>
+				</ul>
+			</nav>
+		</header>
+		<main class="container pad6">
+			<div class="slider">
+				<div id="slide1" class="slide">
+					<h5 style="margin-bottom:0;">Paramètres</h5>
+					<label for='nbvoulu'>Nombre d'exercices : <span id="affNb"></span><input style="float:right;" type="range" min="1" max="10" value="3" id="nbvoulu" name="range" onchange="affNb()"></label>
+					<label for='switch'><input type='checkbox' id='togDoublons' name='switch' role='switch' class='toggledroite'>Autoriser les exercices de même type</label>
+					<h5 class="pad6">Sélection des exercices</h5>
+					<div id="divBtnExos" hidden><button class="outline" onclick="menu('Exos')">Retour</button></div>
+					<div id="divBtnCat"class="grid">
+						<div><button class="outline" onclick="menu('Gpe')">Par thème</button></div>
+						<div><button class="outline" onclick="menu('Diff')">Par difficulté</button></div>
+					</div>
+					<div id="divTableExos" class="slide"><table role="grid" id="tableExos"></table></div>
+					<div id="divTableGpe" class="slide" hidden><table role="grid" id="tableGpe"></table></div>
+					<div id="divTableDiff" class="slide" hidden><table role="grid" id="tabDiff"></table></div>
+				</div>
+				<div id="slide2" class="slide" hidden>
+					<div id="questions">QUESTIONS</div>
+				</div>
+				<div id="slide3" class="slide" hidden>
+					<div id="reponses">REPONSES</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
