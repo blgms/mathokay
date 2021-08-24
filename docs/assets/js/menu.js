@@ -25,7 +25,7 @@ function demarrage() {
 	let diffStr = "";
 	for (let i=0 ; i<exos.length ; i++) {
 		if (i==0 || exos[i].Gpe!=exos[i-1].Gpe) {
-			exosStr += "<tr><thead>"+groupes[exos[i].Gpe]+"</thead></tr>";
+			exosStr += "<thead><tr><th>"+groupes[exos[i].Gpe]+"</th></tr></thead>";
 		}
 		exosStr += "<tr><td><label for='switch'><input type='checkbox' id='togExo"+i+"' name='switch' role='switch' class='toggledroite' onclick='majMenu(&apos;Exos&apos;,"+i+")'>"+diffs[exos[i].Diff].couleur+" "+exos[i].nom+"</label></td></tr>"	
 	}
@@ -107,10 +107,13 @@ function slider(sl) {
 	let btnsNew=[];
 	if (sl==1) {
 		btnsNew=[true, false, false, false];
+		document.getElementById("footerpage").hidden=false;
 	} else if (sl==2) {
 		btnsNew=[false, true, false, true];
+		document.getElementById("footerpage").hidden=true;
 	} else if (sl==3) {
 		btnsNew=[false, true, true, false];
+		document.getElementById("footerpage").hidden=true;
 	}
 	for (let i=0 ; i<4 ; i++) {
 		document.getElementById("liBtn"+btns[i].id).hidden=!btnsNew[i];
