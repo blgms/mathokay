@@ -14,9 +14,9 @@ var exos = [
 	{"act": false, "Gpe": 2, "Diff": 3,  "fonc": "durees(3)", "nom": "Durées (difficile)"},
 	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "tabprop()", "nom": "Vérification"},
 	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "quatprop()", "nom": "Calcul de 4e proportionnelle"},
-	/*{"act": false, "Gpe": 4, "Diff": 1,  "fonc": "fracsimp(3)", "nom": "Simplification"},
-	{"act": false, "Gpe": 4, "Diff": 2,  "fonc": "fraccalc(3)", "nom": "Calculs"},
-	{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Type <i>ax = d</i>"},
+	{"act": false, "Gpe": 4, "Diff": 1,  "fonc": "fracsimp()", "nom": "Simplification"},
+	{"act": false, "Gpe": 4, "Diff": 2,  "fonc": "fraccalc()", "nom": "Calculs"},
+	/*{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Type <i>ax = d</i>"},
 	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(2)", "nom": "Type <i>ax + b = d</i>"},
 	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Type <i>ax + b = cx + d</i>"}*/
 ];
@@ -273,8 +273,9 @@ function quatprop() {
 /*FRACTIONS - A CORRIGER (défaut affichage)*/
 /*SIMPLIFICATION FRACTIONS*/
 function fracsimp() {
-	let question = "<p>Si c'est possible, simplifier :<div class='grid nombres'>";
-	let reponse = "<div class='grid nombres'>";
+	let consigne = "<div>Si c'est possible, simplifier :</div>";
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
 	for (let j=1;j<4;j++) {
 		let nbs = [];
 		let a = Math.ceil(Math.random()*5);
@@ -285,25 +286,26 @@ function fracsimp() {
 		/*création des chaînes*/
 		let frac = chainefrac(nbs);
 		let resultat = chainefrac(fracres);
-		question += "<div>"+frac+"</div>";
-		reponse += "<div>"+frac+"&nbsp;=&nbsp;"+resultat+"</div>";
+		question += "<div>"+renderKatex(frac)+"</div>";
+		reponse += "<div>"+renderKatex(frac+"="+resultat)+"</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
-	return [question,reponse];
+	return [consigne,question,reponse];
 }
 
 /*CALCULS FRACTIONS*/
-function fraccalc(n) {
-	let question = "Calculer :<div class='grid'>";
-	let reponse = "<table><tr>";
-	for (let j=0;j<n;j++) {
+function fraccalc() {
+	let consigne = "<div>Calculer :</div>"
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
+	for (let j=0;j<3;j++) {
 		let nbs = [];
 		for (let i=0;i<4;i++) {
 			nbs[i]=Math.ceil(Math.random()*10);
 		}
 		/*choix aléatoire de l'opération*/
-		let ops = ["+","-","×","÷"];
+		let ops = ["+","-","\\times","\\div"];
 		let nbop = Math.floor(Math.random()*4);
 		let op = ops[nbop];
 		/*calcul du dénominateur du résultat*/
@@ -313,18 +315,14 @@ function fraccalc(n) {
 		/*simplification de la fraction résultat*/
 		let fracres = simpl(num[nbop],den[nbop]);
 		/*création des chaînes*/
-		let calcul = "<table><tr><td>"+chainefrac([nbs[0],nbs[1]])+"</td><td>&nbsp;"+op+"&nbsp;</td><td>"+chainefrac([nbs[2],nbs[3]])+"</td></tr></table>";
+		let calcul = chainefrac([nbs[0],nbs[1]])+op+chainefrac([nbs[2],nbs[3]]);
 		let resultat = chainefrac(fracres);
-		question += "<td>"+calcul+"</td>";
-		reponse += "<td><table><tr><td>"+resultat+"</td></tr></table></td>";
-		if (j<n-1) {
-			question += "<td>;</td>";
-			reponse += "<td>;</td>";
-		}
+		question += "<div>"+renderKatex(calcul)+"</div>";
+		reponse += "<div>"+renderKatex(calcul+"="+resultat)+"</div>";
 	}
-	question += "</tr></table>";
-	reponse += "</tr></table>";
-	return [question,reponse];
+	question += "</div>";
+	reponse += "</div>";
+	return [consigne,question,reponse];
 }
 
 /*EQUATIONS DU 1ER DEGRE*/
