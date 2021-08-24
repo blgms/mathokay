@@ -9,7 +9,7 @@ var exos = [
 	{"act": false, "Gpe": 1, "Diff": 0,  "fonc": "puiss10()", "nom": "Multiplier/diviser par 10, 100, 1000"},
 	{"act": false, "Gpe": 2, "Diff": 0,  "fonc": "unites(1)", "nom": "Longueurs, masses, volumes (L)..."},
 	{"act": false, "Gpe": 2, "Diff": 2,  "fonc": "unites(2)", "nom": "Aires, volumes (m³)"},
-	{"act": false, "Gpe": 2, "Diff": 1,  "fonc": "durees(1)", "nom": "Durées (facile)"},
+	/*{"act": false, "Gpe": 2, "Diff": 1,  "fonc": "durees(1)", "nom": "Durées (facile)"},
 	{"act": false, "Gpe": 2, "Diff": 2,  "fonc": "durees(2)", "nom": "Durées (moyen)"},
 	{"act": false, "Gpe": 2, "Diff": 3,  "fonc": "durees(3)", "nom": "Durées (difficile)"},
 	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "tabprop()", "nom": "Vérification"},
@@ -18,7 +18,7 @@ var exos = [
 	{"act": false, "Gpe": 4, "Diff": 2,  "fonc": "fraccalc(3)", "nom": "Calculs"},
 	{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Type <i>ax = d</i>"},
 	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(2)", "nom": "Type <i>ax + b = d</i>"},
-	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Type <i>ax + b = cx + d</i>"},
+	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Type <i>ax + b = cx + d</i>"}*/
 ];
 
 /*VARIABLES*/
@@ -29,8 +29,9 @@ var chainex = "<span style='font-size:6vmin;font-family:Times'><i>x</i></span>";
 function arrondis() {
 	let ordre = ["à l'unité","au dixième","au centième","au millième"];
 	let nOrdre = Math.floor(Math.random()*ordre.length);
-	let question = "Arrondir <b>"+ordre[nOrdre]+"</b>.<div class='grid nombres'>";
-	let reponse = "Arrondir <b>"+ordre[nOrdre]+"</b>.<div class='grid nombres'>";
+	let consigne = "Arrondir <b>"+ordre[nOrdre]+"</b>.";
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
 	for (let j=1;j<4;j++) {
 		let a = Math.floor(Math.random()*100000);
 		let x = (Math.round(a/(10**(4-nOrdre))))/(10**nOrdre);
@@ -40,13 +41,14 @@ function arrondis() {
 	}
 	question += "</div>";
 	reponse += "</div>";
-	return [question,reponse];
+	return [consigne,question,reponse];
 }
 
 /* PASSER EN ECRITURE SCIENTIFIQUE*/
 function scienti() {
-	let question = "Convertir en écriture scientifique :<div class='grid nombres'>";
-	let reponse = "<div class='grid nombres'>";
+	let consigne = "Convertir en écriture scientifique :";
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
 	for (let j=1;j<4;j++) {
 		let nb = Math.floor(Math.random()*9000+1000)/1000;
 		let npuis = Math.ceil(Math.random()*6);
@@ -64,18 +66,19 @@ function scienti() {
 		} else {
 			numch = num.toFixed(0);
 		}
-		question += "<div>"+j+")&nbsp;"+numch+"</div>";
-		reponse += "<div>"+j+")&nbsp;"+numch+"&nbsp;=&nbsp;"+nb+"×10<sup>"+puis+"</sup></div>";
+		question += "<div>"+renderKatex(numch)+"</div>";
+		reponse += "<div>"+renderKatex(numch+"="+nb+"\\times 10^{"+puis+"}")+"</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
-	return [question,reponse];
+	return [consigne,question,reponse];
 }
 
 /* PASSER EN ECRITURE DECIMALE*/
 function scientideci() {
-	let question = "Convertir en écriture décimale :<div class='grid nombres'>";
-	let reponse = "<div class='grid nombres'>";
+	let consigne = "Convertir en écriture décimale :";
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
 	for (let j=1;j<4;j++) {
 		let nb = Math.floor(Math.random()*9000+1000)/1000;
 		let npuis = Math.ceil(Math.random()*6);
@@ -93,34 +96,36 @@ function scientideci() {
 		} else {
 			numch = num.toFixed(0);
 		}
-		question += "<div>"+j+")&nbsp;"+nb+"×10<sup>"+puis+"</sup></div>";
-		reponse += "<div>"+j+")&nbsp;"+nb+"×10<sup>" + puis + "</sup>&nbsp;=&nbsp;" + numch + "</div>";
+		question += "<div>"+renderKatex(nb+"\\times 10^{"+puis+"}")+"</div>";
+		reponse += "<div>"+renderKatex(nb+"\\times 10^{"+puis+"}="+numch)+"</div>";
 	}
 	question += "</div>";
-	return [question,reponse];
+	return [consigne,question,reponse];
 }
 
 /*CALCUL MENTAL*/
 /*TABLES DE MULTIPLICATION*/
 function tablesmulti() {
-	let question = "Calculer de tête : <div class='grid nombres'>";
-	let reponse = "<div class='grid nombres'";
+	let consigne = "Calculer <b>de tête :</b>"
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
 	for (let j=1;j<4;j++) {
 		let n1 = Math.ceil(Math.random()*10);
 		let n2 = Math.ceil(Math.random()*10);
-		let quest = n1 + " × " + n2;
+		let quest = n1+"\\times"+n2;
 		let rep = n1*n2;
-		question += "<div>"+j+")&nbsp;"+quest+"</div>";
-		reponse += "<div>"+j+")&nbsp;"+quest+"</td><td>&nbsp;=&nbsp;"+rep+"</div>";
+		question += "<div>"+renderKatex(quest)+"</div>";
+		reponse += "<div>"+renderKatex(quest+"="+rep)+"</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
-	return [question,reponse];
+	return [consigne,question,reponse];
 }
 
 /*PUISSANCES DE 10 - UTILISE DES FRACTIONS*/
 function puiss10() {
-	let question = "Calculer de tête : <div class='grid nombres'>";
+	let consigne = "Calculer <b>de tête</b> :";
+	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres'>";
 	for (let j=1;j<4;j++) {
 		let num = Math.floor(Math.random()*1000);
@@ -131,15 +136,15 @@ function puiss10() {
 			quest = chainefrac([num,coeff]);
 			rep = num/coeff;
 		} else {
-			quest = num+" × "+coeff;
+			quest = num+"\\times"+coeff;
 			rep = num*coeff;
 		}
-		question += "<div>"+j+")&nbsp;"+quest+"</div>";
-		reponse += "<div>"+j+")&nbsp;"+quest+"&nbsp;=&nbsp;"+rep+"</div>";
+		question += "<div>"+renderKatex(quest)+"</div>";
+		reponse += "<div>"+renderKatex(quest+"="+rep)+"</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
-	return [question,reponse];
+	return [consigne,question,reponse];
 }
 
 /*UNITES*/
@@ -159,8 +164,8 @@ function unites(exo) {
 	if (exo==2) {
 		base = 10;
 		unites = [
-			{ "grandeur":"m²", "div":["k","h","da","","d","c","m"], "facteur":2 },
-			{ "grandeur":"m³", "div":["","d","c","m"], "facteur":3 }
+			{ "grandeur":"m$^2$", "div":["k","h","da","","d","c","m"], "facteur":2 },
+			{ "grandeur":"m$^3$", "div":["","d","c","m"], "facteur":3 }
 		];
 	}
 	/*choix de l'unité de départ et de l'unité d'arrivée*/
@@ -181,8 +186,10 @@ function unites(exo) {
 	} else {
 		rep = Math.trunc((nb100*base**(decale))/100);
 	}
-	let question = "<div>Convertir "+nbdep+" "+udep+" en "+uarr+".</div>", reponse = "<div>"+nbdep+" "+udep+" = "+rep+" "+uarr+"</div>";
-	return [question,reponse];
+	let consigne = "<div>Convertir...</div>";
+	let question = "<div class='nombres'>"+renderKatex(nbdep+"\\,\\text{"+udep+"}")+" en "+renderKatex("\\text{"+uarr+"}")+".</div>";
+	let reponse = "<div class='nombres reponse'>"+renderKatex(nbdep+"\\,\\text{"+udep+"}="+rep+"\\,\\text{"+uarr+"}")+"</div>";
+	return [consigne,question,reponse];
 }
 
 /*CONVERSION UNITES DE DUREE*/
@@ -398,29 +405,8 @@ function simpl(a,b) {
 }
 
 /*TRANSFORMER DEUX NOMBRES EN UNE CHAINE FRACTION*/
-/*function chainefrac(array) {
-	let chaine = "<table><tr>";
-	if (array[0]/array[1] < 0) {
-		chaine += "<td>-&nbsp;</td>";
-	}
-	let absnum = Math.abs(array[0]);
-	let absden = Math.abs(array[1]);
-	chaine += "<td><table><tr><td>"+absnum+"</td></tr>";
-	if (absden!=1) {
-		chaine += "<tr><td>"+absden+"</td></tr>";
-	}
-	chaine += "</table></td></tr></table>";
-	return chaine;
-}*/
 function chainefrac(array) {
-	let absnum = Math.abs(array[0]);
-	let absden = Math.abs(array[1]);
-	let chaine = "<span class='fraction'><span class='numerateur'>";
-	if (array[0]/array[1] < 0) {
-		chaine += "-&nbsp;";
-	}
-	chaine += absnum+"</span><span class='denominateur'>"+absden+"</span></span>";
-	return chaine;
+	return "\\dfrac{"+array[0]+"}{"+array[1]+"}";
 }
 
 /*CALCUL DE PGCD*/
@@ -475,6 +461,6 @@ function renderKatex(chaine) {
 	if (typeof chaine != 'string') {
 		chaine = chaine.toString();
 	}
-	let chaineKatex = katex.renderToString(chaine,{throwOnError:false});
-	return chaineKatex;
+	chaine = chaine.replaceAll(".","{,}");
+	return katex.renderToString(chaine,{throwOnError:false});
 }
