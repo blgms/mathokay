@@ -9,20 +9,17 @@ var exos = [
 	{"act": false, "Gpe": 1, "Diff": 0,  "fonc": "puiss10()", "nom": "Multiplier/diviser par 10, 100, 1000"},
 	{"act": false, "Gpe": 2, "Diff": 0,  "fonc": "unites(1)", "nom": "Longueurs, masses, volumes (L)..."},
 	{"act": false, "Gpe": 2, "Diff": 2,  "fonc": "unites(2)", "nom": "Aires, volumes (m³)"},
-	/*{"act": false, "Gpe": 2, "Diff": 1,  "fonc": "durees(1)", "nom": "Durées (facile)"},
+	{"act": false, "Gpe": 2, "Diff": 1,  "fonc": "durees(1)", "nom": "Durées (facile)"},
 	{"act": false, "Gpe": 2, "Diff": 2,  "fonc": "durees(2)", "nom": "Durées (moyen)"},
 	{"act": false, "Gpe": 2, "Diff": 3,  "fonc": "durees(3)", "nom": "Durées (difficile)"},
 	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "tabprop()", "nom": "Vérification"},
 	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "quatprop()", "nom": "Calcul de 4e proportionnelle"},
-	{"act": false, "Gpe": 4, "Diff": 1,  "fonc": "fracsimp(3)", "nom": "Simplification"},
+	/*{"act": false, "Gpe": 4, "Diff": 1,  "fonc": "fracsimp(3)", "nom": "Simplification"},
 	{"act": false, "Gpe": 4, "Diff": 2,  "fonc": "fraccalc(3)", "nom": "Calculs"},
 	{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Type <i>ax = d</i>"},
 	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(2)", "nom": "Type <i>ax + b = d</i>"},
 	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Type <i>ax + b = cx + d</i>"}*/
 ];
-
-/*VARIABLES*/
-var chainex = "<span style='font-size:6vmin;font-family:Times'><i>x</i></span>";
 
 /*NOMBRES*/
 /*ARRONDIS DE DECIMAUX*/
@@ -228,9 +225,10 @@ function durees(exo) {
 			tempsrep.unshift(ttemp);
 		}
 	}
-	let question = "<div>Convertir en utilisant les unités standard de durée : " + temps + " " + grand.unites[nudep] + ".</div>";
-	let reponse = "<div>"+temps + " " + grand.unites[nudep] + " = " + tempsrep.toString().replace(/,/g, " ")+"</div>";
-	return [question,reponse];
+	let consigne = "<div>Exprimer en utilisant toutes les unités de temps nécessaires :</div>";
+	let question = "<div class='nombres'>"+renderKatex(temps+"\\,\\text{"+grand.unites[nudep]+"}")+"</div>";
+	let reponse = "<div class='nombres reponse'>"+renderKatex(temps+"\\,\\text{"+grand.unites[nudep]+"}=\\text{"+tempsrep.toString().replace(/,/g, "\\,")+"}")+"</div>";
+	return [consigne,question,reponse];
 }
 
 /*PROPORTIONNALITE*/
@@ -238,7 +236,7 @@ function durees(exo) {
 function tabprop() {
 	let prop = ["C'est un tableau de proportionnalité.","Ce n'est <b>pas</b> un tableau de proportionnalité."];
 	let on = Math.floor(Math.random()*2);
-	let ouinon = "<div>"+prop[on]+"</div>";
+	let reponse = "<div class='reponse'>"+prop[on]+"</div>";
 	let nbs = [];
 	let coeff = Math.ceil(Math.random()*10);
 	for (let i=0;i<3;i++) {
@@ -249,12 +247,11 @@ function tabprop() {
 		nbs[3+i] = nbs[i]*coeff;
 	}
 	for (let i=0;i<6;i++) {
-		nbs[i] = nbs[i].toString();
+		nbs[i] = renderKatex(nbs[i]);
 	}
-	let tableau = "<table role='grid'><tr><th>Grandeur A</th><td>"+nbs[0]+"</td><td>"+nbs[1]+"</td><td>"+nbs[2]+"</td></tr><tr><th>Grandeur B</th><td>"+nbs[3]+"</td><td>"+nbs[4]+"</td><td>"+nbs[5]+"</td></tr></table>"
-	let reponse = tableau+ouinon;
-	let question = "<div>Indiquer si le tableau suivant est un tableau de proportionnalité.</div>"+tableau;
-	return [question,reponse];
+	let consigne = "<table class='proportion'><tr><th>Grandeur A</th><td>"+nbs[0]+"</td><td>"+nbs[1]+"</td><td>"+nbs[2]+"</td></tr><tr><th>Grandeur B</th><td>"+nbs[3]+"</td><td>"+nbs[4]+"</td><td>"+nbs[5]+"</td></tr></table>"
+	let question = "<div>Indiquer si le tableau ci-dessus est un tableau de proportionnalité.</div>"
+	return [consigne,question,reponse];
 }
 
 /*QUATRIEME PROPORTIONNELLE*/
@@ -265,11 +262,12 @@ function quatprop() {
 	let coeff = (Math.floor(Math.random()*9+2));
 	let nbc = nba*coeff;
 	let nbd = nbb*coeff;
-	let nbs = [nba.toString(), nbb.toString(), nbc.toString(), nbd.toString()];
-	let reponse = chainex+"<span> = "+nbs[quellevaleur]+"</span>";
-	nbs[quellevaleur] = chainex;
-	let question = "<div>Retrouver la valeur manquante dans le tableau de proportionnalité suivant.</div><table role='grid'><tr><th>Grandeur A</th><td>"+nbs[0]+"</td><td>"+nbs[1]+"</td></tr><tr><th>Grandeur B</th><td>"+nbs[2]+"</td><td>"+nbs[3]+"</td></tr></table>";
-	return [question,reponse];
+	let nbs = [nba, nbb, nbc, nbd];
+	let reponse = "<div class='reponse nombres'>"+renderKatex("x="+nbs[quellevaleur])+"</div>";
+	nbs[quellevaleur] = "x";
+	let consigne = "<table class='proportion'><tr><th>Grandeur A</th><td>"+renderKatex(nbs[0])+"</td><td>"+renderKatex(nbs[1])+"</td></tr><tr><th>Grandeur B</th><td>"+renderKatex(nbs[2])+"</td><td>"+renderKatex(nbs[3])+"</td></tr></table>";
+	let question = "<div>Retrouver la valeur manquante dans le tableau de proportionnalité ci-dessus.</div>";
+	return [consigne,question,reponse];
 }
 
 /*FRACTIONS - A CORRIGER (défaut affichage)*/

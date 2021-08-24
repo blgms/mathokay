@@ -176,21 +176,6 @@ function verifActif() {
 	}
 }
 
-/*SELECTION DE TOUS LES EXERCICES*/
-/*function selectTout() {
-	let liste=verifActif();
-	if (liste.includes(false)) {
-		liste.fill(true);
-	} else {
-		liste.fill(false);
-	}
-	for (let i=0 ; i<exos.length ; i++) { 
-		let el = document.getElementById("togExo"+i);
-		el.checked = liste[i];
-	}
-	majMenu('exos',-1);
-}*/
-
 /*LANCEMENT*/
 function lancement() {
 	let array = selectExos();
