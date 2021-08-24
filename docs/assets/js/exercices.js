@@ -16,8 +16,8 @@ var exos = [
 	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "quatprop()", "nom": "Calcul de 4e proportionnelle"},
 	{"act": false, "Gpe": 4, "Diff": 1,  "fonc": "fracsimp()", "nom": "Simplification"},
 	{"act": false, "Gpe": 4, "Diff": 2,  "fonc": "fraccalc()", "nom": "Calculs"},
-	/*{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Type <i>ax = d</i>"},
-	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(2)", "nom": "Type <i>ax + b = d</i>"},
+	{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Type <i>ax = d</i>"},
+	/*{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(2)", "nom": "Type <i>ax + b = d</i>"},
 	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Type <i>ax + b = cx + d</i>"}*/
 ];
 
@@ -123,7 +123,7 @@ function tablesmulti() {
 function puiss10() {
 	let consigne = "Calculer <b>de tête</b> :";
 	let question = "<div class='grid nombres'>";
-	let reponse = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
 	for (let j=1;j<4;j++) {
 		let num = Math.floor(Math.random()*1000);
 		let coeff = 10**Math.ceil(Math.random()*3);
@@ -327,73 +327,45 @@ function fraccalc() {
 
 /*EQUATIONS DU 1ER DEGRE*/
 function equa1d(type) {
-	let consigne = "<p>Résoudre l'équation suivante :</p><p>";
-	let equation;
-	let bonnerep;
 	let nbs = [0,0,0,0];
-	while (nbs[0] == nbs[2] || nbs[1] == nbs[3] || nbs[0] == 0 || nbs[0] == 1) {
-		nbs[0] = Math.floor(Math.random()*20-9);
-		nbs[3] = Math.floor(Math.random()*20-9);
-		if (nbs[0] == 1) {
-			equation = consigne+chainex;
-		} else if (nbs[0] == -1) {
-			equation = consigne+"-"+chainex;
-		} else {
-			equation = consigne+nbs[0]+chainex;
+	while (nbs[0]==nbs[2] || nbs[1]==nbs[3]) {
+		nbs[0] = genZ(1,10);
+		if (type>1) {
+			nbs[1] = genZ(1,10);
 		}
-		if (type > 1) {
-			while (nbs[1] == 0) {
-				nbs[1] = Math.floor(Math.random()*20-9);
-				if (nbs[1] < 0) {
-					var signeb = "&nbsp;-";
-				} else {
-					var signeb = "&nbsp;+";
-				}
-				var absb = Math.abs(nbs[1]);
-			}
-			equation += signeb+"&nbsp;"+absb;
+		if (type>2) {
+			nbs[2] = genZ(1,10);
 		}
-		equation += "&nbsp;=&nbsp;";
-		if (type > 2) {
-			while (nbs[2] == 0) {
-				nbs[2] = Math.floor(Math.random()*20-9);
-			}
-			if (nbs[2] == 1) {
-				equation += chainex;
-			} else if (nbs[2] == -1) {
-				equation += "-"+chainex;
-			} else {
-				equation += nbs[2]+chainex;
-			}
-		}
-		if (nbs[2] != 0) {
-			if (nbs[3] < 0) {
-				var absd = Math.abs(nbs[3]);
-				equation += "&nbsp;-&nbsp;"+absd;
-			} else if (nbs[3] > 0) {
-				equation += "&nbsp;+&nbsp;"+nbs[3];
-			}
-		}
-		if (nbs[2] == 0) {
-			equation += nbs[3];
-		}
+		nbs[3] = genZ(1,10);
 	}
-	bonnerep = (nbs[3]-nbs[1])/(nbs[0]-nbs[2]);
-	if (!Number.isInteger(bonnerep)) {
-		let frac = [nbs[3]-nbs[1],nbs[0]-nbs[2]];
-		frac = simpl(Math.abs(nbs[3]-nbs[1]),Math.abs(nbs[0]-nbs[2]));
-		bonnerep = chainefrac(frac);
+	let equation = nbs[0]+"x";
+	if (type>1) {
+		if (nbs[1]<0) {equation += "-";} else {equation += "+";}
+		equation += Math.abs(nbs[1]);
 	}
-	let reponse = chainex+"&nbsp;=&nbsp;"+bonnerep;
-	equation += "</p>";
-	return [equation,reponse];
+	equation += "=";
+	if (type>2) {
+		equation += nbs[2]+"x";
+	}
+	if (nbs[3]<0) {equation += "-";} else if (type==3) {equation += "+";}
+	equation += Math.abs(nbs[3]);
+	let x = (nbs[3]-nbs[1])/(nbs[0]-nbs[2]);
+	if (!Number.isInteger(x)) {x=chainefrac([nbs[3]-nbs[1],nbs[0]-nbs[2]]);}
+	let question = "<div>Résoudre l'équation.</div>";
+	let consigne = "<div class='nombres'>"+renderKatex(equation)+"</div>";	
+	let reponse = "<div class='nombres reponse'>"+renderKatex("x="+x)+"</div>";
+	return [consigne,question,reponse];
 }
 
 
 
 
-
 /*FONCTIONS ANNEXES*/
+/*GENERER UN ENTIER RELATIF NON NUL SUR [-b;-a]U[a;b]*/
+function genZ(a,b) {
+	return (Math.round(Math.random()*(b-a))+a)*(-1)**Math.round(Math.random());
+}
+
 /*SIMPLIFIER UNE FRACTION*/
 function simpl(a,b) {
 	let s = pgcd(a,b);
@@ -402,7 +374,13 @@ function simpl(a,b) {
 
 /*TRANSFORMER DEUX NOMBRES EN UNE CHAINE FRACTION*/
 function chainefrac(array) {
-	return "\\dfrac{"+array[0]+"}{"+array[1]+"}";
+	let fraction = "";
+	array.map(function(n) {return Number(n);});
+	if (array[0]*array[1]<0) {
+		fraction += "-";
+	}
+	fraction += "\\dfrac{"+Math.abs(array[0])+"}{"+Math.abs(array[1])+"}";
+	return fraction;
 }
 
 /*CALCUL DE PGCD*/
@@ -419,8 +397,9 @@ function ppcm(a,b) {
 	return a*b/p;
 }
 
+/*
 /*CONVERTIR NOMBRE EN NOMBRE TABLEAU*/
-function nbarray(nb,long) {
+/*function nbarray(nb,long) {
 	let nbstr = nb.toString();
 	let nbchiffres = nbstr.length;
 	let array = nbstr.split("");
@@ -428,10 +407,10 @@ function nbarray(nb,long) {
 		array.unshift("0");
 	}
 	return array;
-}
+}*/
 
 /*CONVERTIR NOMBRE TABLEAU EN NOMBRE CHAINE AVEC dec DECIMALES*/
-function arraynb(array,dec) {
+/*function arraynb(array,dec) {
 	let long = array.length;
 	for (let i=0;i<long;i++) {
 		if (array[i]==0) {
@@ -450,7 +429,7 @@ function arraynb(array,dec) {
 		nb += array[i];
 	}
 	return nb;		
-}
+}*/
 
 /*RENDU KATEX D'UNE CHAÎNE*/
 function renderKatex(chaine) {
