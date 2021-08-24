@@ -55,7 +55,6 @@ function menu(m) {
 	document.getElementById("divTable"+menuon).hidden=!document.getElementById("divTable"+menuon).hidden;
 	document.getElementById("divBtnExos").hidden=!document.getElementById("divBtnExos").hidden;
 	document.getElementById("divBtnCat").hidden=!document.getElementById("divBtnCat").hidden;
-	document.getElementById("divBtnOpt").hidden=!document.getElementById("divBtnOpt").hidden;
 	majMenu("Exos",-1);
 }
 
