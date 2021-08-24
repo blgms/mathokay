@@ -1,10 +1,10 @@
 /*VARIABLES GLOBALES*/
 var diffs = [
-	{"nom": "Très facile", "couleur": "<img src='icons/star.svg' class='icon20 iconblue' />"},
-	{"nom": "Facile", "couleur": "<img src='icons/star.svg' class='icon20 icongreen' />"},
-	{"nom": "Moyen", "couleur": "<img src='icons/star.svg' class='icon20 iconyellow' />"},
-	{"nom": "Difficile", "couleur": "<img src='icons/star.svg' class='icon20 iconorange' />"},
-	{"nom": "Hardcore", "couleur": "<img src='icons/star.svg' class='icon20 iconred' />"}
+	{"nom": "Très facile", "couleur": "<img src='docs/assets/icons/star.svg' class='icon20 iconblue' />"},
+	{"nom": "Facile", "couleur": "<img src='docs/assets/icons/star.svg' class='icon20 icongreen' />"},
+	{"nom": "Moyen", "couleur": "<img src='docs/assets/icons/star.svg' class='icon20 iconyellow' />"},
+	{"nom": "Difficile", "couleur": "<img src='docs/assets/icons/star.svg' class='icon20 iconorange' />"},
+	{"nom": "Hardcore", "couleur": "<img src='docs/assets/icons/star.svg' class='icon20 iconred' />"}
 ];
 
 var btns = [

@@ -64,7 +64,7 @@ header > nav {
 	width: 20px;
 }
 .iconBtn {
-	max-width: 24px;
+	max-width: 32px;
 	filter: invert(100%) sepia(0%) saturate(7479%) hue-rotate(302deg) brightness(107%) contrast(103%);
 }
 
