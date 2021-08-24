@@ -42,6 +42,11 @@ function demarrage() {
 	verifActif();
 }
 
+/*ROLL CREDITS*/
+function about() {
+	document.getElementById("aPropos").hidden=!document.getElementById("aPropos").hidden;
+}
+
 /*CHANGEMENT DE MENU DE SELECTION*/
 function menu(m) {
 	majMenu("Exos",-1);
@@ -50,6 +55,7 @@ function menu(m) {
 	document.getElementById("divTable"+menuon).hidden=!document.getElementById("divTable"+menuon).hidden;
 	document.getElementById("divBtnExos").hidden=!document.getElementById("divBtnExos").hidden;
 	document.getElementById("divBtnCat").hidden=!document.getElementById("divBtnCat").hidden;
+	document.getElementById("divBtnOpt").hidden=!document.getElementById("divBtnOpt").hidden;
 	majMenu("Exos",-1);
 }
 
@@ -107,13 +113,10 @@ function slider(sl) {
 	let btnsNew=[];
 	if (sl==1) {
 		btnsNew=[true, false, false, false];
-		document.getElementById("footerpage").hidden=false;
 	} else if (sl==2) {
 		btnsNew=[false, true, false, true];
-		document.getElementById("footerpage").hidden=true;
 	} else if (sl==3) {
 		btnsNew=[false, true, true, false];
-		document.getElementById("footerpage").hidden=true;
 	}
 	for (let i=0 ; i<4 ; i++) {
 		document.getElementById("liBtn"+btns[i].id).hidden=!btnsNew[i];

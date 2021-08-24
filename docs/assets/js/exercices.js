@@ -27,16 +27,16 @@ var chainex = "<span style='font-size:6vmin;font-family:Times'><i>x</i></span>";
 /*NOMBRES*/
 /*ARRONDIS DE DECIMAUX*/
 function arrondis() {
-	let arr = ["à l'unité","au dixième","au centième","au millième"];
-	let narr = Math.floor(Math.random()*4);
-	let question = "Arrondir <b>"+arr[narr]+"</b>.<div class='nombres grid'>";
-	let reponse = "<div class='nombres grid'>";
+	let ordre = ["à l'unité","au dixième","au centième","au millième"];
+	let nOrdre = Math.floor(Math.random()*ordre.length);
+	let question = "Arrondir <b>"+ordre[nOrdre]+"</b>.<div class='grid nombres'>";
+	let reponse = "Arrondir <b>"+ordre[nOrdre]+"</b>.<div class='grid nombres'>";
 	for (let j=1;j<4;j++) {
-		let num = Math.floor(Math.random()*100000);
-		let rep = (Math.round(num/(10**(4-narr))))/(10**narr);
-		num = (num/10000);
-		question += "<div>"+j+")&nbsp;"+num+"</div>";
-		reponse += "<div>"+j+")&nbsp;"+num+"&nbsp;&#8771;&nbsp;"+rep+"</div>";
+		let a = Math.floor(Math.random()*100000);
+		let x = (Math.round(a/(10**(4-nOrdre))))/(10**nOrdre);
+		a = (a/10000);
+		question += "<div>"+renderKatex(a)+"</div>";
+		reponse += "<div>"+renderKatex(a+"\\simeq"+x)+"</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
@@ -468,4 +468,13 @@ function arraynb(array,dec) {
 		nb += array[i];
 	}
 	return nb;		
+}
+
+/*RENDU KATEX D'UNE CHAÎNE*/
+function renderKatex(chaine) {
+	if (typeof chaine != 'string') {
+		chaine = chaine.toString();
+	}
+	let chaineKatex = katex.renderToString(chaine,{throwOnError:false});
+	return chaineKatex;
 }

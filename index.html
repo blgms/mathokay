@@ -6,7 +6,11 @@
 		<link rel="stylesheet" href="docs/assets/css/pico.min.css">
 		<link rel="stylesheet" href="docs/assets/css/custom.css">
 		<script type="text/javascript" src="docs/assets/js/menu.js"></script>
-		<script type="text/javascript" src="docs/assets/js/exercices.js"></script>   
+		<script type="text/javascript" src="docs/assets/js/exercices.js"></script>  
+		<!--Librairie KaTeX-->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css" integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn" crossorigin="anonymous">
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js" integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8" crossorigin="anonymous"></script>
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 		<title>Math'Okay - Automatismes</title>
 	</head>
 	<body onpageshow="demarrage()">
@@ -14,35 +18,43 @@
 			<nav class="container-fluid">
 				<ul>
 					<li>
-						<hgroup>
+						<hgroup onclick="about()">
 							<h4>Math'Okay</h4>
 							<h5>Automatismes</h5>
 						</hgroup>
 					</li>
 				</ul>
 				<ul id="btnNav">
-					<li id="liBtnGo"><button id="btnGo" onclick="lancement()" disabled><img class="iconBtn" src="docs/assets/images/play.svg" /></button></li>
+					<li id="liBtnGo"><button id="btnGo" onclick="lancement()" disabled><img class="iconBtn" src="docs/assets/images/play-circle.svg" /></button></li>
 					<li id="liBtnConfig" hidden><button class="secondary" onclick="slider(1)"><img class="iconBtn" src="docs/assets/images/settings.svg" /></button></li>
 					<li id="liBtnQuestions" hidden><button onclick="slider(2)"><img class="iconBtn" src="docs/assets/images/help-circle.svg" /></button></li>
-					<li id="liBtnReponses" hidden><button onclick="slider(3)"><img class="iconBtn" src="docs/assets/images/checkmark-circle.svg" /></button></li>
+					<li id="liBtnReponses" hidden><button onclick="slider(3)"><img class="iconBtn" src="docs/assets/images/check-circle.svg" /></button></li>
 				</ul>
 			</nav>
+			<div id="aPropos" class="grid" hidden>
+				<div>2021 - B. Le Guével</div>
+				<div><a href="https://github.com/blgms/mathokay"><img class="icon12" src="docs/assets/images/github.svg" /></a> <a href="https://github.com/blgms/mathokay/commits/main">Changelog</a></div>
+				<div>Aidé de <a href="https://picocss.com/">Pico CSS</a> et <a href="https://feathericons.com/">Feather</a></div>
+			</div>
 		</header>
 		<main class="container pad6">
 			<div class="slider">
 				<div id="slide1" class="slide">
-					<h5 style="margin-bottom:0;">Paramètres</h5>
-					<label for='nbvoulu'>Nombre d'exercices : <span id="affNb"></span><input style="float:right;" type="range" min="1" max="10" value="3" id="nbvoulu" name="range" onchange="affNb()"></label>
-					<label for='switch'><input type='checkbox' id='togDoublons' name='switch' role='switch' class='toggledroite'>Autoriser les exercices de même type</label>
-					<h5 class="pad6">Sélection des exercices</h5>
 					<div id="divBtnExos" hidden><button class="outline" onclick="menu('Exos')">Retour</button></div>
-					<div id="divBtnCat"class="grid">
-						<div><button class="outline" onclick="menu('Gpe')">Par thème</button></div>
-						<div><button class="outline" onclick="menu('Diff')">Par difficulté</button></div>
+					<div id="divBtnCat">
+						<div class="divBtnCatCont">
+							<div class="divBtnCat1"><button class="outline" onclick="menu('Gpe')">Thèmes</button></div>
+							<div class="divBtnCat2"><button class="outline" onclick="menu('Diff')">Difficultés</button></div>
+							<div class="divBtnCat3"><button class="secondary outline" onclick="menu('Opt')">Paramètres</button></div>
+						</div>
 					</div>
 					<div id="divTableExos" class="slide"><table role="grid" id="tableExos"></table></div>
 					<div id="divTableGpe" class="slide" hidden><table role="grid" id="tableGpe"></table></div>
 					<div id="divTableDiff" class="slide" hidden><table role="grid" id="tabDiff"></table></div>
+					<div id="divTableOpt" class="slide" hidden><table role="grid" id="tableOpt">
+						<tr><td><label for='nbvoulu'>Nombre d'exercices : <span id="affNb"></span><input style="float:right;" type="range" min="1" max="10" value="3" id="nbvoulu" name="range" onchange="affNb()"></label></td></tr>
+						<tr><td><label for='switch'><input type='checkbox' id='togDoublons' name='switch' role='switch' class='toggledroite'>Autoriser les exercices de même type</label></td></tr>
+					</table></div>
 				</div>
 				<div id="slide2" class="slide" hidden>
 					<div id="questions"></div>
@@ -52,8 +64,5 @@
 				</div>
 			</div>
 		</main>
-		<footer id="footerpage">
-			<div><small>B. Le Guével | <a href="https://github.com/blgms/mathokay">Code (GitHub)</a> | <a href="https://github.com/blgms/mathokay/commits/main">Changelog</a> | Icônes <a href="https://ionic.io/ionicons">Ionicons</a></small></div>
-		</footer>
 	</body>
 </html>

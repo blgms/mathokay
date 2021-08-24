@@ -3,6 +3,11 @@ article, header > h3, header > h4, small > h5, small > h6, .mar6 {
 	margin-bottom: 6px;
 }
 
+small > h6 {
+	margin-top: 0px;
+	margin-bottom: 6px;
+}
+
 body > header, body > footer, nav > ul > li, article > header, .pad6 {
 	padding-top: 6px;
 	padding-bottom: 6px;
@@ -17,12 +22,13 @@ article {
 	padding-bottom: 6px;
 }
 
-header > nav {
+header {
 	border-bottom: 2px solid #1095c1;
 }
 
-body > footer {
+#aPropos {
 	text-align: center;
+	font-size: 0.75em;
 }
 
 .toggledroite {
@@ -45,11 +51,24 @@ body > footer {
     transition-delay: 0;
     opacity: 0;
     transform: scale(0);
-    max-height: 0;
-  }
+	max-height: 0;
+}
+  
+.divBtnCatCont {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: 1fr;
+	grid-column-gap: 12px;
+	grid-row-gap: 0px;
+}
+
+.divBtnCat1 { grid-area: 1 / 1 / 2 / 2; }
+.divBtnCat2 { grid-area: 1 / 2 / 2 / 3; }
+.divBtnCat3 { grid-area: 1 / 3 / 2 / 4; } 
 
 .nombres {
-	margin: auto;
+	margin: 10px auto;
+	text-align: center;
 }
 
 .fraction {
@@ -63,11 +82,18 @@ body > footer {
   border-bottom: 2px solid grey;
 }
 
+.icon12 {
+	height: 12px;
+	width: 12px;
+}
+
 .icon20 {
 	height: 20px;
 	width: 20px;
 }
+
 .iconBtn {
+	width: 32px;
 	max-width: 32px;
 	filter: invert(100%) sepia(0%) saturate(7479%) hue-rotate(302deg) brightness(107%) contrast(103%);
 }
