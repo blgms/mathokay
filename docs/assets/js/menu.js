@@ -38,13 +38,15 @@ function demarrage() {
 	document.getElementById("tableExos").innerHTML = exosStr;
 	document.getElementById("tableGpe").innerHTML = gpeStr;
 	document.getElementById("tabDiff").innerHTML = diffStr;
+	renderMathInElement(document.getElementById("corps"));
 	affNb();
 	verifActif();
 }
 
 /*ROLL CREDITS*/
 function about() {
-	document.getElementById("aPropos").hidden=!document.getElementById("aPropos").hidden;
+	let el = document.getElementById("aPropos");
+	if (el.style.display == "") {el.style.display = "grid"; } else {el.style.display = ""; }
 }
 
 /*CHANGEMENT DE MENU DE SELECTION*/
@@ -120,6 +122,7 @@ function slider(sl) {
 	for (let i=0 ; i<4 ; i++) {
 		document.getElementById("liBtn"+btns[i].id).hidden=!btnsNew[i];
 	}
+	renderMathInElement(document.getElementById("corps"));
 }
 
 /*DÉFILEMENT VERS LE HAUT*/

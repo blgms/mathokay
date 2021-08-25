@@ -16,9 +16,9 @@ var exos = [
 	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "quatprop()", "nom": "Calcul de 4e proportionnelle"},
 	{"act": false, "Gpe": 4, "Diff": 1,  "fonc": "fracsimp()", "nom": "Simplification"},
 	{"act": false, "Gpe": 4, "Diff": 2,  "fonc": "fraccalc()", "nom": "Calculs"},
-	{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Type <i>ax = d</i>"},
-	/*{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(2)", "nom": "Type <i>ax + b = d</i>"},
-	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Type <i>ax + b = cx + d</i>"}*/
+	{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Type \\(ax=d\\)"},
+	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(2)", "nom": "Type \\(ax+b=d\\)"},
+	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Type \\(ax+b=cx+d\\)"}
 ];
 
 /*NOMBRES*/
@@ -33,8 +33,8 @@ function arrondis() {
 		let a = Math.floor(Math.random()*100000);
 		let x = (Math.round(a/(10**(4-nOrdre))))/(10**nOrdre);
 		a = (a/10000);
-		question += "<div>"+renderKatex(a)+"</div>";
-		reponse += "<div>"+renderKatex(a+"\\simeq"+x)+"</div>";
+		question += "<div>\\("+a+"\\)</div>";
+		reponse += "<div>\\("+a+"\\simeq"+x+"\\)</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
@@ -63,8 +63,8 @@ function scienti() {
 		} else {
 			numch = num.toFixed(0);
 		}
-		question += "<div>"+renderKatex(numch)+"</div>";
-		reponse += "<div>"+renderKatex(numch+"="+nb+"\\times 10^{"+puis+"}")+"</div>";
+		question += "<div>\\("+numch+"\\)</div>";
+		reponse += "<div>\\("+numch+"="+nb+"\\times 10^{"+puis+"}"+"\\)</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
@@ -93,8 +93,8 @@ function scientideci() {
 		} else {
 			numch = num.toFixed(0);
 		}
-		question += "<div>"+renderKatex(nb+"\\times 10^{"+puis+"}")+"</div>";
-		reponse += "<div>"+renderKatex(nb+"\\times 10^{"+puis+"}="+numch)+"</div>";
+		question += "<div>\\("+nb+"\\times 10^{"+puis+"}"+"\\)</div>";
+		reponse += "<div>\\("+nb+"\\times 10^{"+puis+"}="+numch+"\\)</div>";
 	}
 	question += "</div>";
 	return [consigne,question,reponse];
@@ -111,8 +111,8 @@ function tablesmulti() {
 		let n2 = Math.ceil(Math.random()*10);
 		let quest = n1+"\\times"+n2;
 		let rep = n1*n2;
-		question += "<div>"+renderKatex(quest)+"</div>";
-		reponse += "<div>"+renderKatex(quest+"="+rep)+"</div>";
+		question += "<div>\\("+quest+"\\)</div>";
+		reponse += "<div>\\("+quest+"="+rep+"\\)</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
@@ -136,8 +136,8 @@ function puiss10() {
 			quest = num+"\\times"+coeff;
 			rep = num*coeff;
 		}
-		question += "<div>"+renderKatex(quest)+"</div>";
-		reponse += "<div>"+renderKatex(quest+"="+rep)+"</div>";
+		question += "<div>\\("+quest+"\\)</div>";
+		reponse += "<div>\\("+quest+"="+rep+"\\)</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
@@ -184,8 +184,8 @@ function unites(exo) {
 		rep = Math.trunc((nb100*base**(decale))/100);
 	}
 	let consigne = "<div>Convertir...</div>";
-	let question = "<div class='nombres'>"+renderKatex(nbdep+"\\,\\text{"+udep+"}")+" en "+renderKatex("\\text{"+uarr+"}")+".</div>";
-	let reponse = "<div class='nombres reponse'>"+renderKatex(nbdep+"\\,\\text{"+udep+"}="+rep+"\\,\\text{"+uarr+"}")+"</div>";
+	let question = "<div class='nombres'>\\("+nbdep+"\\,\\text{"+udep+"}\\) en \\(\\text{"+uarr+"}\\).</div>";
+	let reponse = "<div class='nombres reponse'>\\("+nbdep+"\\,\\text{"+udep+"}="+rep+"\\,\\text{"+uarr+"}\\)</div>";
 	return [consigne,question,reponse];
 }
 
@@ -226,8 +226,8 @@ function durees(exo) {
 		}
 	}
 	let consigne = "<div>Exprimer en utilisant toutes les unités de temps nécessaires :</div>";
-	let question = "<div class='nombres'>"+renderKatex(temps+"\\,\\text{"+grand.unites[nudep]+"}")+"</div>";
-	let reponse = "<div class='nombres reponse'>"+renderKatex(temps+"\\,\\text{"+grand.unites[nudep]+"}=\\text{"+tempsrep.toString().replace(/,/g, "\\,")+"}")+"</div>";
+	let question = "<div class='nombres'>\\("+temps+"\\,\\text{"+grand.unites[nudep]+"}\\)</div>";
+	let reponse = "<div class='nombres reponse'>\\("+temps+"\\,\\text{"+grand.unites[nudep]+"}=\\text{"+tempsrep.toString().replace(/,/g, "\\,")+"}\\)</div>";
 	return [consigne,question,reponse];
 }
 
@@ -247,7 +247,7 @@ function tabprop() {
 		nbs[3+i] = nbs[i]*coeff;
 	}
 	for (let i=0;i<6;i++) {
-		nbs[i] = renderKatex(nbs[i]);
+		nbs[i] = "\\("+nbs[i]+"\\)";
 	}
 	let consigne = "<table class='proportion'><tr><th>Grandeur A</th><td>"+nbs[0]+"</td><td>"+nbs[1]+"</td><td>"+nbs[2]+"</td></tr><tr><th>Grandeur B</th><td>"+nbs[3]+"</td><td>"+nbs[4]+"</td><td>"+nbs[5]+"</td></tr></table>"
 	let question = "<div>Indiquer si le tableau ci-dessus est un tableau de proportionnalité.</div>"
@@ -263,14 +263,14 @@ function quatprop() {
 	let nbc = nba*coeff;
 	let nbd = nbb*coeff;
 	let nbs = [nba, nbb, nbc, nbd];
-	let reponse = "<div class='reponse nombres'>"+renderKatex("x="+nbs[quellevaleur])+"</div>";
+	let reponse = "<div class='reponse nombres'>\\(x="+nbs[quellevaleur]+"\\)</div>";
 	nbs[quellevaleur] = "x";
-	let consigne = "<table class='proportion'><tr><th>Grandeur A</th><td>"+renderKatex(nbs[0])+"</td><td>"+renderKatex(nbs[1])+"</td></tr><tr><th>Grandeur B</th><td>"+renderKatex(nbs[2])+"</td><td>"+renderKatex(nbs[3])+"</td></tr></table>";
+	let consigne = "<table class='proportion'><tr><th>Grandeur A</th><td>\\("+nbs[0]+"\\)</td><td>\\("+nbs[1]+"\\)</td></tr><tr><th>Grandeur B</th><td>\\("+nbs[2]+"\\)</td><td>\\("+nbs[3]+"\\)</td></tr></table>";
 	let question = "<div>Retrouver la valeur manquante dans le tableau de proportionnalité ci-dessus.</div>";
 	return [consigne,question,reponse];
 }
 
-/*FRACTIONS - A CORRIGER (défaut affichage)*/
+/*FRACTIONS*/
 /*SIMPLIFICATION FRACTIONS*/
 function fracsimp() {
 	let consigne = "<div>Si c'est possible, simplifier :</div>";
@@ -286,8 +286,8 @@ function fracsimp() {
 		/*création des chaînes*/
 		let frac = chainefrac(nbs);
 		let resultat = chainefrac(fracres);
-		question += "<div>"+renderKatex(frac)+"</div>";
-		reponse += "<div>"+renderKatex(frac+"="+resultat)+"</div>";
+		question += "<div>\\("+frac+"\\)</div>";
+		reponse += "<div>\\("+frac+"="+resultat+"\\)</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
@@ -317,8 +317,8 @@ function fraccalc() {
 		/*création des chaînes*/
 		let calcul = chainefrac([nbs[0],nbs[1]])+op+chainefrac([nbs[2],nbs[3]]);
 		let resultat = chainefrac(fracres);
-		question += "<div>"+renderKatex(calcul)+"</div>";
-		reponse += "<div>"+renderKatex(calcul+"="+resultat)+"</div>";
+		question += "<div>\\("+calcul+"\\)</div>";
+		reponse += "<div>\\("+calcul+"="+resultat+"\\)</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
@@ -350,10 +350,10 @@ function equa1d(type) {
 	if (nbs[3]<0) {equation += "-";} else if (type==3) {equation += "+";}
 	equation += Math.abs(nbs[3]);
 	let x = (nbs[3]-nbs[1])/(nbs[0]-nbs[2]);
-	if (!Number.isInteger(x)) {x=chainefrac([nbs[3]-nbs[1],nbs[0]-nbs[2]]);}
+	if (!Number.isInteger(x)) {x=chainefrac(simpl(nbs[3]-nbs[1],nbs[0]-nbs[2]));}
 	let question = "<div>Résoudre l'équation.</div>";
-	let consigne = "<div class='nombres'>"+renderKatex(equation)+"</div>";	
-	let reponse = "<div class='nombres reponse'>"+renderKatex("x="+x)+"</div>";
+	let consigne = "<div class='nombres'>\\("+equation+"\\)</div>";	
+	let reponse = "<div class='nombres reponse'>\\(x="+x+"\\)</div>";
 	return [consigne,question,reponse];
 }
 
@@ -396,40 +396,6 @@ function ppcm(a,b) {
 	let p = pgcd(a,b);
 	return a*b/p;
 }
-
-/*
-/*CONVERTIR NOMBRE EN NOMBRE TABLEAU*/
-/*function nbarray(nb,long) {
-	let nbstr = nb.toString();
-	let nbchiffres = nbstr.length;
-	let array = nbstr.split("");
-	for (let i=0;i<=long-nbchiffres;i++) {
-		array.unshift("0");
-	}
-	return array;
-}*/
-
-/*CONVERTIR NOMBRE TABLEAU EN NOMBRE CHAINE AVEC dec DECIMALES*/
-/*function arraynb(array,dec) {
-	let long = array.length;
-	for (let i=0;i<long;i++) {
-		if (array[i]==0) {
-			array.splice(i,1);
-		} else {
-			break;
-		}
-	}
-	long = array.length;
-	let nb = "";
-	for (let i=0;i<long-dec;i++) {
-		nb += array[i];
-	}
-	nb += ",";
-	for (let i=long-dec;i<long;i++) {
-		nb += array[i];
-	}
-	return nb;		
-}*/
 
 /*RENDU KATEX D'UNE CHAÎNE*/
 function renderKatex(chaine) {
