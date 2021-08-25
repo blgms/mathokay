@@ -18,10 +18,17 @@
 			<nav class="container-fluid">
 				<ul>
 					<li>
-						<hgroup onclick="about()">
-							<h4>Math'Okay</h4>
-							<h5>Automatismes</h5>
-						</hgroup>
+						<div id="divLogo">
+							<hgroup onclick="about()">
+								<h4>Math'Okay</h4>
+								<h5>Automatismes</h5>
+							</hgroup>
+						</div>
+					</li>
+					<li>
+						<div id="divChrono" hidden>
+							<button id="btnCompteRebours" onclick="compteReboursPause()"><span id="chrono">CHRONO</span></button>
+						</div>
 					</li>
 				</ul>
 				<ul id="btnNav">
@@ -52,8 +59,9 @@
 					<div id="divTableGpe" class="slide" hidden><table role="grid" id="tableGpe"></table></div>
 					<div id="divTableDiff" class="slide" hidden><table role="grid" id="tabDiff"></table></div>
 					<div id="divTableOpt" class="slide" hidden><table role="grid" id="tableOpt">
-						<tr><td><label for='nbvoulu'>Nombre d'exercices : <span id="affNb"></span><input style="float:right;" type="range" min="1" max="10" value="3" id="nbvoulu" name="range" onchange="affNb()"></label></td></tr>
+						<tr><td><label for='nbvoulu'>Nombre d'exercices : <span id="affNb"></span><input class="toggledroite" type="range" min="1" max="10" value="3" id="nbvoulu" name="range" onchange="affNb()"></label></td></tr>
 						<tr><td><label for='switch'><input type='checkbox' id='togDoublons' name='switch' role='switch' class='toggledroite'>Autoriser les exercices de même type</label></td></tr>
+						<tr><td><label for='switch'><input type='checkbox' id='togChrono' name='switch' role='switch' class='toggledroite' onchange="compteReboursReset()">Compte à rebours<span id="timeRangeSpan" hidden><input class="toggledroite" type="range" min="10" max="600" step="10" value="300" id="timeRange" name="range" onchange="compteReboursRefresh()"></span></label></td></tr>
 					</table></div>
 				</div>
 				<div id="slide2" class="slide" hidden>

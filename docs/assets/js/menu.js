@@ -16,9 +16,14 @@ var btns = [
 	
 var slon = 1;
 var menuon = "Exos";
+var elChrono, timer;
+var time=300;
+var pauseCompteRebours = false;
 
 /*LANCEMENT DE L'APPLI ET AFFICHAGE DU MENU*/
 function demarrage() {
+	elChrono = document.getElementById("chrono");
+	document.getElementById("togChrono").checked=false;
 	exos.sort(function(a, b) {return a.Gpe-b.Gpe;});
 	let exosStr = "";
 	let gpeStr = "";
@@ -114,10 +119,15 @@ function slider(sl) {
 	let btnsNew=[];
 	if (sl==1) {
 		btnsNew=[true, false, false, false];
+		time=0;
 	} else if (sl==2) {
 		btnsNew=[false, true, false, true];
+		if (document.getElementById("togChrono").checked==true) {
+			compteReboursPause(false);
+		}
 	} else if (sl==3) {
 		btnsNew=[false, true, true, false];
+		time=0;
 	}
 	for (let i=0 ; i<4 ; i++) {
 		document.getElementById("liBtn"+btns[i].id).hidden=!btnsNew[i];
@@ -230,4 +240,54 @@ function creerExos(liste) {
 	document.getElementById("questions").innerHTML = "<div>"+cartesq+"</div>";
 	document.getElementById("reponses").innerHTML = cartesr;
 	slider(2);
+}
+
+/*COMPTE A REBOURS*/
+function compteReboursReset() {
+	if (document.getElementById("togChrono").checked==true) {
+		document.getElementById("divLogo").classList.add("cacheLogo");
+		document.getElementById("divChrono").hidden=false;
+		document.getElementById("timeRangeSpan").hidden=false;
+		compteReboursRefresh();
+	} else {
+		document.getElementById("divLogo").classList.remove("cacheLogo");
+		document.getElementById("divChrono").hidden=true;
+		document.getElementById("timeRangeSpan").hidden=true;
+	}
+}
+function compteRebours() {
+	timer = setInterval(function() {
+		if (pauseCompteRebours==false) {
+			time--;
+			elChrono.innerHTML=compteReboursAff(time);
+		}
+		if (time<=0) {
+			clearInterval(timer);
+			document.getElementById("btnCompteRebours").classList.add("outline");
+			elChrono.innerHTML="Terminé !";
+			setTimeout(function() {
+				document.getElementById("togChrono").checked=false;
+				compteReboursReset();
+			}, 3000);
+		}
+	}, 1000);
+	
+}
+function compteReboursAff(t) {
+	let s=t%60;
+	let m=Math.floor(t/60);
+	if (m<10) {m="0"+m;}
+	if (s<10) {s="0"+s;}
+	return m+":"+s;
+}
+function compteReboursRefresh() {
+	document.getElementById("btnCompteRebours").classList.remove("outline");
+	time=document.getElementById("timeRange").value;
+	elChrono.innerHTML=compteReboursAff(time);
+}
+
+function compteReboursPause(cmd) {
+	if (typeof cmd != "boolean") { pauseCompteRebours=!pauseCompteRebours; console.log("pouet"); } else { pauseCompteRebours=cmd; };
+	if (pauseCompteRebours==true) { document.getElementById("corps").classList.add("flou"); document.getElementById("btnCompteRebours").classList.add("outline"); clearInterval(timer); }
+	if (pauseCompteRebours==false) { document.getElementById("corps").classList.remove("flou"); document.getElementById("btnCompteRebours").classList.remove("outline"); compteRebours(); }	
 }

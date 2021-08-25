@@ -29,6 +29,15 @@ body > header {
 	z-index: 1;
 }
 
+#divLogo > hgroup, #divChrono button {
+	margin: 0;
+	line-height:32px;
+	width:150px;
+}
+#chrono {
+	font-weight: 900;
+}
+
 main {
 	top: 93.5px;
 	position: relative;
@@ -48,7 +57,9 @@ main {
   100% { opacity: 1; max-height: auto; }
 }
 
-.cache {
+.cacheLogo {
+	max-width: 0px;
+	overflow: hidden;
 }
 
 .toggledroite {
@@ -107,15 +118,16 @@ main {
 	background-color: #ffffff;
 }
 
-.fraction {
-  display: inline-flex;
-  flex-direction: column;
-  padding: 1em;
-  align-items: center;
-}
-
-.numerateur {
-  border-bottom: 2px solid grey;
+.flou {
+	webkit-filter: blur(5px);
+	-moz-filter: blur(5px);
+	-o-filter: blur(5px);
+	-ms-filter: blur(5px);
+	filter: blur(5px);
+	width: 100%;
+	height: 100%;
+	background-color: #ccc;
+	transition: all 0.5s ease-out;
 }
 
 .icon12 {
