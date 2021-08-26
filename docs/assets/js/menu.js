@@ -244,7 +244,7 @@ function creerExos(liste) {
 		cartesq += "<div><article><header><small><h5>Exercice "+(i+1)+" - "+groupes[liste[i].Gpe]+"</h5><h6>"+liste[i].nom+"</h6></small></header><div>"+consigne+"</div><div>"+question+"</div></article></div>";
 		cartesr += "<div><article><header><small><h5>Réponse "+(i+1)+" - "+groupes[liste[i].Gpe]+"</h5><h6>"+liste[i].nom+"</h6></small></header><div>"+consigne+"</div><div>"+reponse+"</div></article></div>";
 	}
-	document.getElementById("questions").innerHTML = "<div>"+cartesq+"</div>";
+	document.getElementById("questions").innerHTML = cartesq;
 	document.getElementById("reponses").innerHTML = cartesr;
 	if (document.getElementById("togChrono").checked==true) { timerGo(); } else { slider(2); }
 }

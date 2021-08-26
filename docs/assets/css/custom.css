@@ -8,12 +8,12 @@ html {
 
 article, header > h3, header > h4, small > h5, small > h6, .proportion, .mar6 {
 	margin-top: 6px;
-	margin-bottom: 6px;
+	margin-bottom: 0px;
 }
 
 small > h6 {
 	margin-top: 0px;
-	margin-bottom: 6px;
+	margin-bottom: 0px;
 }
 
 body > header, body > footer, nav > ul > li, article > header, .pad6 {
@@ -130,6 +130,9 @@ main {
 .nombres {
 	margin: 10px auto;
 	text-align: center;
+}
+.nombres div {
+	padding: 10px 0;
 }
 
 .reponse {
