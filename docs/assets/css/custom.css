@@ -204,7 +204,7 @@ main {
 	position: fixed;
 	text-align: center;
 	width: 100vw;
-	top: 93.5px;
-	line-height: calc(100vh - 93.5px);
+	top: 0px;
+	line-height: 100vh;
 	font-size: 10vw;
 }

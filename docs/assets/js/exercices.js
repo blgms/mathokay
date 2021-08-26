@@ -1,11 +1,11 @@
 /*VARIABLES*/
 var groupes = [
-	"Nombres",
-	"Calcul Mental",
-	"Unités",
-	"Proportionnalité",
-	"Fractions",
-	"Équations du 1er degré"
+	/*0*/"Nombres",
+	/*1*/"Calcul Mental",
+	/*2*/"Unités",
+	/*3*/"Proportionnalité",
+	/*4*/"Fractions",
+	/*5*/"Équations du 1er degré"
 ];
 
 var diffs = [
@@ -36,8 +36,8 @@ var exos = [
 	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Type \\(ax+b=cx+d\\)"}
 ];
 
-/*NOMBRES*/
-/*ARRONDIS DE DECIMAUX*/
+//NOMBRES
+//ARRONDIS DE DECIMAUX
 function arrondis() {
 	let ordre = ["à l'unité","au dixième","au centième","au millième"];
 	let nOrdre = Math.floor(Math.random()*ordre.length);
@@ -56,7 +56,7 @@ function arrondis() {
 	return [consigne,question,reponse];
 }
 
-/* PASSER EN ECRITURE SCIENTIFIQUE*/
+//PASSER EN ECRITURE SCIENTIFIQUE
 function scienti() {
 	let consigne = "Convertir en écriture scientifique :";
 	let question = "<div class='grid nombres'>";
@@ -86,7 +86,7 @@ function scienti() {
 	return [consigne,question,reponse];
 }
 
-/*PASSER EN ECRITURE DECIMALE*/
+//PASSER EN ECRITURE DECIMALE
 function scientideci() {
 	let consigne = "Convertir en écriture décimale :";
 	let question = "<div class='grid nombres'>";
@@ -115,8 +115,8 @@ function scientideci() {
 	return [consigne,question,reponse];
 }
 
-/*CALCUL MENTAL*/
-/*TABLES DE MULTIPLICATION*/
+//CALCUL MENTAL
+//TABLES DE MULTIPLICATION
 function tablesmulti() {
 	let consigne = "Calculer <b>de tête :</b>"
 	let question = "<div class='grid nombres'>";
@@ -134,7 +134,7 @@ function tablesmulti() {
 	return [consigne,question,reponse];
 }
 
-/*PUISSANCES DE 10 - UTILISE DES FRACTIONS*/
+//PUISSANCES DE 10 - UTILISE DES FRACTIONS
 function puiss10() {
 	let consigne = "Calculer <b>de tête</b> :";
 	let question = "<div class='grid nombres'>";
@@ -159,8 +159,8 @@ function puiss10() {
 	return [consigne,question,reponse];
 }
 
-/*UNITES*/
-/*CONVERSION UNITES*/
+//UNITES
+//CONVERSION UNITES
 function unites(exo) {
 	let unites = [];
 	let base;
@@ -204,7 +204,7 @@ function unites(exo) {
 	return [consigne,question,reponse];
 }
 
-/*CONVERSION UNITES DE DUREE*/
+//CONVERSION UNITES DE DUREE
 function durees(exo) {
 	let grand;
 	if (exo==1) {
@@ -246,8 +246,8 @@ function durees(exo) {
 	return [consigne,question,reponse];
 }
 
-/*PROPORTIONNALITE*/
-/*TABLEAUX DE PROPORTIONNALITE*/
+//PROPORTIONNALITE
+//TABLEAUX DE PROPORTIONNALITE
 function tabprop() {
 	let prop = ["C'est un tableau de proportionnalité.","Ce n'est <b>pas</b> un tableau de proportionnalité."];
 	let on = Math.floor(Math.random()*2);
@@ -269,7 +269,7 @@ function tabprop() {
 	return [consigne,question,reponse];
 }
 
-/*QUATRIEME PROPORTIONNELLE*/
+//QUATRIEME PROPORTIONNELLE
 function quatprop() {
 	let quellevaleur = Math.floor(Math.random()*4);
 	let nba = Math.floor(Math.random()*90+1);
@@ -285,8 +285,8 @@ function quatprop() {
 	return [consigne,question,reponse];
 }
 
-/*FRACTIONS*/
-/*SIMPLIFICATION FRACTIONS*/
+//FRACTIONS
+//SIMPLIFICATION FRACTIONS
 function fracsimp() {
 	let consigne = "<div>Si c'est possible, simplifier :</div>";
 	let question = "<div class='grid nombres'>";
@@ -309,7 +309,7 @@ function fracsimp() {
 	return [consigne,question,reponse];
 }
 
-/*CALCULS FRACTIONS*/
+//CALCULS FRACTIONS
 function fraccalc() {
 	let consigne = "<div>Calculer :</div>"
 	let question = "<div class='grid nombres'>";
@@ -340,7 +340,7 @@ function fraccalc() {
 	return [consigne,question,reponse];
 }
 
-/*EQUATIONS DU 1ER DEGRE*/
+//EQUATIONS DU 1ER DEGRE
 function equa1d(type) {
 	let nbs = [0,0,0,0];
 	while (nbs[0]==nbs[2] || nbs[1]==nbs[3]) {
@@ -375,19 +375,19 @@ function equa1d(type) {
 
 
 
-/*FONCTIONS ANNEXES*/
-/*GENERER UN ENTIER RELATIF NON NUL SUR [-b;-a]U[a;b]*/
+//FONCTIONS ANNEXES
+//GENERER UN ENTIER RELATIF NON NUL SUR [-b;-a]U[a;b]
 function genZ(a,b) {
 	return (Math.round(Math.random()*(b-a))+a)*(-1)**Math.round(Math.random());
 }
 
-/*SIMPLIFIER UNE FRACTION*/
+//SIMPLIFIER UNE FRACTION
 function simpl(a,b) {
 	let s = pgcd(a,b);
 	return [a/s,b/s];
 }
 
-/*TRANSFORMER DEUX NOMBRES EN UNE CHAINE FRACTION*/
+//TRANSFORMER DEUX NOMBRES EN UNE CHAINE FRACTION
 function chainefrac(array) {
 	let fraction = "";
 	array.map(function(n) {return Number(n);});
@@ -398,7 +398,7 @@ function chainefrac(array) {
 	return fraction;
 }
 
-/*CALCUL DE PGCD*/
+//CALCUL DE PGCD
 function pgcd(a,b) {
 	if (!b) {
 		return a;
@@ -406,13 +406,13 @@ function pgcd(a,b) {
 	return pgcd(b,a%b);
 }
 
-/*CALCUL DE PPCM*/
+//CALCUL DE PPCM
 function ppcm(a,b) {
 	let p = pgcd(a,b);
 	return a*b/p;
 }
 
-/*RENDU KATEX D'UNE CHAÎNE*/
+//RENDU KATEX D'UNE CHAÎNE
 function renderKatex(chaine) {
 	if (typeof chaine != 'string') {
 		chaine = chaine.toString();

@@ -5,6 +5,7 @@ var pauseCompteRebours = false;
 
 /*3, 2, 1 GO*/
 function timerGo() {
+	document.getElementById("btnGo").disabled=true;
 	let corps = document.getElementById("corps");
 	let centerScreen = document.getElementById("centerScreen");
 	let t=3;
@@ -23,6 +24,7 @@ function timerGo() {
 			centerScreen.innerHTML="Pause";
 			corps.classList.remove("flou");
 			slider(2);
+			document.getElementById("btnGo").disabled=false;
 		},500);
 	}, 3000);
 }
@@ -81,4 +83,5 @@ function compteReboursStop() {
 	document.getElementById("btnCompteRebours").classList.add("outline");
 	elChrono.innerHTML="Terminé !";
 	document.getElementById("corps").classList.remove("flou");
+	document.getElementById("centerScreen").hidden=true;
 }
