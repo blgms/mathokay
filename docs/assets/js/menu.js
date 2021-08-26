@@ -1,12 +1,4 @@
 /*VARIABLES GLOBALES*/
-var diffs = [
-	{"nom": "Très facile", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 iconblue' />"},
-	{"nom": "Facile", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 icongreen' />"},
-	{"nom": "Moyen", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 iconyellow' />"},
-	{"nom": "Difficile", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 iconorange' />"},
-	{"nom": "Hardcore", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 iconred' />"}
-];
-
 var btns = [
 	{"id":"Go", "lbl":"Go&nbsp;!", "actif":true},
 	{"id":"Config", "lbl":"Config", "actif":false},
@@ -16,9 +8,6 @@ var btns = [
 	
 var slon = 1;
 var menuon = "Exos";
-var elChrono, timer;
-var time=300;
-var pauseCompteRebours = false;
 
 /*LANCEMENT DE L'APPLI ET AFFICHAGE DU MENU*/
 function demarrage() {
@@ -34,10 +23,10 @@ function demarrage() {
 		}
 		exosStr += "<tr><td><label for='switch'><input type='checkbox' id='togExo"+i+"' name='switch' role='switch' class='toggledroite' onclick='majMenu(&apos;Exos&apos;,"+i+")'>"+diffs[exos[i].Diff].couleur+" "+exos[i].nom+"</label></td></tr>"	
 	}
-	for (let i=0 ; i<groupes.length ; i++) {
+	for (let i of listePropriete(exos,"Gpe")) {
 		gpeStr += "<tr><td><label for='switch'><input type='checkbox' id='togGpe"+i+"' name='switch' role='switch' class='toggledroite' onclick='majMenu(&apos;Gpe&apos;,"+i+")'>"+groupes[i]+"</label></td></tr>"
 	}
-	for (let i=0 ; i<diffs.length ; i++) {
+	for (let i of listePropriete(exos,"Diff")) {
 		diffStr += "<tr><td><label for='switch'><input type='checkbox' id='togDiff"+i+"' name='switch' role='switch' class='toggledroite' onclick='majMenu(&apos;Diff&apos;,"+i+")'>"+diffs[i].couleur+" "+diffs[i].nom+"</label></td></tr>"
 	}
 	document.getElementById("tableExos").innerHTML = exosStr;
@@ -46,6 +35,15 @@ function demarrage() {
 	renderMathInElement(document.getElementById("corps"));
 	affNb();
 	verifActif();
+}
+
+/*ENUMERE DANS L'ORDRE ALPHANUMERIQUE LES PROPRIETES UNIQUES DES OBJETS D'UNE LISTE*/
+function listePropriete(array,prop) {
+	let l=[];
+	let a=array.map(function(e) {
+	if (!l.includes(e[prop])) { l.push(e[prop]); };
+	});
+	return l.sort();
 }
 
 /*ROLL CREDITS*/
@@ -88,25 +86,29 @@ function majMenu(cat,n) {
 		}
 		for (let i=0 ; i<countGpe.length ; i++) {
 			let el = document.getElementById("togGpe"+i)
-			if (countGpeAct[i]==countGpe[i] && countGpe[i]>0) {
-				el.checked=true;
-			} else {
-				el.checked=false;
+			if (el != null) {
+				if (countGpeAct[i]==countGpe[i] && countGpe[i]>0) {
+					el.checked=true;
+				} else {
+					el.checked=false;
+				}
 			}
 		}
 		for (let i=0 ; i<countDiff.length ; i++) {
 			let el = document.getElementById("togDiff"+i)
-			if (countDiffAct[i]==countDiff[i] && countDiff[i]>0) {
-				el.checked=true;
-			} else {
-				el.checked=false;
+			if (el != null) {
+				if (countDiffAct[i]==countDiff[i] && countDiff[i]>0) {
+					el.checked=true;
+				} else {
+					el.checked=false;
+				}
 			}
 		}
 	}
 	verifActif();
 }
 
-/*TRANSITION*/
+/*TRANSITION ET DECLENCHEMENT DU COMPTE A REBOURS*/
 function slider(sl) {
 	if (sl!=slon) {
 		let el=document.getElementById("slide"+slon);
@@ -119,7 +121,12 @@ function slider(sl) {
 	let btnsNew=[];
 	if (sl==1) {
 		btnsNew=[true, false, false, false];
-		time=0;
+		if (document.getElementById("togChrono").checked==true) {
+			compteReboursStop();
+			setTimeout(function() {
+				compteReboursReset();
+			}, 500);
+		}
 	} else if (sl==2) {
 		btnsNew=[false, true, false, true];
 		if (document.getElementById("togChrono").checked==true) {
@@ -127,7 +134,7 @@ function slider(sl) {
 		}
 	} else if (sl==3) {
 		btnsNew=[false, true, true, false];
-		time=0;
+		compteReboursStop();
 	}
 	for (let i=0 ; i<4 ; i++) {
 		document.getElementById("liBtn"+btns[i].id).hidden=!btnsNew[i];
@@ -239,55 +246,5 @@ function creerExos(liste) {
 	}
 	document.getElementById("questions").innerHTML = "<div>"+cartesq+"</div>";
 	document.getElementById("reponses").innerHTML = cartesr;
-	slider(2);
-}
-
-/*COMPTE A REBOURS*/
-function compteReboursReset() {
-	if (document.getElementById("togChrono").checked==true) {
-		document.getElementById("divLogo").classList.add("cacheLogo");
-		document.getElementById("divChrono").hidden=false;
-		document.getElementById("timeRangeSpan").hidden=false;
-		compteReboursRefresh();
-	} else {
-		document.getElementById("divLogo").classList.remove("cacheLogo");
-		document.getElementById("divChrono").hidden=true;
-		document.getElementById("timeRangeSpan").hidden=true;
-	}
-}
-function compteRebours() {
-	timer = setInterval(function() {
-		if (pauseCompteRebours==false) {
-			time--;
-			elChrono.innerHTML=compteReboursAff(time);
-		}
-		if (time<=0) {
-			clearInterval(timer);
-			document.getElementById("btnCompteRebours").classList.add("outline");
-			elChrono.innerHTML="Terminé !";
-			setTimeout(function() {
-				document.getElementById("togChrono").checked=false;
-				compteReboursReset();
-			}, 3000);
-		}
-	}, 1000);
-	
-}
-function compteReboursAff(t) {
-	let s=t%60;
-	let m=Math.floor(t/60);
-	if (m<10) {m="0"+m;}
-	if (s<10) {s="0"+s;}
-	return m+":"+s;
-}
-function compteReboursRefresh() {
-	document.getElementById("btnCompteRebours").classList.remove("outline");
-	time=document.getElementById("timeRange").value;
-	elChrono.innerHTML=compteReboursAff(time);
-}
-
-function compteReboursPause(cmd) {
-	if (typeof cmd != "boolean") { pauseCompteRebours=!pauseCompteRebours; console.log("pouet"); } else { pauseCompteRebours=cmd; };
-	if (pauseCompteRebours==true) { document.getElementById("corps").classList.add("flou"); document.getElementById("btnCompteRebours").classList.add("outline"); clearInterval(timer); }
-	if (pauseCompteRebours==false) { document.getElementById("corps").classList.remove("flou"); document.getElementById("btnCompteRebours").classList.remove("outline"); compteRebours(); }	
+	if (document.getElementById("togChrono").checked==true) { timerGo(); } else { slider(2); }
 }

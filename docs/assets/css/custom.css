@@ -1,3 +1,11 @@
+html::-webkit-scrollbar {
+  display: none;
+}
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 article, header > h3, header > h4, small > h5, small > h6, .proportion, .mar6 {
 	margin-top: 6px;
 	margin-bottom: 6px;
@@ -20,19 +28,41 @@ article > header {
 
 article {
 	padding-bottom: 6px;
+	border: 2px #bde4f3 solid;
 }
 
 body > header {
 	border-bottom: 2px solid #1095c1;
 	position: fixed;
-	background-color: #ffffff;
 	z-index: 1;
 }
 
-#divLogo > hgroup, #divChrono button {
+@media (prefers-color-scheme: dark) {
+	body > header, article > header {
+		background-color: #1f2532;
+	}
+}
+@media (prefers-color-scheme: light) {
+	body > header, article > header {
+		background-color: #f5f5ff;
+	}
+}
+
+#divLogo > hgroup{
+	margin: 0;
+	line-height:1;
+	animation: affChrono 0.3s ease-out;
+}
+#divChrono button {
 	margin: 0;
 	line-height:32px;
+	font-size:1.2em;
 	width:150px;
+	animation: affChrono 0.3s ease-out;
+}
+@keyframes affChrono {
+  0% { opacity: 0; max-width: 0px; }
+  100% { opacity: 1; max-width: 150px; }
 }
 #chrono {
 	font-weight: 900;
@@ -60,6 +90,8 @@ main {
 .cacheLogo {
 	max-width: 0px;
 	overflow: hidden;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .toggledroite {
@@ -70,19 +102,17 @@ main {
     display: grid;
     grid-template: 1/1;
 }
-
 .slide {
     grid-area: 1/1;
     display: block;
-    transition: all .3s 0s cubic-bezier(.5, 0, .5, 1);
-    transition-property: opacity, transform;
+    transition: opacity .2s 0s cubic-bezier(.5, 0, .5, 1);
+    transition-property: opacity max-height;
 }
-
 .slide[hidden] {
     transition-delay: 0;
     opacity: 0;
     transform: scale(0);
-	max-height: 0;
+	max-height: 0px;
 }
   
 .divBtnCatCont {
@@ -126,8 +156,8 @@ main {
 	filter: blur(5px);
 	width: 100%;
 	height: 100%;
-	background-color: #ccc;
 	transition: all 0.5s ease-out;
+	z-index: -1;
 }
 
 .icon12 {
@@ -165,4 +195,13 @@ main {
 
 .iconred {
 	filter: invert(11%) sepia(91%) saturate(4956%) hue-rotate(357deg) brightness(96%) contrast(111%);
+}
+
+#centerScreen {
+	position: fixed;
+	text-align: center;
+	width: 100vw;
+	top: 93.5px;
+	line-height: calc(100vh - 93.5px);
+	font-size: 10vw;
 }

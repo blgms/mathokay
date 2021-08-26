@@ -1,5 +1,20 @@
 /*VARIABLES*/
-var groupes = ["Nombres", "Calcul Mental", "Unités", "Proportionnalité", "Fractions", "Équations du 1er degré"];
+var groupes = [
+	"Nombres",
+	"Calcul Mental",
+	"Unités",
+	"Proportionnalité",
+	"Fractions",
+	"Équations du 1er degré"
+];
+
+var diffs = [
+	{"nom": "Très facile", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 iconblue' />"},
+	{"nom": "Facile", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 icongreen' />"},
+	{"nom": "Moyen", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 iconyellow' />"},
+	{"nom": "Difficile", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 iconorange' />"},
+	{"nom": "Hardcore", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 iconred' />"}
+];
 
 var exos = [
 	{"act": false, "Gpe": 0, "Diff": 0, "fonc": "arrondis()", "nom": "Arrondir des nombres"},
@@ -71,7 +86,7 @@ function scienti() {
 	return [consigne,question,reponse];
 }
 
-/* PASSER EN ECRITURE DECIMALE*/
+/*PASSER EN ECRITURE DECIMALE*/
 function scientideci() {
 	let consigne = "Convertir en écriture décimale :";
 	let question = "<div class='grid nombres'>";
