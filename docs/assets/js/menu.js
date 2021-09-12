@@ -108,8 +108,8 @@ function affNb() {
 
 /*VERIFICATION DES EXERCICES ACTIFS*/
 function verifActif() {
-	let liste = listePropriete(exos,"act");
-	if (liste.includes(true)) {
+	let liste = selectExos();
+	if (liste.length > 0) {
 		document.getElementById("btnGo").disabled=false;
 	} else {
 		document.getElementById("btnGo").disabled=true;
@@ -172,13 +172,4 @@ function creerExos(liste) {
 function about() {
 	let el = document.getElementById("aPropos");
 	if (el.style.display == "") {el.style.display = "grid"; } else {el.style.display = ""; }
-}
-
-/*ENUMERE DANS L'ORDRE ALPHANUMERIQUE LES PROPRIETES UNIQUES DES OBJETS D'UNE LISTE*/
-function listePropriete(array,prop) {
-	let l=[];
-	let a=array.map(function(e) {
-	if (!l.includes(e[prop])) { l.push(e[prop]); };
-	});
-	return l.sort();
 }

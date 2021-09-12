@@ -35,11 +35,10 @@ var exos = [
 	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "quatprop()", "nom": "Calcul de 4e proportionnelle"},
 	{"act": false, "Gpe": 4, "Diff": 1,  "fonc": "fracsimp()", "nom": "Simplification"},
 	{"act": false, "Gpe": 4, "Diff": 2,  "fonc": "fraccalc()", "nom": "Calculs avec des fractions"},
-	/*{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equaTrad()", "nom": "Traduire un problème en équation"},*/
 	{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Forme \\(ax=d\\)"},
 	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(2)", "nom": "Forme \\(ax+b=d\\)"},
-	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Forme \\(ax+b=cx+d\\)"}
-	/*{"act": false, "Gpe": 5, "Diff": 3,  "fonc": "equa2d()", "nom": "Second degré"}*/
+	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Forme \\(ax+b=cx+d\\)"},
+	{"act": false, "Gpe": 5, "Diff": 3,  "fonc": "equa2d()", "nom": "Second degré"}
 	/*{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMoy()", "nom": "Calcul de moyenne"},*/
 	/*{"act": false, "Gpe": 6, "Diff": 2,  "fonc": "statMoyP()", "nom": "Calcul de moyenne pondérée"},*/
 	/*{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMed()", "nom": "Vérification de médiane"},*/
@@ -395,10 +394,40 @@ function equa1d(type) {
 	return [consigne,question,reponse];
 }
 
-
+//EQUATIONS DU 2ND DEGRE
+function equa2d() {
+	let n=tripletsD(-5,5)[genEnt(0,151)];
+	var a=n[0],b=n[1],c=n[2];
+	let na="",nb="",nc="";
+	if (a==-1) { na +="-"; } else if (a!=1) { na += a; }
+	if (b>0) { nb += "+"; }
+	if (b==-1) { nb +="-"; } else if (b!=1) { nb += b; }
+	if (c>0) { nc += "+"; }
+	nc += c;
+	let d=b*b-4*a*c;
+	let sol;
+	if (d<0) { sol = "Pas de solution."; }
+	if (d==0) { sol = "\\(x="+chainefrac(simpl(-b,2*a))+"\\)"; }
+	if (d>0) { 
+		let rd,x1,x2;
+		rd = Math.sqrt(d);
+		x1 = chainefrac(simpl(-b-rd,2*a));
+		x2 = chainefrac(simpl(-b+rd,2*a));
+		sol = "<div>\\(x_{1}="+x1+"\\)</div><div>\\(x_{2}="+x2+"\\)</div>"; 
+	}
+	let question = "<div>Indiquer les solutions de l'équation.</div>";
+	let consigne = "<div class='nombres'>\\("+na+"x^2"+nb+"x"+nc+"\\)</div>";	
+	let reponse = "<div class='nombres reponse grid'>"+sol+"</div>";
+	return [consigne,question,reponse];
+}
 
 
 //FONCTIONS ANNEXES
+//GENERER UN ENTIER SUR [a;b]
+function genEnt(a,b) {
+	return (Math.round(Math.random()*(b-a))+a);
+}
+
 //GENERER UN ENTIER RELATIF NON NUL SUR [-b;-a]U[a;b]
 function genZ(a,b) {
 	return (Math.round(Math.random()*(b-a))+a)*(-1)**Math.round(Math.random());
@@ -406,12 +435,17 @@ function genZ(a,b) {
 
 //SIMPLIFIER UNE FRACTION
 function simpl(a,b) {
-	let s = pgcd(a,b);
-	return [a/s,b/s];
+	if (Number.isInteger(a/b)) {
+		return [a/b,1,b];
+	} else {
+		let s = pgcd(a,b);
+		return [a/s,b/s,s];
+	}
 }
 
 //TRANSFORMER DEUX NOMBRES EN UNE CHAINE FRACTION
 function chainefrac(array) {
+	if (array.length==1 || array[1]==1) { return array[0]; }
 	let fraction = "";
 	array.map(function(n) {return Number(n);});
 	if (array[0]*array[1]<0) {
@@ -433,6 +467,33 @@ function pgcd(a,b) {
 function ppcm(a,b) {
 	let p = pgcd(a,b);
 	return a*b/p;
+}
+
+//VALEUR EXACTE D'UNE RACINE CARREE (NOMBRES < 10000)
+function exaSqrt(n) {
+	let a=1;
+	for (i=99;i>1;i--) {
+		if (Number.isInteger(n/(i*i))) {
+			a*=i;
+			n/=i*i;
+		}
+	}
+	return [a,n];
+}
+
+//CALCUL DES TRIPLETS a, b, c TELS QUE b²-4ac SOIT UN CARRE D'ENTIER
+function tripletsD(inf,sup) {
+	let liste=[];
+	for (let a=inf;a<=sup;a++) {
+		for (let b=inf;b<=sup;b++) {
+			for (let c=inf;c<=sup;c++) {
+				if (Number.isInteger(Math.sqrt(b*b-4*a*c)) && a!=0 && b!=0 && c!=0) {
+					liste.push([a,b,c]);
+				}
+			}
+		}
+	}
+	return liste;
 }
 
 //RENDU KATEX D'UNE CHAÎNE
