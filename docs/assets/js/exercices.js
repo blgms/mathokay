@@ -1,11 +1,15 @@
 /*VARIABLES*/
 var groupes = [
-	/*0*/"Nombres",
-	/*1*/"Calcul Mental",
-	/*2*/"Unités",
-	/*3*/"Proportionnalité",
-	/*4*/"Fractions",
-	/*5*/"Équations du 1er degré"
+	/*0*/{"nom": "Nombres"},
+	/*1*/{"nom": "Calcul Mental"},
+	/*2*/{"nom": "Unités"},
+	/*3*/{"nom": "Proportionnalité, pourcentages"},
+	/*4*/{"nom": "Fractions"},
+	/*5*/{"nom": "Équations"},
+	/*6*/{"nom": "Statistiques"},
+	/*7*/{"nom": "Fonctions"},
+	/*8*/{"nom": "Géométrie"},
+	/*9*/{"nom": "Suites"},
 ];
 
 var diffs = [
@@ -13,7 +17,7 @@ var diffs = [
 	{"nom": "Facile", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 icongreen' />"},
 	{"nom": "Moyen", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 iconyellow' />"},
 	{"nom": "Difficile", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 iconorange' />"},
-	{"nom": "Hardcore", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 iconred' />"}
+	{"nom": "Très difficile", "couleur": "<img src='docs/assets/images/star.svg' class='icon20 iconred' />"}
 ];
 
 var exos = [
@@ -30,10 +34,29 @@ var exos = [
 	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "tabprop()", "nom": "Vérification"},
 	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "quatprop()", "nom": "Calcul de 4e proportionnelle"},
 	{"act": false, "Gpe": 4, "Diff": 1,  "fonc": "fracsimp()", "nom": "Simplification"},
-	{"act": false, "Gpe": 4, "Diff": 2,  "fonc": "fraccalc()", "nom": "Calculs"},
-	{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Type \\(ax=d\\)"},
-	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(2)", "nom": "Type \\(ax+b=d\\)"},
-	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Type \\(ax+b=cx+d\\)"}
+	{"act": false, "Gpe": 4, "Diff": 2,  "fonc": "fraccalc()", "nom": "Calculs avec des fractions"},
+	/*{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equaTrad()", "nom": "Traduire un problème en équation"},*/
+	{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Forme \\(ax=d\\)"},
+	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(2)", "nom": "Forme \\(ax+b=d\\)"},
+	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Forme \\(ax+b=cx+d\\)"}
+	/*{"act": false, "Gpe": 5, "Diff": 3,  "fonc": "equa2d()", "nom": "Second degré"}*/
+	/*{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMoy()", "nom": "Calcul de moyenne"},*/
+	/*{"act": false, "Gpe": 6, "Diff": 2,  "fonc": "statMoyP()", "nom": "Calcul de moyenne pondérée"},*/
+	/*{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMed()", "nom": "Vérification de médiane"},*/
+	/*{"act": false, "Gpe": 7, "Diff": 1,  "fonc": "foncTabl()", "nom": "Compléter un tableau de valeurs"},*/
+	/*{"act": false, "Gpe": 7, "Diff": 1,  "fonc": "foncVar()", "nom": "Compléter un tableau de variations"},*/
+	/*{"act": false, "Gpe": 8, "Diff": 1,  "fonc": "geoAire()", "nom": "Calculer une aire"},*/
+	/*{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "geoVol()", "nom": "Calculer un volume"},*/
+	/*{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "geoThal()", "nom": "Théorème de Thalès"},*/
+	/*{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "geoPyth()", "nom": "Théorème de Pythagore"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 2,  "fonc": "suitAri()", "nom": "Retrouver les termes d'une suite arithmétique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 2,  "fonc": "suitAriR()", "nom": "Retrouver la raison d'une suite arithmétique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 3,  "fonc": "suitAriVerif()", "nom": "Vérifier si une suite est arithmétique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 4,  "fonc": "suitAriN()", "nom": "\\(n\\)-ième terme d'une suite arithmétique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 2,  "fonc": "suitGeo()", "nom": "Retrouver les termes d'une suite géométrique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 2,  "fonc": "suitGeoQ()", "nom": "Retrouver la raison d'une suite géométrique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 3,  "fonc": "suitGeoVerif()", "nom": "Vérifier si une suite est géométrique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 4,  "fonc": "suitGeoN()", "nom": "\\(n\\)-ième terme d'une suite géométrique"},*/
 ];
 
 //NOMBRES

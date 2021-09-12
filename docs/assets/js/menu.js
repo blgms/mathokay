@@ -7,104 +7,57 @@ var btns = [
 	];
 	
 var slon = 1;
-var menuon = "Exos";
+var menuon = "Gpe";
 
 /*LANCEMENT DE L'APPLI ET AFFICHAGE DU MENU*/
 function demarrage() {
 	elChrono = document.getElementById("chrono");
 	document.getElementById("togChrono").checked=false;
-	exos.sort(function(a, b) {return a.Gpe-b.Gpe;});
-	let exosStr = "";
-	let gpeStr = "";
-	let diffStr = "";
-	for (let i=0 ; i<exos.length ; i++) {
-		if (i==0 || exos[i].Gpe!=exos[i-1].Gpe) {
-			exosStr += "<thead><tr><th>"+groupes[exos[i].Gpe]+"</th></tr></thead>";
-		}
-		exosStr += "<tr><td><label for='switch'><input type='checkbox' id='togExo"+i+"' name='switch' role='switch' class='toggledroite' onclick='majMenu(&apos;Exos&apos;,"+i+")'>"+diffs[exos[i].Diff].couleur+" "+exos[i].nom+"</label></td></tr>"	
-	}
-	for (let i of listePropriete(exos,"Gpe")) {
-		gpeStr += "<tr><td><label for='switch'><input type='checkbox' id='togGpe"+i+"' name='switch' role='switch' class='toggledroite' onclick='majMenu(&apos;Gpe&apos;,"+i+")'>"+groupes[i]+"</label></td></tr>"
-	}
-	for (let i of listePropriete(exos,"Diff")) {
-		diffStr += "<tr><td><label for='switch'><input type='checkbox' id='togDiff"+i+"' name='switch' role='switch' class='toggledroite' onclick='majMenu(&apos;Diff&apos;,"+i+")'>"+diffs[i].couleur+" "+diffs[i].nom+"</label></td></tr>"
-	}
-	document.getElementById("tableExos").innerHTML = exosStr;
-	document.getElementById("tableGpe").innerHTML = gpeStr;
-	document.getElementById("tabDiff").innerHTML = diffStr;
+	menu("Gpe");
 	renderMathInElement(document.getElementById("corps"));
 	affNb();
 	verifActif();
 }
 
-/*ENUMERE DANS L'ORDRE ALPHANUMERIQUE LES PROPRIETES UNIQUES DES OBJETS D'UNE LISTE*/
-function listePropriete(array,prop) {
-	let l=[];
-	let a=array.map(function(e) {
-	if (!l.includes(e[prop])) { l.push(e[prop]); };
-	});
-	return l.sort();
-}
-
-/*ROLL CREDITS*/
-function about() {
-	let el = document.getElementById("aPropos");
-	if (el.style.display == "") {el.style.display = "grid"; } else {el.style.display = ""; }
-}
-
-/*CHANGEMENT DE MENU DE SELECTION*/
+/*CREATION OU CHANGEMENT DE MENU DE SELECTION*/
 function menu(m) {
-	majMenu("Exos",-1);
+	let exosListe = "";
+	if (m=="Gpe") {
+		exos.sort(function(a, b) {return a.Gpe-b.Gpe;});
+		for (let i=0 ; i<exos.length ; i++) {
+			if (i==0 || exos[i].Gpe!=exos[i-1].Gpe) {
+				exosListe += "<thead><tr><th>"+groupes[exos[i].Gpe].nom+"</th></tr></thead>";
+			}
+			let check = "";
+			if (exos[i].act==true) { check=" checked"; }
+			exosListe += "<tr><td><label for='switch'><input type='checkbox' id='togExo"+i+"' name='switch' role='switch' class='toggledroite' onclick='majMenu("+i+")'"+check+">"+diffs[exos[i].Diff].couleur+" "+exos[i].nom+"</label></td></tr>";
+		}
+		document.getElementById("tableGpe").innerHTML = exosListe;
+	}
+	if (m=="Diff") {
+		exos.sort(function(a, b) {return a.Diff-b.Diff;});
+		for (let i=0 ; i<exos.length ; i++) {
+			if (i==0 || exos[i].Diff!=exos[i-1].Diff) {
+				exosListe += "<thead><tr><th>"+diffs[exos[i].Diff].couleur+" "+diffs[exos[i].Diff].nom+"</th></tr></thead>";
+			}
+			let check = "";
+			if (exos[i].act==true) { check=" checked"; }
+			exosListe += "<tr><td><label for='switch'><input type='checkbox' id='togExo"+i+"' name='switch' role='switch' class='toggledroite' onclick='majMenu("+i+")'"+check+">"+exos[i].nom+"</label></td></tr>";
+		}
+		document.getElementById("tableDiff").innerHTML = exosListe;
+	}
+	if ((m=="Opt" && menuon!="Opt") || (m!="Opt" && menuon=="Opt")) { document.getElementById("iconBtnMenuOpt").classList.toggle("iconMenu"); document.getElementById("iconBtnMenuOpt").classList.toggle("iconSelect"); };
 	document.getElementById("divTable"+menuon).hidden=!document.getElementById("divTable"+menuon).hidden;
-	menuon = m;
+	document.getElementById("btnMenu"+menuon).classList.toggle("outline");
+	menuon=m;		
 	document.getElementById("divTable"+menuon).hidden=!document.getElementById("divTable"+menuon).hidden;
-	document.getElementById("divBtnExos").hidden=!document.getElementById("divBtnExos").hidden;
-	document.getElementById("divBtnCat").hidden=!document.getElementById("divBtnCat").hidden;
-	majMenu("Exos",-1);
+	document.getElementById("btnMenu"+menuon).classList.toggle("outline");
+	renderMathInElement(document.getElementById("corps"));
 }
 
 /*MISE A JOUR AUTO MENU*/
-function majMenu(cat,n) {
-	if (cat!="Exos") {
-		selectionne(cat,n);
-	} else {
-		if (n>-1) {
-			exos[n].act=document.getElementById("togExo"+n).checked
-		}
-		let countGpe = Array(groupes.length).fill(0);
-		let countGpeAct = Array(groupes.length).fill(0);
-		let countDiff = Array(diffs.length).fill(0);
-		let countDiffAct = Array(diffs.length).fill(0);		
-		for (let i=0 ; i<exos.length ; i++) {
-			countGpe[exos[i].Gpe] += 1;
-			countDiff[exos[i].Diff] += 1;
-			if (exos[i].act==true) {
-				countGpeAct[exos[i].Gpe] += 1;
-				countDiffAct[exos[i].Diff] += 1;
-			}
-			exos[i].act=document.getElementById("togExo"+i).checked
-		}
-		for (let i=0 ; i<countGpe.length ; i++) {
-			let el = document.getElementById("togGpe"+i)
-			if (el != null) {
-				if (countGpeAct[i]==countGpe[i] && countGpe[i]>0) {
-					el.checked=true;
-				} else {
-					el.checked=false;
-				}
-			}
-		}
-		for (let i=0 ; i<countDiff.length ; i++) {
-			let el = document.getElementById("togDiff"+i)
-			if (el != null) {
-				if (countDiffAct[i]==countDiff[i] && countDiff[i]>0) {
-					el.checked=true;
-				} else {
-					el.checked=false;
-				}
-			}
-		}
-	}
+function majMenu(n) {
+	exos[n].act=!exos[n].act;
 	verifActif();
 }
 
@@ -153,42 +106,9 @@ function affNb() {
 	document.getElementById("affNb").innerHTML=document.getElementById("nbvoulu").value;
 }
 
-/*SELECTION PAR GROUPE/DIFFICULTE*/
-function selectionne(cat,n) {
-	let select = [];
-	let count = 0;
-	for (let i=0 ; i<exos.length ; i++) {
-		let el;
-		let gpeexo = exos[i][cat];
-		if (gpeexo == n) {
-			el = document.getElementById("togExo"+i);
-			select[count] = el.checked;
-			count += 1;
-		}
-	}
-	if (select.includes(false)) {
-		select.fill(true);
-	} else {
-		select.fill(false);
-	}
-	count = 0;
-	for (let i=0 ; i<exos.length ; i++) {
-		let gpeexo = exos[i][cat];
-		if (gpeexo == n) {
-			el = document.getElementById("togExo"+i);
-			el.checked = select[count];
-			count += 1;
-		}
-	}
-}
-
 /*VERIFICATION DES EXERCICES ACTIFS*/
 function verifActif() {
-	let liste = [];
-	for (let i=0 ; i<exos.length ; i++) { 
-		let el = document.getElementById("togExo"+i);
-		liste[i] = el.checked;
-	}
+	let liste = listePropriete(exos,"act");
 	if (liste.includes(true)) {
 		document.getElementById("btnGo").disabled=false;
 	} else {
@@ -207,8 +127,7 @@ function lancement() {
 function selectExos() {
 	let exosselect = [];
 	for (let i=0 ; i<exos.length ; i++) {
-		let el = document.getElementById("togExo"+i);
-		if (el.checked) {
+		if (exos[i].act==true) {
 			exosselect.push(exos[i]);
 		}
 	}
@@ -241,10 +160,25 @@ function creerExos(liste) {
 		liste[i].type = liste[i].groupe + " - " + liste[i].nom;
 		quesrep = eval(liste[i].fonc);
 		let consigne = quesrep[0], question = quesrep[1], reponse = quesrep[2];
-		cartesq += "<div><article><header><small><h5>Exercice "+(i+1)+" - "+groupes[liste[i].Gpe]+"</h5><h6>"+liste[i].nom+"</h6></small></header><div>"+consigne+"</div><div>"+question+"</div></article></div>";
-		cartesr += "<div><article><header><small><h5>Réponse "+(i+1)+" - "+groupes[liste[i].Gpe]+"</h5><h6>"+liste[i].nom+"</h6></small></header><div>"+consigne+"</div><div>"+reponse+"</div></article></div>";
+		cartesq += "<div><article><header><small><h5>Exercice "+(i+1)+" - "+groupes[liste[i].Gpe].nom+"</h5><h6>"+liste[i].nom+"</h6></small></header><div>"+consigne+"</div><div>"+question+"</div></article></div>";
+		cartesr += "<div><article><header><small><h5>Réponse "+(i+1)+" - "+groupes[liste[i].Gpe].nom+"</h5><h6>"+liste[i].nom+"</h6></small></header><div>"+consigne+"</div><div>"+reponse+"</div></article></div>";
 	}
 	document.getElementById("questions").innerHTML = cartesq;
 	document.getElementById("reponses").innerHTML = cartesr;
 	if (document.getElementById("togChrono").checked==true) { timerGo(); } else { slider(2); }
+}
+
+/*ROLL CREDITS*/
+function about() {
+	let el = document.getElementById("aPropos");
+	if (el.style.display == "") {el.style.display = "grid"; } else {el.style.display = ""; }
+}
+
+/*ENUMERE DANS L'ORDRE ALPHANUMERIQUE LES PROPRIETES UNIQUES DES OBJETS D'UNE LISTE*/
+function listePropriete(array,prop) {
+	let l=[];
+	let a=array.map(function(e) {
+	if (!l.includes(e[prop])) { l.push(e[prop]); };
+	});
+	return l.sort();
 }
