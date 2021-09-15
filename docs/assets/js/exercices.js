@@ -70,8 +70,8 @@ function arrondis() {
 		let a = Math.floor(Math.random()*100000);
 		let x = (Math.round(a/(10**(4-nOrdre))))/(10**nOrdre);
 		a = (a/10000);
-		question += "<div>\\("+a+"\\)</div>";
-		reponse += "<div>\\("+a+"\\simeq"+x+"\\)</div>";
+		question += "<div>\\("+pointVirg(a.toString())+"\\)</div>";
+		reponse += "<div>\\("+pointVirg(a.toString())+"\\simeq"+pointVirg(x.toString())+"\\)</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
@@ -100,8 +100,8 @@ function scienti() {
 		} else {
 			numch = num.toFixed(0);
 		}
-		question += "<div>\\("+numch+"\\)</div>";
-		reponse += "<div>\\("+numch+"="+nb+"\\times 10^{"+puis+"}"+"\\)</div>";
+		question += "<div>\\("+pointVirg(numch.toString())+"\\)</div>";
+		reponse += "<div>\\("+pointVirg(numch.toString())+"="+pointVirg(nb.toString())+"\\times 10^{"+puis+"}"+"\\)</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
@@ -130,8 +130,8 @@ function scientideci() {
 		} else {
 			numch = num.toFixed(0);
 		}
-		question += "<div>\\("+nb+"\\times 10^{"+puis+"}"+"\\)</div>";
-		reponse += "<div>\\("+nb+"\\times 10^{"+puis+"}="+numch+"\\)</div>";
+		question += "<div>\\("+pointVirg(nb.toString())+"\\times 10^{"+puis+"}"+"\\)</div>";
+		reponse += "<div>\\("+pointVirg(nb.toString())+"\\times 10^{"+puis+"}="+pointVirg(numch.toString())+"\\)</div>";
 	}
 	question += "</div>";
 	return [consigne,question,reponse];
@@ -156,7 +156,7 @@ function tablesmulti() {
 	return [consigne,question,reponse];
 }
 
-//PUISSANCES DE 10 - UTILISE DES FRACTIONS
+//PUISSANCES DE 10
 function puiss10() {
 	let consigne = "Calculer <b>de tête</b> :";
 	let question = "<div class='grid nombres'>";
@@ -174,7 +174,7 @@ function puiss10() {
 			rep = num*coeff;
 		}
 		question += "<div>\\("+quest+"\\)</div>";
-		reponse += "<div>\\("+quest+"="+rep+"\\)</div>";
+		reponse += "<div>\\("+quest+"="+pointVirg(rep.toString())+"\\)</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
@@ -221,8 +221,8 @@ function unites(exo) {
 		rep = Math.trunc((nb100*base**(decale))/100);
 	}
 	let consigne = "<div>Convertir...</div>";
-	let question = "<div class='nombres'>\\("+nbdep+"\\,\\text{"+udep+"}\\) en \\(\\text{"+uarr+"}\\).</div>";
-	let reponse = "<div class='nombres reponse'>\\("+nbdep+"\\,\\text{"+udep+"}="+rep+"\\,\\text{"+uarr+"}\\)</div>";
+	let question = "<div class='nombres'>\\("+pointVirg(nbdep.toString())+"\\,\\text{"+udep+"}\\) en \\(\\text{"+uarr+"}\\).</div>";
+	let reponse = "<div class='nombres reponse'>\\("+pointVirg(nbdep.toString())+"\\,\\text{"+udep+"}="+pointVirg(rep.toString())+"\\,\\text{"+uarr+"}\\)</div>";
 	return [consigne,question,reponse];
 }
 
@@ -263,8 +263,8 @@ function durees(exo) {
 		}
 	}
 	let consigne = "<div>Exprimer en utilisant toutes les unités de temps nécessaires :</div>";
-	let question = "<div class='nombres'>\\("+temps+"\\,\\text{"+grand.unites[nudep]+"}\\)</div>";
-	let reponse = "<div class='nombres reponse'>\\("+temps+"\\,\\text{"+grand.unites[nudep]+"}=\\text{"+tempsrep.toString().replace(/,/g, "\\,")+"}\\)</div>";
+	let question = "<div class='nombres'>\\("+pointVirg(temps.toString())+"\\,\\text{"+grand.unites[nudep]+"}\\)</div>";
+	let reponse = "<div class='nombres reponse'>\\("+pointVirg(temps.toString())+"\\,\\text{"+grand.unites[nudep]+"}=\\text{"+tempsrep.toString().replace(/,/g, "\\,")+"}\\)</div>";
 	return [consigne,question,reponse];
 }
 
@@ -397,7 +397,7 @@ function equa1d(type) {
 //EQUATIONS DU 2ND DEGRE
 function equa2d() {
 	let n=tripletsD(-5,5)[genEnt(0,151)];
-	var a=n[0],b=n[1],c=n[2];
+	let a=n[0],b=n[1],c=n[2];
 	let na="",nb="",nc="";
 	if (a==-1) { na +="-"; } else if (a!=1) { na += a; }
 	if (b>0) { nb += "+"; }
@@ -481,7 +481,7 @@ function exaSqrt(n) {
 	return [a,n];
 }
 
-//CALCUL DES TRIPLETS a, b, c TELS QUE b²-4ac SOIT UN CARRE D'ENTIER
+//RECHERCHE DES TRIPLETS a, b, c NON NULS TELS QUE b²-4ac SOIT UN CARRE D'ENTIER
 function tripletsD(inf,sup) {
 	let liste=[];
 	for (let a=inf;a<=sup;a++) {
@@ -501,6 +501,12 @@ function renderKatex(chaine) {
 	if (typeof chaine != 'string') {
 		chaine = chaine.toString();
 	}
-	chaine = chaine.replaceAll(".","{,}");
+	chaine = pointVirg(chaine);
 	return katex.renderToString(chaine,{throwOnError:false});
+}
+
+//REMPLACEMENT DES POINTS PAR DES VIRGULES
+function pointVirg(str) {
+	str = str.replaceAll(".","{,}");
+	return str;
 }

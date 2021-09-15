@@ -11,7 +11,7 @@ article, header > h3, header > h4, small > h5, small > h6, .proportion, .mar6 {
 	margin-bottom: 0px;
 }
 
-small > h6 {
+small > h6, article h5, article h6 {
 	margin-top: 0px;
 	margin-bottom: 0px;
 }
@@ -23,7 +23,20 @@ body > header, body > footer, nav > ul > li, article > header, .pad6 {
 }
 
 article > header {
-	margin-bottom: 6px;
+	margin-bottom: 0px;
+}
+
+@media screen and (min-width: 992px) {
+	article > header > small > div > div.droite {
+		text-align: right;
+		vertical-align: bottom;
+	}
+	article > header h6 {
+		display: inline;
+		vertical-align: bottom;
+		line-height: 1em;
+	}
+	
 }
 
 article {
@@ -55,14 +68,15 @@ body > header {
 }
 #divChrono button {
 	margin: 0;
+	padding: 0.75rem 0.5rem;
 	line-height:32px;
 	font-size:1.2em;
-	width:120px;
+	width:7rem;
 	animation: affChrono 0.3s ease-in-out;
 }
 @keyframes affChrono {
   0% { opacity: 0; max-width: 0px; }
-  100% { opacity: 1; max-width: 120px; }
+  100% { opacity: 1; max-width: 7rem; }
 }
 #chrono {
 	font-weight: 900;
