@@ -54,10 +54,22 @@ body > header {
 	body > header, article > header {
 		background-color: #1f2532;
 	}
+	.gitHubLogo {
+		background-image: url('../images/GitHub-Mark-Light-32px.png');
+		background-repeat: no-repeat;
+		background-size: 1em;
+		padding-left: 1.1em;
+	}
 }
 @media (prefers-color-scheme: light) {
 	body > header, article > header {
 		background-color: #f5f5ff;
+	}
+	.gitHubLogo {
+		background-image: url('../images/GitHub-Mark-32px.png');
+		background-repeat: no-repeat;
+		background-size: 1em;
+		padding-left: 1.1em;
 	}
 }
 
@@ -110,6 +122,10 @@ main {
 
 .toggledroite {
 	float: right;
+}
+
+.centre {
+	text-align: center;
 }
 
 .slider {

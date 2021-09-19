@@ -33,6 +33,7 @@ var exos = [
 	{"act": false, "Gpe": 2, "Diff": 3,  "fonc": "durees(3)", "nom": "Durées (difficile)"},
 	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "tabprop()", "nom": "Vérification"},
 	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "quatprop()", "nom": "Calcul de 4e proportionnelle"},
+	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "echelle()", "nom": "Échelles"},
 	{"act": false, "Gpe": 4, "Diff": 1,  "fonc": "fracsimp()", "nom": "Simplification"},
 	{"act": false, "Gpe": 4, "Diff": 2,  "fonc": "fraccalc()", "nom": "Calculs avec des fractions"},
 	{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Forme \\(ax=d\\)"},
@@ -307,6 +308,25 @@ function quatprop() {
 	return [consigne,question,reponse];
 }
 
+//ECHELLES
+function echelle() {
+	let echList = [2, 3, 10, 20, 25, 50, 100];
+	let ech = echList[genEnt(0,echList.length-1)];
+	if (ech > 10) { var unit = "", fact = 1000; } else { var unit = "c", fact = 10; }
+	let consigne = "<div>Sur un plan à l'échelle <b>1:"+ech+"</b>, on relève les cotes suivantes :</div>";
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid reponse centre'>";
+	for (let j=1;j<4;j++) {
+		let quest = genEnt(40,250);
+		let rep = quest*ech/fact;
+		question += "<div>\\("+quest+"\\,\\text{mm}\\)</div>";
+		reponse += "<div>\\("+pointVirg(rep.toString())+"\\,\\text{"+unit+"m}\\)</div>";
+	}
+	reponse = question+"</div>"+reponse+"</div>";
+	question += "</div><div>Déterminer les cotes réelles en \\(\\text{"+unit+"m}\\).";
+	return [consigne,question,reponse];
+}
+
 //FRACTIONS
 //SIMPLIFICATION FRACTIONS
 function fracsimp() {
@@ -419,94 +439,4 @@ function equa2d() {
 	let consigne = "<div class='nombres'>\\("+na+"x^2"+nb+"x"+nc+"\\)</div>";	
 	let reponse = "<div class='nombres reponse grid'>"+sol+"</div>";
 	return [consigne,question,reponse];
-}
-
-
-//FONCTIONS ANNEXES
-//GENERER UN ENTIER SUR [a;b]
-function genEnt(a,b) {
-	return (Math.round(Math.random()*(b-a))+a);
-}
-
-//GENERER UN ENTIER RELATIF NON NUL SUR [-b;-a]U[a;b]
-function genZ(a,b) {
-	return (Math.round(Math.random()*(b-a))+a)*(-1)**Math.round(Math.random());
-}
-
-//SIMPLIFIER UNE FRACTION
-function simpl(a,b) {
-	if (Number.isInteger(a/b)) {
-		return [a/b,1,b];
-	} else {
-		let s = pgcd(a,b);
-		return [a/s,b/s,s];
-	}
-}
-
-//TRANSFORMER DEUX NOMBRES EN UNE CHAINE FRACTION
-function chainefrac(array) {
-	if (array.length==1 || array[1]==1) { return array[0]; }
-	let fraction = "";
-	array.map(function(n) {return Number(n);});
-	if (array[0]*array[1]<0) {
-		fraction += "-";
-	}
-	fraction += "\\dfrac{"+Math.abs(array[0])+"}{"+Math.abs(array[1])+"}";
-	return fraction;
-}
-
-//CALCUL DE PGCD
-function pgcd(a,b) {
-	if (!b) {
-		return a;
-	}
-	return pgcd(b,a%b);
-}
-
-//CALCUL DE PPCM
-function ppcm(a,b) {
-	let p = pgcd(a,b);
-	return a*b/p;
-}
-
-//VALEUR EXACTE D'UNE RACINE CARREE (NOMBRES < 10000)
-function exaSqrt(n) {
-	let a=1;
-	for (i=99;i>1;i--) {
-		if (Number.isInteger(n/(i*i))) {
-			a*=i;
-			n/=i*i;
-		}
-	}
-	return [a,n];
-}
-
-//RECHERCHE DES TRIPLETS a, b, c NON NULS TELS QUE b²-4ac SOIT UN CARRE D'ENTIER
-function tripletsD(inf,sup) {
-	let liste=[];
-	for (let a=inf;a<=sup;a++) {
-		for (let b=inf;b<=sup;b++) {
-			for (let c=inf;c<=sup;c++) {
-				if (Number.isInteger(Math.sqrt(b*b-4*a*c)) && a!=0 && b!=0 && c!=0) {
-					liste.push([a,b,c]);
-				}
-			}
-		}
-	}
-	return liste;
-}
-
-//RENDU KATEX D'UNE CHAÎNE
-function renderKatex(chaine) {
-	if (typeof chaine != 'string') {
-		chaine = chaine.toString();
-	}
-	chaine = pointVirg(chaine);
-	return katex.renderToString(chaine,{throwOnError:false});
-}
-
-//REMPLACEMENT DES POINTS PAR DES VIRGULES
-function pointVirg(str) {
-	str = str.replaceAll(".","{,}");
-	return str;
 }
