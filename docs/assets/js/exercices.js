@@ -436,7 +436,7 @@ function equa2d() {
 		sol = "<div>\\(x_{1}="+x1+"\\)</div><div>\\(x_{2}="+x2+"\\)</div>"; 
 	}
 	let question = "<div>Indiquer les solutions de l'équation.</div>";
-	let consigne = "<div class='nombres'>\\("+na+"x^2"+nb+"x"+nc+"\\)</div>";	
+	let consigne = "<div class='nombres'>\\("+na+"x^2"+nb+"x"+nc+"=0\\)</div>";	
 	let reponse = "<div class='nombres reponse grid'>"+sol+"</div>";
 	return [consigne,question,reponse];
 }
