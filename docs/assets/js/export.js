@@ -10,7 +10,8 @@ function download(filename,text) {
 
 function getCss() {
 	let response = fetch("docs/assets/css/custom.css");
-	let str = response.text();
+	console.log(response);
+	let str = response.text;
 	return str;
 }
 
