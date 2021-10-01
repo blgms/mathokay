@@ -10,7 +10,7 @@ function download(filename,text) {
 
 function getCss() {
 	let response = fetch("docs/assets/css/custom.css");
-	let str = "gniii";
+	let str = response.text();
 	return str;
 }
 
