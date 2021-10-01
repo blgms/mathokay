@@ -15,7 +15,7 @@ function getCss() {
 		return response.text();
 	})
 	.then(function(data) {
-		css = data;
+		await css = data;
 	});
 	return css;
 }
