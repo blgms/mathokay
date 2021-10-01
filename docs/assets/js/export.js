@@ -11,7 +11,10 @@ function download(filename,text) {
 function getCss() {
 	fetch("docs/assets/css/custom.css")
 	.then(function(response) {
-		console.log(response);
+		return response.text();
+	})
+	.then(function(data) {
+		console.log(data);
 	});
 	return "lol";
 }
