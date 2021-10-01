@@ -9,14 +9,22 @@ function download(filename,text) {
 }
 
 function getCss() {
+	let css = "";
 	fetch("docs/assets/css/custom.css")
 	.then(function(response) {
 		return response.text();
 	})
 	.then(function(data) {
-		var css = data;
+		css += data;
 	});
-	return "lol";
+	fetch("docs/assets/css/pico.min.css")
+	.then(function(response) {
+		return response.text();
+	})
+	.then(function(data) {
+		css += data;
+	});
+	return css;
 }
 
 function exportHtml() {
