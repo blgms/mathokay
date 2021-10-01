@@ -13,13 +13,11 @@ function getCss() {
 	.then(function(response) {
 		console.log(response);
 	});
-	let str = response.text;
-	return str;
+	return "lol";
 }
 
 function exportHtml() {
 	let headers = document.getElementsByTagName("header");
-	console.log(headers);
 	let mains = document.getElementsByTagName("main");
 	let html = "<!doctype html><html lang='fr'><head><style>";
 	let css = getCss();
