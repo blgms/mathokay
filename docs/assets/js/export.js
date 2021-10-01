@@ -9,20 +9,12 @@ function download(filename,text) {
 }
 
 function getCss() {
-	let css = "";
 	fetch("docs/assets/css/custom.css")
 	.then(function(response) {
 		return response.text();
 	})
 	.then(function(data) {
-		css += data;
-	});
-	fetch("docs/assets/css/pico.min.css")
-	.then(function(response) {
-		return response.text();
-	})
-	.then(function(data) {
-		css += data;
+		var css = data;
 	});
 	return css;
 }
