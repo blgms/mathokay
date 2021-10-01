@@ -8,23 +8,23 @@ function download(filename,text) {
   document.body.removeChild(element);
 }
 
-function getCss(css) {
+async getCss(css) {
 	let css = "";
-	fetch("docs/assets/css/custom.css")
+	await fetch("docs/assets/css/custom.css")
 	.then(function(response) {
 		return response.text();
 	})
 	.then(function(data) {
 		css = data;
 	});
+	return css;
 }
 
 function exportHtml() {
 	let headers = document.getElementsByTagName("header");
 	let mains = document.getElementsByTagName("main");
 	let html = "<!doctype html><html lang='fr'><head><style>";
-	let css="":
-	getCss(css);
+	let css = getCss();
 	console.log(css);
 	html += css+"</style></head><body><header>"+headers[0].innerHTML+"</header><main class='container pad6'>"+mains[0].innerHTML+"</main></body></html>";
 	download("hello.html",html);
