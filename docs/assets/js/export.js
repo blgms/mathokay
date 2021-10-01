@@ -9,14 +9,15 @@ function download(filename,text) {
 }
 
 function getCss() {
+	let css = "";
 	fetch("docs/assets/css/custom.css")
 	.then(function(response) {
 		return response.text();
 	})
 	.then(function(data) {
-		console.log(data);
+		css = data;
 	});
-	return "lol";
+	return css;
 }
 
 function exportHtml() {
