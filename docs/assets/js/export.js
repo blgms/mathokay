@@ -9,8 +9,10 @@ function download(filename,text) {
 }
 
 function getCss() {
-	let response = fetch("docs/assets/css/custom.css");
-	console.log(response);
+	fetch("docs/assets/css/custom.css")
+	.then(function(response) {
+		console.log(response);
+	}
 	let str = response.text;
 	return str;
 }
