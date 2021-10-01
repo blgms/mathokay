@@ -14,7 +14,7 @@ function getCss() {
 		return response.text();
 	})
 	.then(function(data) {
-		console.log(data);
+		var css = data;
 	});
 	return "lol";
 }
