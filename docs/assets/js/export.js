@@ -12,7 +12,7 @@ function getCss() {
 	fetch("docs/assets/css/custom.css")
 	.then(function(response) {
 		console.log(response);
-	}
+	});
 	let str = response.text;
 	return str;
 }
