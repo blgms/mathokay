@@ -21,7 +21,6 @@ function timerGo() {
 		clearInterval(go);
 		setTimeout(function() {
 			centerScreen.hidden = true;
-			document.getElementById("divMenuPause").hidden=false;
 			divPause.innerHTML="Pause";
 			corps.classList.remove("flou");
 			slider(2);
@@ -52,7 +51,7 @@ function compteReboursAff(t) {
 }
 
 function compteReboursRefresh() {
-	document.getElementById("btnCompteRebours").classList.remove("outline");
+	btnCompteRebours.classList.remove("outline");
 	time=document.getElementById("timeRange").value;
 	elChrono.innerHTML=compteReboursAff(time);
 }

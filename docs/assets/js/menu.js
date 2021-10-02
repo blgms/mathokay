@@ -18,7 +18,7 @@ function demarrage() {
 	elChrono = document.getElementById("chrono");
 	document.getElementById("togChrono").checked=false;
 	menu("Gpe");
-	renderMathInElement(document.getElementById("corps"));
+	renderMathInElement(corps);
 	affNb();
 	verifActif();
 }
@@ -56,7 +56,7 @@ function menu(m) {
 	menuon=m;		
 	document.getElementById("divTable"+menuon).hidden=!document.getElementById("divTable"+menuon).hidden;
 	document.getElementById("btnMenu"+menuon).classList.toggle("outline");
-	renderMathInElement(document.getElementById("corps"));
+	renderMathInElement(corps);
 }
 
 /*MISE A JOUR AUTO MENU*/
@@ -78,8 +78,8 @@ function slider(sl) {
 	let btnsNew=[];
 	if (sl==1) {
 		btnsNew=[true, false, false, false];
+		compteReboursStop();
 		if (document.getElementById("togChrono").checked==true) {
-			compteReboursStop();
 			setTimeout(function() {
 				compteReboursReset();
 			}, 500);
@@ -89,6 +89,7 @@ function slider(sl) {
 		if (document.getElementById("togChrono").checked==true) {
 			compteReboursPause(false);
 		}
+		document.getElementById("divMenuPause").hidden=false;
 	} else if (sl==3) {
 		btnsNew=[false, true, true, false];
 		compteReboursStop();
@@ -96,7 +97,7 @@ function slider(sl) {
 	for (let i=0 ; i<4 ; i++) {
 		document.getElementById("liBtn"+btns[i].id).hidden=!btnsNew[i];
 	}
-	renderMathInElement(document.getElementById("corps"));
+	renderMathInElement(corps);
 }
 
 /*DÉFILEMENT VERS LE HAUT*/
