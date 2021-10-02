@@ -1,5 +1,5 @@
 /*VARIABLES GLOBALES*/
-var btns = [
+const btns = [
 	{"id":"Go", "lbl":"Go&nbsp;!", "actif":true},
 	{"id":"Config", "lbl":"Config", "actif":false},
 	{"id":"Questions", "lbl":"Questions", "actif":false},
@@ -11,6 +11,10 @@ var menuon = "Gpe";
 
 /*LANCEMENT DE L'APPLI ET AFFICHAGE DU MENU*/
 function demarrage() {
+	const corps = document.getElementById("corps");
+	const centerScreen = document.getElementById("centerScreen");
+	const divPause = document.getElementById("divPause");
+	const btnCompteRebours = document.getElementById("btnCompteRebours");
 	elChrono = document.getElementById("chrono");
 	document.getElementById("togChrono").checked=false;
 	menu("Gpe");

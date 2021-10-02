@@ -255,7 +255,23 @@ main {
 	position: fixed;
 	text-align: center;
 	width: 100vw;
+	height: 100vh;
 	top: 0px;
-	line-height: 100vh;
+}
+
+#centerScreenCtnr {
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+#divPause {
 	font-size: 10vw;
+}
+
+.divMenuPause {
+	margin: auto;
+	width: 320px;
 }

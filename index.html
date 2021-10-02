@@ -36,7 +36,7 @@
 				</ul>
 				<ul id="btnNav">
 					<li id="liBtnGo"><button id="btnGo" onclick="lancement()" disabled><img class="iconBtn" src="docs/assets/images/play-circle.svg" /></button></li>
-					<li id="liBtnConfig" hidden><button class="secondary" onclick="slider(1)"><img class="iconBtn" src="docs/assets/images/settings.svg" /></button></li>
+					<li id="liBtnConfig" hidden><button class="secondary" onclick="compteReboursPause('menu')"><img class="iconBtn" src="docs/assets/images/settings.svg" /></button></li>
 					<li id="liBtnQuestions" hidden><button onclick="slider(2)"><img class="iconBtn" src="docs/assets/images/help-circle.svg" /></button></li>
 					<li id="liBtnReponses" hidden><button onclick="slider(3)"><img class="iconBtn" src="docs/assets/images/check-circle.svg" /></button></li>
 				</ul>
@@ -67,13 +67,21 @@
 				</div>
 				<div id="slide2" class="slide" hidden>
 					<div id="questions"></div>
-					<div id="export"><button onclick="exportHtml()">Exporter les questions</button></div>
 				</div>
 				<div id="slide3" class="slide" hidden>
 					<div id="reponses"></div>
 				</div>
 			</div>
 		</main>
-		<div id="centerScreen" hidden>Pause</div>
+		<div id="centerScreen" hidden>
+			<div id="centerScreenCtnr">
+				<div id="divPause" hidden></div>
+				<div id="divMenuBack" class="divMenuPause" hidden>
+					<button onclick="exportHtml()">Exporter les questions</button>
+					<button onclick="slider(1)">Retour à la configuration</button>
+				</div>
+				<button id="divMenuPause" class="outline divMenuPause" onclick="compteReboursPause()" hidden>Reprendre</button>
+			</div>
+		</div>
 	</body>
 </html>

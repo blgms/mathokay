@@ -5,23 +5,24 @@ var pauseCompteRebours = false;
 
 /*3, 2, 1 GO*/
 function timerGo() {
+	document.getElementById("divMenuPause").hidden=true;
 	document.getElementById("btnGo").disabled=true;
-	let corps = document.getElementById("corps");
-	let centerScreen = document.getElementById("centerScreen");
 	let t=3;
 	corps.classList.add("flou");
-	centerScreen.innerHTML=t
+	divPause.innerHTML=t;
 	centerScreen.hidden = false;
+	divPause.hidden = false;
 	let go = setInterval(function() {
 		t--;
-		centerScreen.innerHTML=t;
+		divPause.innerHTML=t;
 		},1000);
 	setTimeout(function() {
-		centerScreen.innerHTML="Go !";
+		divPause.innerHTML="Go !";
 		clearInterval(go);
 		setTimeout(function() {
 			centerScreen.hidden = true;
-			centerScreen.innerHTML="Pause";
+			document.getElementById("divMenuPause").hidden=false;
+			divPause.innerHTML="Pause";
 			corps.classList.remove("flou");
 			slider(2);
 			document.getElementById("btnGo").disabled=false;
@@ -70,18 +71,25 @@ function compteReboursReset() {
 }
 
 function compteReboursPause(cmd) {
-	if (time>0 && slon==2) {
-		if (typeof cmd != "boolean") { pauseCompteRebours=!pauseCompteRebours; } else { pauseCompteRebours=cmd; };
-		if (pauseCompteRebours==true) { document.getElementById("corps").classList.add("flou"); document.getElementById("centerScreen").hidden=false; document.getElementById("btnCompteRebours").classList.add("outline"); clearInterval(timer); }
-		if (pauseCompteRebours==false) { document.getElementById("corps").classList.remove("flou"); document.getElementById("centerScreen").hidden=true; document.getElementById("btnCompteRebours").classList.remove("outline"); compteRebours(); }	
+	if (slon>1) {
+		let el;
+		if (cmd == "menu") { 
+			if (pauseCompteRebours==true) { divPause.hidden = true; cmd = true; }
+			el = divMenuBack;
+		} else { el = divPause; }
+		if (typeof cmd != "boolean") { pauseCompteRebours=!pauseCompteRebours; } else { pauseCompteRebours=cmd; }
+		if (pauseCompteRebours==true) { corps.classList.add("flou"); centerScreen.hidden=false; el.hidden=false; btnCompteRebours.classList.add("outline"); clearInterval(timer); }
+		if (pauseCompteRebours==false) { corps.classList.remove("flou"); centerScreen.hidden=true; divMenuBack.hidden=true; divPause.hidden=true; if (time > 0) btnCompteRebours.classList.remove("outline"); compteRebours(); }	
 	}
 }
 
 function compteReboursStop() {
 	clearInterval(timer);
 	time=0;
-	document.getElementById("btnCompteRebours").classList.add("outline");
+	btnCompteRebours.classList.add("outline");
 	elChrono.innerHTML="Terminé !";
-	document.getElementById("corps").classList.remove("flou");
-	document.getElementById("centerScreen").hidden=true;
+	corps.classList.remove("flou");
+	centerScreen.hidden=true;
+	divPause.hidden=true;
+	divMenuBack.hidden=true;
 }
