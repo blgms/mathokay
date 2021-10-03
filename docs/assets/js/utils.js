@@ -72,15 +72,6 @@ function tripletsD(inf,sup) {
 	return liste;
 }
 
-//RENDU KATEX D'UNE CHAÎNE
-function renderKatex(chaine) {
-	if (typeof chaine != 'string') {
-		chaine = chaine.toString();
-	}
-	chaine = pointVirg(chaine);
-	return katex.renderToString(chaine,{throwOnError:false});
-}
-
 //REMPLACEMENT DES POINTS PAR DES VIRGULES
 function pointVirg(str) {
 	str = str.replaceAll(".","{,}");

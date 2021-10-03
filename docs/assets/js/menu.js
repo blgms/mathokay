@@ -18,7 +18,7 @@ function demarrage() {
 	elChrono = document.getElementById("chrono");
 	document.getElementById("togChrono").checked=false;
 	menu("Gpe");
-	renderMathInElement(corps);
+	MathJax.startup.defaultReady();
 	affNb();
 	verifActif();
 }
@@ -56,7 +56,7 @@ function menu(m) {
 	menuon=m;		
 	document.getElementById("divTable"+menuon).hidden=!document.getElementById("divTable"+menuon).hidden;
 	document.getElementById("btnMenu"+menuon).classList.toggle("outline");
-	renderMathInElement(corps);
+	MathJax.startup.defaultReady();
 }
 
 /*MISE A JOUR AUTO MENU*/
@@ -97,7 +97,8 @@ function slider(sl) {
 	for (let i=0 ; i<4 ; i++) {
 		document.getElementById("liBtn"+btns[i].id).hidden=!btnsNew[i];
 	}
-	renderMathInElement(corps);
+	
+	MathJax.startup.defaultReady();
 }
 
 /*DÉFILEMENT VERS LE HAUT*/

@@ -170,8 +170,8 @@ main {
 	padding: 10px 0;
 }
 
-mjx-math {
-	font-size: 1.2em;
+mjx-assistive-mml {
+	font-size: 100%;
 }
 
 .reponse {

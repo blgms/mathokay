@@ -10,17 +10,20 @@ function download(filename,text) {
 
 async function exportHtml() {
 	let jsExp = "<script type='text/javascript'>var slon = 2;function slider(sl) {if (sl!=slon) {document.getElementById('slide'+slon).hidden=true;document.getElementById('btn'+slon).hidden=true;slon = sl;document.getElementById('slide'+slon).hidden=false;document.getElementById('btn'+slon).hidden=false;}}</script>";
-	jsExp += "<script src='https://polyfill.io/v3/polyfill.min.js?features=es6'></script><script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'></script>";
+	/*jsExp += "<script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js'></script>";*/
+	await fetch("https://blgms.github.io/mathokay/docs/assets/js/mml-chtml.js")
+	.then(function(response) {
+		return response.text();
+	})
+	.then(function(data) {
+		jsExp += "<script id='MathJax-script' async>"+data+"</script>";
+	});
 	let date = [new Date()];
 	date.push(date[0].getDate(), date[0].getMonth()+1, date[0].getFullYear());
 	let tempDiv = document.createElement('div');
 	tempDiv.setAttribute('id','tempDiv');
 	tempDiv.style.display = 'none';
-	tempDiv.innerHTML = document.getElementById("corps").innerHTML;
-	let elSupp = tempDiv.getElementsByClassName("katex-html");
-	while(elSupp[0]) {
-		elSupp[0].remove();
-	}
+	tempDiv.innerHTML = corps.innerHTML;
 	document.body.appendChild(tempDiv);
 	let css = "";
 	await fetch("https://blgms.github.io/mathokay/docs/assets/css/pico.min.css")
