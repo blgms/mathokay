@@ -170,6 +170,10 @@ main {
 	padding: 10px 0;
 }
 
+mjx-math {
+	font-size: 1.2em;
+}
+
 .reponse {
 	color: #0fcc02;
 }
