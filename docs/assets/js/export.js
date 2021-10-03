@@ -10,14 +10,7 @@ function download(filename,text) {
 
 async function exportHtml() {
 	let jsExp = "<script type='text/javascript'>var slon = 2;function slider(sl) {if (sl!=slon) {document.getElementById('slide'+slon).hidden=true;document.getElementById('btn'+slon).hidden=true;slon = sl;document.getElementById('slide'+slon).hidden=false;document.getElementById('btn'+slon).hidden=false;}}</script>";
-	/*jsExp += "<script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js'></script>";*/
-	await fetch("https://blgms.github.io/mathokay/docs/assets/js/mml-chtml.js")
-	.then(function(response) {
-		return response.text();
-	})
-	.then(function(data) {
-		jsExp += "<script id='MathJax-script' async>"+data+"</script>";
-	});
+	jsExp += "<script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js'></script>";
 	let date = [new Date()];
 	date.push(date[0].getDate(), date[0].getMonth()+1, date[0].getFullYear());
 	let tempDiv = document.createElement('div');
