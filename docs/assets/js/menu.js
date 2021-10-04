@@ -97,8 +97,7 @@ function slider(sl) {
 	for (let i=0 ; i<4 ; i++) {
 		document.getElementById("liBtn"+btns[i].id).hidden=!btnsNew[i];
 	}
-	
-	MathJax.startup.defaultReady();
+	if (sl > 1) MathJax.startup.defaultReady();
 }
 
 /*DÉFILEMENT VERS LE HAUT*/
