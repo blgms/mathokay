@@ -199,28 +199,23 @@ function unites(exo) {
 	if (exo==2) {
 		base = 10;
 		unites = [
-			{ "grandeur":"m$^2$", "div":["k","h","da","","d","c","m"], "facteur":2 },
+			{ "grandeur":"m$^2$", "div":["","d","c","m"], "facteur":2 },
 			{ "grandeur":"m$^3$", "div":["","d","c","m"], "facteur":3 }
 		];
 	}
 	/*choix de l'unité de départ et de l'unité d'arrivée*/
-	let grand = unites[Math.floor(Math.random()*unites.length)];
-	let nudep = Math.floor(Math.random()*grand.div.length);
-	let nuarr = Math.floor(Math.random()*grand.div.length);
+	let grand = unites[genEnt(0,unites.length-1)];
+	let a = grand.div.length-1;
+	let nudep = genEnt(0,a);
+	let nuarr = genEnt(0,a);
 	while (nuarr==nudep) {
-		nuarr = Math.floor(Math.random()*grand.div.length);
+		nuarr = genEnt(0,a);
 	}
 	let udep = grand.div[nudep]+grand.grandeur;
 	let uarr = grand.div[nuarr]+grand.grandeur;
-	let nb100 = Math.floor(Math.random()*20000)+1;
-	let nbdep = (nb100/100).toFixed(2);
-	let decale = (nuarr-nudep)*grand.facteur;
-	let rep;
-	if (2-decale>0) {
-		rep = ((nb100*base**(decale))/100).toFixed(2-decale);
-	} else {
-		rep = Math.trunc((nb100*base**(decale))/100);
-	}
+	let nbm = genEnt(1,999)*100;
+	let nbdep = nbm/(10**((a-nudep)*grand.facteur));
+	let rep = nbm/(10**((a-nuarr)*grand.facteur));
 	let consigne = "<div>Convertir...</div>";
 	let question = "<div class='nombres'>\\("+pointVirg(nbdep.toString())+"\\,\\text{"+udep+"}\\) en \\(\\text{"+uarr+"}\\).</div>";
 	let reponse = "<div class='nombres reponse'>\\("+pointVirg(nbdep.toString())+"\\,\\text{"+udep+"}="+pointVirg(rep.toString())+"\\,\\text{"+uarr+"}\\)</div>";

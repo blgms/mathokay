@@ -1,3 +1,12 @@
+/*CONFIGURATION MATHJAX*/
+MathJax = {
+  options: {
+    renderActions: {
+      assistiveMml: [],
+    }
+  },
+};
+
 /*VARIABLES GLOBALES*/
 const btns = [
 	{"id":"Go", "lbl":"Go&nbsp;!", "actif":true},
@@ -18,7 +27,6 @@ function demarrage() {
 	elChrono = document.getElementById("chrono");
 	document.getElementById("togChrono").checked=false;
 	menu("Gpe");
-	MathJax.startup.defaultReady();
 	affNb();
 	verifActif();
 }
@@ -68,6 +76,7 @@ function majMenu(n) {
 /*TRANSITION ET DECLENCHEMENT DU COMPTE A REBOURS*/
 function slider(sl) {
 	if (sl!=slon) {
+		if (slon==1) MathJax.startup.defaultReady();
 		let el=document.getElementById("slide"+slon);
 		el.hidden=true;
 		slon = sl;
@@ -97,7 +106,6 @@ function slider(sl) {
 	for (let i=0 ; i<4 ; i++) {
 		document.getElementById("liBtn"+btns[i].id).hidden=!btnsNew[i];
 	}
-	if (sl > 1) MathJax.startup.defaultReady();
 }
 
 /*DÉFILEMENT VERS LE HAUT*/
