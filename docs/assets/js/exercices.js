@@ -193,7 +193,8 @@ function unites(exo) {
 			{ "grandeur":"m", "div":["k","h","da","","d","c","m"], "facteur":1 },
 			{ "grandeur":"g", "div":["k","h","da","","d","c","m"], "facteur":1 },
 			{ "grandeur":"L", "div":["h","da","","d","c","m"], "facteur":1 },
-			{ "grandeur":"V", "div":["k","","m"], "facteur":3 }
+			{ "grandeur":"V", "div":["k","","m"], "facteur":3 },
+			{ "grandeur":"s", "div":["","m"], "facteur":3 }
 		];
 	}
 	if (exo==2) {
@@ -268,14 +269,14 @@ function durees(exo) {
 //TABLEAUX DE PROPORTIONNALITE
 function tabprop() {
 	let prop = ["C'est un tableau de proportionnalité.","Ce n'est <b>pas</b> un tableau de proportionnalité."];
-	let on = Math.floor(Math.random()*2);
+	let on = genEnt(0,1);
 	let reponse = "<div class='reponse'>"+prop[on]+"</div>";
 	let nbs = [];
-	let coeff = Math.ceil(Math.random()*10);
+	let coeff = genEnt(1,10);
 	for (let i=0;i<3;i++) {
-		nbs[i] = Math.ceil(Math.random()*100);
+		nbs[i] = genEnt(1,100);
 		if (on == 1 && i > 0) {
-			coeff = coeff+(i-1)+Math.floor(Math.random()*(2));
+			coeff = coeff+(i-1)+genEnt(0,1);
 		}
 		nbs[3+i] = nbs[i]*coeff;
 	}
@@ -289,10 +290,10 @@ function tabprop() {
 
 //QUATRIEME PROPORTIONNELLE
 function quatprop() {
-	let quellevaleur = Math.floor(Math.random()*4);
-	let nba = Math.floor(Math.random()*90+1);
-	let nbb = Math.floor(Math.random()*100+1);
-	let coeff = (Math.floor(Math.random()*9+2));
+	let quellevaleur = genEnt(0,3);
+	let nba = genEnt(1,90);
+	let nbb = genEnt(1,100);
+	let coeff = genEnt(2,10);
 	let nbc = nba*coeff;
 	let nbd = nbb*coeff;
 	let nbs = [nba, nbb, nbc, nbd];
@@ -330,9 +331,9 @@ function fracsimp() {
 	let reponse = "<div class='grid nombres reponse'>";
 	for (let j=1;j<4;j++) {
 		let nbs = [];
-		let a = Math.ceil(Math.random()*5);
+		let a = genEnt(1,5);
 		for (let i=0;i<2;i++) {
-			nbs[i]=Math.ceil(Math.random()*20)*a;
+			nbs[i]=genEnt(1,20)*a;
 		}
 		let fracres = simpl(nbs[0],nbs[1]);
 		/*création des chaînes*/
@@ -354,11 +355,11 @@ function fraccalc() {
 	for (let j=0;j<3;j++) {
 		let nbs = [];
 		for (let i=0;i<4;i++) {
-			nbs[i]=Math.ceil(Math.random()*10);
+			nbs[i]=genEnt(1,10);
 		}
 		/*choix aléatoire de l'opération*/
 		let ops = ["+","-","\\times","\\div"];
-		let nbop = Math.floor(Math.random()*4);
+		let nbop = genEnt(0,3);
 		let op = ops[nbop];
 		/*calcul du dénominateur du résultat*/
 		let den = [ppcm(nbs[1],nbs[3]) , ppcm(nbs[1],nbs[3]) , nbs[1]*nbs[3], nbs[1]*nbs[2]];
