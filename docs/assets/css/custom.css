@@ -170,19 +170,6 @@ main {
 	z-index: 0;
 }
 
-#aPropos {
-	display: none;
-	text-align: center;
-	font-size: 0.75em;
-	animation: ouvreAbout 0.5s ease-out;
-	overflow: hidden;
-	max-height: 57.4px;
-}
-@keyframes ouvreAbout {
-  0% { opacity: 0; max-height: 0px; }
-  100% { opacity: 1; max-height: auto; }
-}
-
 .cacheLogo {
 	max-width: 0px;
 	overflow: hidden;
@@ -333,7 +320,6 @@ mjx-assistive-mml {
 	height: 100vh;
 	top: 0px;
 }
-
 #centerScreenCtnr {
 	position: relative;
 	top: 50%;
@@ -358,4 +344,18 @@ mjx-assistive-mml {
 
 #btnMenuAccueil {
 	margin-top: 4em;
+}
+
+footer {
+	text-align:  center;
+	position: fixed;
+	bottom: 5px;
+}
+footer div {
+	display: inline-block;
+}
+
+.mainTuto {
+	max-height: calc(100vh - 8em);
+	overflow: scroll;
 }

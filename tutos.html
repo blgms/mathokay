@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="docs/assets/css/pico.min.css">
+		<link rel="stylesheet" href="docs/assets/css/custom.css">
+		<script type="text/javascript" src="docs/assets/js/tutosmenu.js"></script>
+		<title>Math'Okay - Tutos</title>
+		<link rel="shortcut icon" type="image/x-icon" href="docs/assets/images/logo128.png">
+	</head>
+	<body>
+		<header>
+			<nav class="container-fluid">
+				<ul id="ulLogo">
+					<li id="liLogo">
+						<div id="divLogo">
+							<hgroup>
+								<h4>Math'Okay</h4>
+								<h5>Tutos</h5>
+							</hgroup>
+						</div>
+					</li>
+				</ul>
+				<ul id="btnNav">
+					<li><button class="secondary" onclick="mainMenu()"><img class="iconBtn" src="docs/assets/images/menu.svg" /></button></li>
+				</ul>
+			</nav>
+		</header>
+		<main class="container pad6 mainTuto">
+			<div id="corps" class="slider">
+				<div id="slide1" class="slide">
+					<div id="tutosMenu">
+						Debout les zouzous
+						<button onclick="afficheTuto()">Go 3</button>
+						</div>
+				</div>
+				<div id="slide2" class="slide" hidden>
+					<div id="tutosSousMenu"></div>
+				</div>
+				<div id="slide3" class="slide" hidden>
+					<div id="tutosAff">
+						<article id="tutoAffiche">
+						</article>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div>
+				<a role="button"><img class="iconBtn" src="docs/assets/images/menu.svg" /></a>
+				<a role="button"><img class="iconBtn" src="docs/assets/images/menu.svg" /></a>
+			</div>
+		</footer>
+		<div id="centerScreen" hidden>
+			<div id="centerScreenCtnr">
+				<div id="divPause" hidden></div>
+				<div id="divMenuBack" class="divMenuPause" hidden>
+					<button onclick="exportHtml()">Exporter les questions</button>
+					<button onclick="slider(1)">Retour à la configuration</button>
+				</div>
+				<div id="divMenuPause" class="divMenuPause"><button class="secondary" onclick="mainMenu()">Retour</button>
+				<button id="btnMenuAccueil" class="outline" onclick="window.location.href='./index.html'">Accueil du site</button></div>
+			</div>
+		</div>
+	</body>
+</html>

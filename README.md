@@ -1,5 +1,5 @@
 # mathokay
-Générateur d'exercices rapides de mathématiques afin de travailler sur les automatismes
+Générateur d'exercices rapides de mathématiques afin de travailler sur les automatismes et tutos d'utilisation de la calculatrice
 
 Ça va être léger côté description, mais dans l'idée, il s'agit d'une application web permettant de générer des mini-exercices de mathématiques afin de s'exercer sur des temps assez courts. L'interface est pensée pour permettre une génération et une utilisation rapide.
 
