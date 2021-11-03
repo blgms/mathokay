@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="docs/assets/css/pico.min.css">
+		<link rel="stylesheet" href="docs/assets/css/custom.css">
+		<script type="text/javascript" src="docs/assets/js/menu.js"></script>
+		<script type="text/javascript" src="docs/assets/js/exercices.js"></script> 
+		<script type="text/javascript" src="docs/assets/js/timer.js"></script>
+		<script type="text/javascript" src="docs/assets/js/utils.js"></script>
+		<script type="text/javascript" src="docs/assets/js/export.js"></script>
+		<!--Librairie MathJax-->
+		<script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js'></script>
+		<title>Math'Okay - Automatismes</title>
+		<link rel="shortcut icon" type="image/x-icon" href="docs/assets/images/logo128.png">
+	</head>
+	<body onpageshow="demarrage()">
+		<header>
+			<nav class="container-fluid">
+				<ul id="ulLogo">
+					<li id="liLogo">
+						<div id="divLogo">
+							<hgroup>
+								<h4>Math'Okay</h4>
+								<h5>Automatismes</h5>
+							</hgroup>
+						</div>
+					</li>
+					<li>
+						<div id="divChrono" hidden>
+							<button id="btnCompteRebours" onclick="compteReboursPause()"><span id="chrono"></span></button>
+						</div>
+					</li>
+				</ul>
+				<ul id="btnNav">
+					<li id="liBtnConfig"><button id="btnConfig" class="secondary" onclick="menuPause()"><img class="iconBtn" src="docs/assets/images/menu.svg" /></button></li>
+					<li id="liBtnGo"><button id="btnGo" onclick="lancement()" disabled><img class="iconBtn" src="docs/assets/images/play-circle.svg" /></button></li>
+					<li id="liBtnQuestions" hidden><button onclick="slider(2)"><img class="iconBtn" src="docs/assets/images/help-circle.svg" /></button></li>
+					<li id="liBtnReponses" hidden><button onclick="slider(3)"><img class="iconBtn" src="docs/assets/images/check-circle.svg" /></button></li>
+				</ul>
+			</nav>
+		</header>
+		<main class="container pad6">
+			<div id="corps" class="slider">
+				<div id="slide1" class="slide">
+					<div id="divBtnCat">
+						<div class="divBtnCatCont">
+							<div class="divBtnCat1"><button id="btnMenuGpe" onclick="menu('Gpe')">Thèmes</button></div>
+							<div class="divBtnCat2"><button id="btnMenuDiff" class="outline" onclick="menu('Diff')">Difficulté</button></div>
+							<div class="divBtnCat3"><button id="btnMenuOpt" class="outline" onclick="menu('Opt')"><img id="iconBtnMenuOpt" class="icon18 iconMenu" src="docs/assets/images/settings.svg" /></button></div>
+						</div>
+					</div>
+					<div id="divTableGpe" class="slide"><table role="grid" id="tableGpe"></table></div>
+					<div id="divTableDiff" class="slide" hidden><table role="grid" id="tableDiff"></table></div>
+					<div id="divTableOpt" class="slide" hidden><table role="grid" id="tableOpt">
+						<tr><td><label for='nbvoulu'>Nombre d'exercices : <span id="affNb"></span><input class="toggledroite" type="range" min="1" max="10" value="3" id="nbvoulu" name="range" onchange="affNb()"></label></td></tr>
+						<tr><td><label for='switch'><input type='checkbox' id='togDoublons' name='switch' role='switch' class='toggledroite'>Autoriser les exercices de même type</label></td></tr>
+						<tr><td><label for='switch'><input type='checkbox' id='togChrono' name='switch' role='switch' class='toggledroite' onchange="compteReboursReset()">Compte à rebours<span id="timeRangeSpan" hidden><input class="toggledroite" type="range" min="10" max="600" step="10" value="300" id="timeRange" name="range" onchange="compteReboursRefresh()"></span></label></td></tr>
+					</table></div>
+				</div>
+				<div id="slide2" class="slide" hidden>
+					<div id="questions"></div>
+				</div>
+				<div id="slide3" class="slide" hidden>
+					<div id="reponses"></div>
+				</div>
+			</div>
+		</main>
+		<div id="centerScreen" hidden>
+			<div id="centerScreenCtnr">
+				<div id="divPause" hidden></div>
+				<div id="divMenuBack" class="divMenuPause" hidden>
+					<button onclick="exportHtml()">Exporter les questions</button>
+					<button onclick="slider(1)">Retour à la configuration</button>
+				</div>
+				<div id="divMenuPause" class="divMenuPause"><button class="secondary" onclick="menuPause()">Retour</button>
+				<button id="btnMenuAccueil" class="outline" onclick="window.location.href='./index.html'">Accueil du site</button></div>
+			</div>
+		</div>
+	</body>
+</html>

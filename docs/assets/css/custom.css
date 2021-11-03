@@ -44,6 +44,30 @@ html {
   scrollbar-width: none;  /* Firefox */
 }
 
+#accueil {
+	position: absolute;
+	top: 50%;
+	left : 50%;	
+	-ms-transform: translateY(-50%) translateX(-50%);
+	transform: translateY(-50%) translateX(-50%);
+	text-align: center;
+}
+#titrePrincipalCont {
+	height: 7.5em;
+}
+#titrePrincipal {
+	display: inline-block;
+	height: 2.2em;
+	background-image: url("../images/logo128.png");
+	background-repeat: no-repeat;
+	background-size: 2em;
+	padding-top: 0.3em;
+	padding-left: 2em;
+	font-size: 2em;
+	font-weight: 600;
+	margin: 0.7em 0;
+}
+
 article, header > h3, header > h4, small > h5, small > h6, .proportion, .mar6 {
 	margin-top: 6px;
 	margin-bottom: 0px;
@@ -330,4 +354,8 @@ mjx-assistive-mml {
 .divMenuPause {
 	margin: auto;
 	width: 300px;
+}
+
+#btnMenuAccueil {
+	margin-top: 4em;
 }

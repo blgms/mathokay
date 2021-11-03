@@ -10,7 +10,6 @@ MathJax = {
 /*VARIABLES GLOBALES*/
 const btns = [
 	{"id":"Go", "lbl":"Go&nbsp;!", "actif":true},
-	{"id":"Config", "lbl":"Config", "actif":false},
 	{"id":"Questions", "lbl":"Questions", "actif":false},
 	{"id":"Reponses", "lbl":"Réponses", "actif":false}
 	];
@@ -86,7 +85,7 @@ function slider(sl) {
 	defilHaut();
 	let btnsNew=[];
 	if (sl==1) {
-		btnsNew=[true, false, false, false];
+		btnsNew=[true, false, false];
 		compteReboursStop();
 		if (document.getElementById("togChrono").checked==true) {
 			setTimeout(function() {
@@ -94,18 +93,19 @@ function slider(sl) {
 			}, 500);
 		}
 	} else if (sl==2) {
-		btnsNew=[false, true, false, true];
+		btnsNew=[false, false, true];
 		if (document.getElementById("togChrono").checked==true) {
 			compteReboursPause(false);
 		}
 		document.getElementById("divMenuPause").hidden=false;
 	} else if (sl==3) {
-		btnsNew=[false, true, true, false];
+		btnsNew=[false, true, false];
 		compteReboursStop();
 	}
-	for (let i=0 ; i<4 ; i++) {
+	for (let i in btns) {
 		document.getElementById("liBtn"+btns[i].id).hidden=!btnsNew[i];
 	}
+	document.getElementById("btnConfig").disabled=false;
 }
 
 /*DÉFILEMENT VERS LE HAUT*/
@@ -179,10 +179,4 @@ function creerExos(liste) {
 	document.getElementById("questions").innerHTML = cartesq;
 	document.getElementById("reponses").innerHTML = cartesr;
 	if (document.getElementById("togChrono").checked==true) { timerGo(); } else { slider(2); }
-}
-
-/*ROLL CREDITS*/
-function about() {
-	let el = document.getElementById("aPropos");
-	if (el.style.display == "") {el.style.display = "grid"; } else {el.style.display = ""; }
 }

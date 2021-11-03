@@ -12,6 +12,7 @@ function timerGo() {
 	divPause.innerHTML=t;
 	centerScreen.hidden = false;
 	divPause.hidden = false;
+	document.getElementById("btnConfig").disabled=true;
 	let go = setInterval(function() {
 		t--;
 		divPause.innerHTML=t;
@@ -69,16 +70,19 @@ function compteReboursReset() {
 	}
 }
 
+function menuPause() {
+	if (slon > 1) { compteReboursPause(); }
+	else {
+		corps.classList.toggle("flou");
+		centerScreen.hidden=!centerScreen.hidden;
+	}
+}
+
 function compteReboursPause(cmd) {
 	if (slon>1) {
-		let el;
-		if (cmd == "menu") { 
-			if (pauseCompteRebours==true) { divPause.hidden = true; cmd = true; }
-			el = divMenuBack;
-		} else { el = divPause; }
 		if (typeof cmd != "boolean") { pauseCompteRebours=!pauseCompteRebours; } else { pauseCompteRebours=cmd; }
-		if (pauseCompteRebours==true) { corps.classList.add("flou"); centerScreen.hidden=false; el.hidden=false; btnCompteRebours.classList.add("outline"); clearInterval(timer); }
-		if (pauseCompteRebours==false) { corps.classList.remove("flou"); centerScreen.hidden=true; divMenuBack.hidden=true; divPause.hidden=true; if (time > 0) btnCompteRebours.classList.remove("outline"); compteRebours(); }	
+		if (pauseCompteRebours==true) { corps.classList.add("flou"); centerScreen.hidden=false; divMenuBack.hidden=false; divPause.hidden=false; btnCompteRebours.classList.add("outline"); clearInterval(timer); }
+		if (pauseCompteRebours==false) { corps.classList.remove("flou"); centerScreen.hidden=true; divMenuBack.hidden=true; divPause.hidden=true; if (time > 0) btnCompteRebours.classList.remove("outline"); compteRebours(); }
 	}
 }
 
