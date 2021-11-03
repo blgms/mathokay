@@ -39,7 +39,8 @@ var exos = [
 	{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Forme \\(ax=d\\)"},
 	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(2)", "nom": "Forme \\(ax+b=d\\)"},
 	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Forme \\(ax+b=cx+d\\)"},
-	{"act": false, "Gpe": 5, "Diff": 3,  "fonc": "equa2d()", "nom": "Second degré"}
+	{"act": false, "Gpe": 5, "Diff": 3,  "fonc": "equa2d()", "nom": "Second degré"},
+	{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statFreq()", "nom": "Calculs de fréquences/pourcentages"}
 	/*{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMoy()", "nom": "Calcul de moyenne"},*/
 	/*{"act": false, "Gpe": 6, "Diff": 2,  "fonc": "statMoyP()", "nom": "Calcul de moyenne pondérée"},*/
 	/*{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMed()", "nom": "Vérification de médiane"},*/
@@ -434,5 +435,25 @@ function equa2d() {
 	let question = "<div>Indiquer les solutions de l'équation.</div>";
 	let consigne = "<div class='nombres'>\\("+na+"x^2"+nb+"x"+nc+"=0\\)</div>";	
 	let reponse = "<div class='nombres reponse grid'>"+sol+"</div>";
+	return [consigne,question,reponse];
+}
+
+//CALCUL DE FREQUENCE/POURCENTAGE
+function statFreq() {
+	let consigne = "Calculer, en %, les fréquences (arrondies à l'unité) correspondant à ces effectifs.";
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
+	for (let j=1;j<4;j++) {
+		let N=genEnt(20,500);
+		let n=genEnt(0,N);
+		let f=n*100/N;
+		let eg=(Number.isInteger(f))? "=" : "\\simeq";
+		f=Math.round(f);
+		let quest = "\\(n_i="+n+"\\)<br>\\(N="+N+"\\)";
+		question += "<div>"+quest+"</div>";
+		reponse += "<div>\\(f=\\dfrac{"+n+"}{"+N+"} \\times 100"+eg+f+"\\%\\)</div>";
+	}
+	question += "</div>";
+	reponse += "</div>";
 	return [consigne,question,reponse];
 }
