@@ -355,7 +355,10 @@ footer div {
 	display: inline-block;
 }
 
-.mainTuto {
-	max-height: calc(100vh - 8em);
+#articleTuto {
+	height: calc(100vh - 8.2em);
+}
+
+#corpsTuto div {
 	overflow: scroll;
 }
