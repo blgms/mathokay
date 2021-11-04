@@ -40,9 +40,9 @@ var exos = [
 	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(2)", "nom": "Forme \\(ax+b=d\\)"},
 	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Forme \\(ax+b=cx+d\\)"},
 	{"act": false, "Gpe": 5, "Diff": 3,  "fonc": "equa2d()", "nom": "Second degré"},
-	{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statFreq()", "nom": "Calculs de fréquences/pourcentages"}
-	/*{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMoy()", "nom": "Calcul de moyenne"},*/
-	/*{"act": false, "Gpe": 6, "Diff": 2,  "fonc": "statMoyP()", "nom": "Calcul de moyenne pondérée"},*/
+	{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statFreq()", "nom": "Calculs de fréquences/pourcentages"},
+	{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMoy()", "nom": "Calcul de moyenne"},
+	{"act": false, "Gpe": 6, "Diff": 2,  "fonc": "statMoyP()", "nom": "Calcul de moyenne pondérée"},
 	/*{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMed()", "nom": "Vérification de médiane"},*/
 	/*{"act": false, "Gpe": 7, "Diff": 1,  "fonc": "foncTabl()", "nom": "Compléter un tableau de valeurs"},*/
 	/*{"act": false, "Gpe": 7, "Diff": 1,  "fonc": "foncVar()", "nom": "Compléter un tableau de variations"},*/
@@ -440,7 +440,7 @@ function equa2d() {
 
 //CALCUL DE FREQUENCE/POURCENTAGE
 function statFreq() {
-	let consigne = "Calculer, en %, les fréquences (arrondies à l'unité) correspondant à ces effectifs.";
+	let consigne = "<div>Calculer, en %, les fréquences (arrondies à l'unité) correspondant à ces effectifs.</div>";
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
 	for (let j=1;j<4;j++) {
@@ -456,4 +456,44 @@ function statFreq() {
 	question += "</div>";
 	reponse += "</div>";
 	return [consigne,question,reponse];
+}
+
+//CALCUL DE MOYENNE SIMPLE
+function statMoy() {
+	let consigne = "<div>Calculer la moyenne de ces valeurs (arrondir au dixième si nécessaire).</div>";
+	let N = genEnt(4,8);
+	let x = genEnt(0,50);
+	let S = x;
+	let question = "<div class='nombres'>\\("+x;
+	for (let j=1 ; j<N ; j++) {
+		x = genEnt(0,50);
+		S += x;
+		question += " ; "+x;
+	}
+	question += "\\)</div>";
+	let moy = S/N;
+	let eg=(Number.isInteger(moy*10))? "=" : "\\simeq";
+	let reponse = "<div class='nombres reponse'>\\(\\bar{x}"+eg+pointVirg((Math.round((moy)*10)/10).toString())+"\\).</div>";
+	return [question,consigne,reponse];
+}
+
+//CALCUL DE MOYENNE PONDÉRÉE
+function statMoyP() {
+	let consigne = "<div>Calculer la moyenne de ces valeurs (arrondir au dixième si nécessaire).</div>";
+	let valeurs = "<tr><th>\\(x_i\\)</th>";
+	let effectifs = "<tr><th>\\(n_i\\)</th>";
+	let N=0, S=0;
+	for (let j=0 ; j<genEnt(3,5) ; j++) {
+		let x = genEnt(0,50);
+		let n = genEnt(2,20);
+		valeurs += "<td>\\("+x+"\\)</td>";
+		effectifs += "<td>\\("+n+"\\)</td>";
+		S += x*n;
+		N += n;
+	}
+	let moy = S/N;
+	let eg=(Number.isInteger(moy*10))? "=" : "\\simeq";
+	let question = "<table class='proportion'>"+valeurs+effectifs+"</table>";
+	let reponse = "<div class='nombres reponse'>\\(\\bar{x}"+eg+pointVirg((Math.round((moy)*10)/10).toString())+"\\).</div>";
+	return [question,consigne,reponse];
 }

@@ -19,7 +19,8 @@ var menuon = "Gpe";
 
 /*LANCEMENT DE L'APPLI ET AFFICHAGE DU MENU*/
 function demarrage() {
-	const corps = document.getElementById("corps");
+	const slide2 = document.getElementById("slide2");
+	const slide3 = document.getElementById("slide3");
 	const centerScreen = document.getElementById("centerScreen");
 	const divPause = document.getElementById("divPause");
 	const btnCompteRebours = document.getElementById("btnCompteRebours");

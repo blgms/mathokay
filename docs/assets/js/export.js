@@ -27,7 +27,7 @@ async function exportHtml() {
 	.then(function(data) {
 		css += data;
 	});
-	let html = "<!doctype html><html lang='fr'><head>"+jsExp+"<style>"+css+"</style></head><body><header><nav class='container-fluid'><ul><li id='liLogo'><div id='divLogo'><hgroup><h4>Math'Okay</h4><h5>Séance du "+date[1]+"/"+date[2]+"/"+date[3]+"</h5></hgroup></div></li></ul><ul><li id='btn3' hidden><button style='width:7rem;' onclick='slider(2)'>Questions</button></li><li id='btn2'><button style='width:7rem;' onclick='slider(3)'>Réponses</button></li></ul></nav></header><main class='container pad6'>"+corps.innerHTML+"</main></body></html>";
+	let html = "<!doctype html><html lang='fr'><head><meta charset='UTF-8'>"+jsExp+"<style>"+css+"</style></head><body><header><nav class='container-fluid'><ul><li id='liLogo'><div id='divLogo'><hgroup><h4>Math'Okay</h4><h5>Séance du "+date[1]+"/"+date[2]+"/"+date[3]+"</h5></hgroup></div></li></ul><ul><li id='btn3' hidden><button style='width:7rem;' onclick='slider(2)'>Questions</button></li><li id='btn2'><button style='width:7rem;' onclick='slider(3)'>Réponses</button></li></ul></nav></header><main class='container pad6'><div id='corps' class='slider'><div id='slide2' class='slide'>"+slide2.innerHTML+"</div><div id='slide3' class='slide' hidden>"+slide3.innerHTML+"</div></div></main></body></html>";
 	MathJax.startup.defaultReady();
 	download("Automatismes-"+date[1]+"-"+date[2]+"-"+date[3]+".html",html);
 }
