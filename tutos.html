@@ -43,10 +43,11 @@
 				</div>
 			</div>
 		</main>
-		<footer>
+		<footer hidden>
 			<div>
-				<a role="button" onclick="tutoPage(-1)"><img class="iconBtn" src="docs/assets/images/menu.svg" /></a>
-				<a role="button" onclick="tutoPage(1)"><img class="iconBtn" src="docs/assets/images/menu.svg" /></a>
+				<button id="btnPagePrec" onclick="tutoPage(-1)"><img class="iconBtn" src="docs/assets/images/arrow-left.svg" /></button>
+				<span id="affPage"></span>
+				<button id="btnPageSuiv" onclick="tutoPage(1)"><img class="iconBtn" src="docs/assets/images/arrow-right.svg" /></button>
 			</div>
 		</footer>
 		<div id="centerScreen" hidden>

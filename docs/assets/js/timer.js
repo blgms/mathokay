@@ -95,4 +95,5 @@ function compteReboursStop() {
 	centerScreen.hidden=true;
 	divPause.hidden=true;
 	divMenuBack.hidden=true;
+	pauseCompteRebours=false;
 }

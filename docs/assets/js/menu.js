@@ -36,27 +36,35 @@ function menu(m) {
 	let exosListe = "";
 	if (m=="Gpe") {
 		exos.sort(function(a, b) {return a.Gpe-b.Gpe;});
-		for (let i=0 ; i<exos.length ; i++) {
-			if (i==0 || exos[i].Gpe!=exos[i-1].Gpe) {
-				exosListe += "<thead><tr><th>"+groupes[exos[i].Gpe].nom+"</th></tr></thead>";
+		let b = Array.from(new Set(exos.map(a => a.Gpe)));
+		for (let j in b) {
+			exosListe += "<article><header>"+groupes[b[j]].nom+"</header><table role='grid'>";
+			let c = exos.filter(obj => { return obj.Gpe == b[j]; });
+			for (let i in c) {
+				let check = "";
+				if (c[i].act==true) { check=" checked"; }
+				let k = exos.indexOf(c[i]);
+				exosListe += "<tr><td><label for='switch'><input type='checkbox' id='togExo"+k+"' name='switch' role='switch' class='toggledroite' onclick='majMenu("+k+")'"+check+">"+diffs[c[i].Diff].couleur+" "+c[i].nom+"</label></td></tr>";
 			}
-			let check = "";
-			if (exos[i].act==true) { check=" checked"; }
-			exosListe += "<tr><td><label for='switch'><input type='checkbox' id='togExo"+i+"' name='switch' role='switch' class='toggledroite' onclick='majMenu("+i+")'"+check+">"+diffs[exos[i].Diff].couleur+" "+exos[i].nom+"</label></td></tr>";
+			exosListe += "</table></article>";
 		}
-		document.getElementById("tableGpe").innerHTML = exosListe;
+		document.getElementById("divTableGpe").innerHTML = exosListe;
 	}
 	if (m=="Diff") {
 		exos.sort(function(a, b) {return a.Diff-b.Diff;});
-		for (let i=0 ; i<exos.length ; i++) {
-			if (i==0 || exos[i].Diff!=exos[i-1].Diff) {
-				exosListe += "<thead><tr><th>"+diffs[exos[i].Diff].couleur+" "+diffs[exos[i].Diff].nom+"</th></tr></thead>";
+		let b = Array.from(new Set(exos.map(a => a.Diff)));
+		for (let j in b) {
+			exosListe += "<article><header>"+diffs[b[j]].couleur+" "+diffs[b[j]].nom+"</header><table role='grid'>";
+			let c = exos.filter(obj => { return obj.Diff == b[j]; });
+			for (let i in c) {
+				let check = "";
+				if (c[i].act==true) { check=" checked"; }
+				let k = exos.indexOf(c[i]);
+				exosListe += "<tr><td><label for='switch'><input type='checkbox' id='togExo"+k+"' name='switch' role='switch' class='toggledroite' onclick='majMenu("+k+")'"+check+">"+c[i].nom+"</label></td></tr>";
 			}
-			let check = "";
-			if (exos[i].act==true) { check=" checked"; }
-			exosListe += "<tr><td><label for='switch'><input type='checkbox' id='togExo"+i+"' name='switch' role='switch' class='toggledroite' onclick='majMenu("+i+")'"+check+">"+exos[i].nom+"</label></td></tr>";
+			exosListe += "</table></article>";
 		}
-		document.getElementById("tableDiff").innerHTML = exosListe;
+		document.getElementById("divTableDiff").innerHTML = exosListe;
 	}
 	if ((m=="Opt" && menuon!="Opt") || (m!="Opt" && menuon=="Opt")) { document.getElementById("iconBtnMenuOpt").classList.toggle("iconMenu"); document.getElementById("iconBtnMenuOpt").classList.toggle("iconSelect"); };
 	document.getElementById("divTable"+menuon).hidden=!document.getElementById("divTable"+menuon).hidden;

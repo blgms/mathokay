@@ -28,6 +28,7 @@ async function afficheTuto(ref) {
 		document.getElementById("articleTuto").innerHTML = data;
 		nbPages = document.getElementById("corpsTuto").childElementCount;
 		page = 1;
+		affPage();
 		slider(3);
 	});
 }
@@ -39,6 +40,11 @@ function slider(sl) {
 		slon = sl;
 		el=document.getElementById("slide"+slon);
 		el.hidden=false;
+	}
+	if (slon==3) {
+		document.getElementsByTagName("footer")[0].hidden = false;
+	} else {
+		document.getElementsByTagName("footer")[0].hidden = true;
 	}
 	defilHaut();
 }
@@ -55,9 +61,16 @@ function mainMenu() {
 }
 
 function tutoPage(n) {
-	if ((page >= 1 && page < nbPages && n == 1) || (page > 1 && page <= nbPages && n == -1)) {
+	if (page+n >= 1 && page+n <= nbPages) {
 		document.getElementById("tutoPage"+page).hidden = true;
 		page += n;
 		document.getElementById("tutoPage"+page).hidden = false;
+		affPage();
 	}
+}
+
+function affPage() {
+	document.getElementById("affPage").innerHTML = page+"/"+nbPages;
+	if (page==1) { document.getElementById("btnPagePrec").disabled = true; } else { document.getElementById("btnPagePrec").disabled = false; }
+	if (page==nbPages) { document.getElementById("btnPageSuiv").disabled = true; } else { document.getElementById("btnPageSuiv").disabled = false; }
 }
