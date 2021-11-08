@@ -378,7 +378,8 @@ footer button {
 	height: calc(100vh - 8.2em);
 }
 
-#corpsTuto div {
+#corpsTuto {
+	height: 100%;
 	overflow: scroll;
 }
 
