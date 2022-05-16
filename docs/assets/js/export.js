@@ -11,7 +11,7 @@ function download(filename,text) {
 async function exportHtml() {
 	let jsExp = "<script type='text/javascript'>var slon = 2;function slider(sl) {if (sl!=slon) {document.getElementById('slide'+slon).hidden=true;document.getElementById('btn'+slon).hidden=true;slon = sl;document.getElementById('slide'+slon).hidden=false;document.getElementById('btn'+slon).hidden=false;}}</script>";
 	let date = [new Date()];
-	date.push(date[0].getDate(), date[0].getMonth()+1, date[0].getFullYear());
+	date.push(date[0].getFullYear(), date[0].getMonth()+1, date[0].getDate());
 	let css = "";
 	await fetch("https://blgms.github.io/mathokay/docs/assets/css/pico.min.css")
 	.then(function(response) {
