@@ -34,11 +34,12 @@ function lanceExp(exp) {
 //REFLEXES
 function reflexes() {
 	document.getElementById("artExpHead").innerHTML = "Test de réflexes";
-	document.getElementById("artExp").innerHTML = "Appuyer sur le bouton, puis rappuyer dessus le plus vite possible lorsqu'il redevient actif.</div><div><button id='reflexBtn' onclick='reflexBtn()'><span id='reflex'>Je suis prêt !</span></button><div id='reflexChr'>&nbsp;</div><div id='ti' hidden>";
+	document.getElementById("expConsigne").innerHTML = "Appuyer sur le bouton, puis rappuyer dessus le plus vite possible lorsqu'il redevient actif.";
+	document.getElementById("expMilieu").innerHTML = "<button id='reflexBtn' onclick='reflexBtn()'><span id='reflex'>Je suis prêt !</span></button><div id='reflexChr'>&nbsp;</div><div id='ti' hidden></div>";
 }
 function reflexBtn() {
 	if (document.getElementById("reflex").innerHTML=="Je suis prêt !") {
-		let t = Math.round(Math.random()*4000)+2000;
+		let t = Math.round(Math.random()*4000)+1000;
 		document.getElementById("reflex").innerHTML = "Attention...";
 		document.getElementById("reflexBtn").disabled = true;
 		test = setTimeout(function() {

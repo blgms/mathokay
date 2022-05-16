@@ -374,13 +374,13 @@ footer button {
 	margin : 0;
 }
 
-#articleTuto {
-	height: calc(100vh - 8.2em);
+#artExp {
+	display: table-cell;
+	height: calc(100vh - 7.5em);
+	vertical-align: middle;
 }
-
-#corpsTuto {
-	height: 100%;
-	overflow: scroll;
+#artExp button {
+	margin: 1rem auto;
 }
 
 #affPage {

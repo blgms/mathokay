@@ -44,7 +44,7 @@ var exos = [
 	{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMoy()", "nom": "Calcul de moyenne"},
 	{"act": false, "Gpe": 6, "Diff": 2,  "fonc": "statMoyP()", "nom": "Calcul de moyenne pondérée"},
 	/*{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMed()", "nom": "Vérification de médiane"},*/
-	/*{"act": false, "Gpe": 7, "Diff": 1,  "fonc": "foncTabl()", "nom": "Compléter un tableau de valeurs"},*/
+	{"act": false, "Gpe": 7, "Diff": 1,  "fonc": "foncAffTabl()", "nom": "Tableau de valeurs : fonction affine ou linéaire"},
 	/*{"act": false, "Gpe": 7, "Diff": 1,  "fonc": "foncVar()", "nom": "Compléter un tableau de variations"},*/
 	/*{"act": false, "Gpe": 8, "Diff": 1,  "fonc": "geoAire()", "nom": "Calculer une aire"},*/
 	/*{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "geoVol()", "nom": "Calculer un volume"},*/
@@ -496,4 +496,38 @@ function statMoyP() {
 	let question = "<table class='proportion'>"+valeurs+effectifs+"</table>";
 	let reponse = "<div class='nombres reponse'>\\(\\bar{x}"+eg+pointVirg((Math.round((moy)*10)/10).toString())+"\\).</div>";
 	return [question,consigne,reponse];
+}
+
+//FONCTION AFFINE - TABLEAU DE VALEURS
+function foncAffTabl() {
+	let a = genZ(1,20);
+	let b = genEnt(0,2);
+	let bStr = "";
+	if (b != 0) {
+		b = genEnt(1,20);
+		bStr = "+"+b;
+	}
+	let consigne = "<div>Compléter le tableau de valeurs de la fonction définie par \\(f(x)="+a+"x"+bStr+"\\) .</div>";
+	let ant = [];
+	let img = [];
+	let antStr = "<tr><th>\\(x\\)</th>";
+	let imgStr = "<tr><th>\\(f(x)\\)</th><td></td><td></td><td></td><td></td>";
+	let imgRepStr = "<tr><th>\\(f(x)\\)</th>";
+	for (let j=0 ; j<4 ; j++) {
+		ant[j] = genZ(0,20);
+		while (j>0 && ant[j]==ant[j-1]) {
+			ant[j] = genZ(0,20);
+		}
+	}
+	ant.sort(function(a,b) {
+		return a-b;
+	});
+	for (let j=0 ; j<4 ; j++) {
+		antStr += "<td>"+ant[j]+"</td>";
+		img[j] = ant[j]*a+b;
+		imgRepStr += "<td>"+img[j]+"</td>";
+	}
+	let question = "<table class='proportion'>"+antStr+"</tr>"+imgStr+"</tr></table>";
+	let reponse = "<table class='proportion'>"+antStr+"</tr>"+imgRepStr+"</tr></table>";
+	return [consigne,question,reponse];	
 }
