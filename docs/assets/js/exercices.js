@@ -502,12 +502,10 @@ function statMoyP() {
 function foncAffTabl() {
 	let a = genZ(1,20);
 	let b = genEnt(0,2);
-	let bStr = "";
 	if (b != 0) {
-		b = genEnt(1,20);
-		bStr = "+"+b;
+		b = genZ(1,20);
 	}
-	let consigne = "<div>Compléter le tableau de valeurs de la fonction définie par \\(f(x)="+a+"x"+bStr+"\\) .</div>";
+	let consigne = "<div>Compléter le tableau de valeurs de la fonction définie par \\(f(x)="+a+"x"+strPlus(b)+"\\) .</div>";
 	let ant = [];
 	let img = [];
 	let antStr = "<tr><th>\\(x\\)</th>";

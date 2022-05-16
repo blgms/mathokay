@@ -77,3 +77,15 @@ function pointVirg(str) {
 	str = str.replaceAll(".","{,}");
 	return str;
 }
+
+function strPlus(a) {
+	if (a<0) {
+		return "-"+Math.abs(a);
+	}
+	if (a==0) {
+		return "";
+	}
+	if (a>0) {
+		return "+"+a;
+	}
+}
