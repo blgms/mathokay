@@ -3,7 +3,7 @@ var groupes = [
 	/*0*/{"nom": "Nombres"},
 	/*1*/{"nom": "Calcul Mental"},
 	/*2*/{"nom": "Unités"},
-	/*3*/{"nom": "Proportionnalité, pourcentages"},
+	/*3*/{"nom": "Proportionnalité"},
 	/*4*/{"nom": "Fractions"},
 	/*5*/{"nom": "Équations"},
 	/*6*/{"nom": "Statistiques"},
@@ -22,6 +22,8 @@ var diffs = [
 
 var exos = [
 	{"act": false, "Gpe": 0, "Diff": 0, "fonc": "arrondis()", "nom": "Arrondir des nombres"},
+	{"act": false, "Gpe": 0, "Diff": 0, "fonc": "compNombres()", "nom": "Comparer des nombres"},
+	/*{"act": false, "Gpe": 0, "Diff": 0, "fonc": "compFrac()", "nom": "Comparer des fractions"},*/
 	{"act": false, "Gpe": 0, "Diff": 1, "fonc": "scienti()", "nom": "Passer en écriture scientifique"},
 	{"act": false, "Gpe": 0, "Diff": 1, "fonc": "scientideci()", "nom": "Passer en écriture décimale"},
 	{"act": false, "Gpe": 1, "Diff": 0,  "fonc": "tablesmulti()", "nom": "Tables de multiplication"},
@@ -43,8 +45,10 @@ var exos = [
 	{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statFreq()", "nom": "Calculs de fréquences/pourcentages"},
 	{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMoy()", "nom": "Calcul de moyenne"},
 	{"act": false, "Gpe": 6, "Diff": 2,  "fonc": "statMoyP()", "nom": "Calcul de moyenne pondérée"},
-	/*{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMed()", "nom": "Vérification de médiane"},*/
+	{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMed()", "nom": "Détermination de médiane"},
 	{"act": false, "Gpe": 7, "Diff": 1,  "fonc": "foncAffTabl()", "nom": "Tableau de valeurs : fonction affine ou linéaire"},
+	{"act": false, "Gpe": 7, "Diff": 2,  "fonc": "foncCarTabl()", "nom": "Tableau de valeurs : fonction carré"},
+	{"act": false, "Gpe": 7, "Diff": 2,  "fonc": "foncRacTabl()", "nom": "Tableau de valeurs : fonction racine carrée"},
 	/*{"act": false, "Gpe": 7, "Diff": 1,  "fonc": "foncVar()", "nom": "Compléter un tableau de variations"},*/
 	/*{"act": false, "Gpe": 8, "Diff": 1,  "fonc": "geoAire()", "nom": "Calculer une aire"},*/
 	/*{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "geoVol()", "nom": "Calculer un volume"},*/
@@ -74,6 +78,31 @@ function arrondis() {
 		a = (a/10000);
 		question += "<div>\\("+pointVirg(a.toString())+"\\)</div>";
 		reponse += "<div>\\("+pointVirg(a.toString())+"\\simeq"+pointVirg(x.toString())+"\\)</div>";
+	}
+	question += "</div>";
+	reponse += "</div>";
+	return [consigne,question,reponse];
+}
+
+//COMPARAISON DE NOMBRES
+function compNombres() {
+	let consigne = "Compléter avec les symboles \\(<\\) ou \\(>\\) :";
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
+	for (let j=1;j<4;j++) {
+		let a = genZ(0,1000);
+		let b = a + genZ(1,1)*10**genEnt(0,2);
+		let c = 10**genEnt(0,3);
+		let s = genZ(1,1);
+		a = s*a/c; b = s*b/c;
+		let r = "";
+		if (a-b<0) {
+			r = "<";
+		} else {
+			r = ">";
+		}
+		question += "<div>\\("+pointVirg(a.toString())+"\\,\\,\\text{...}\\,\\,"+pointVirg(b.toString())+"\\)</div>";
+		reponse += "<div>\\("+pointVirg(a.toString())+"\\,\\,"+r+"\\,\\,"+pointVirg(b.toString())+"\\)</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
@@ -498,6 +527,33 @@ function statMoyP() {
 	return [question,consigne,reponse];
 }
 
+//CALCUL DE MEDIANE
+function statMed() {
+	let consigne = "<div>Déterminer la médiane de ces valeurs.</div>";
+	let N = genEnt(4,8);
+	let nb = [];
+	let med;
+	let question = "<div class='nombres'>\\(";
+	for (let j=0 ; j<N ; j++) {
+		nb[j] = genEnt(0,50);
+		question += nb[j];
+		if (j<N-1) {
+			question += " ; ";
+		}
+	}
+	question += "\\)</div>";
+	nb.sort(function(a,b) {
+		return a-b;
+	});
+	if (N%2==1) {
+		med = nb[(N+1)/2-1]
+	} else {
+		med = nb[N/2-1];
+	}
+	let reponse = "<div class='nombres reponse'>La médiane est "+med+".</div>";
+	return [question,consigne,reponse];
+}
+
 //FONCTION AFFINE - TABLEAU DE VALEURS
 function foncAffTabl() {
 	let a = genZ(1,20);
@@ -523,9 +579,65 @@ function foncAffTabl() {
 	for (let j=0 ; j<4 ; j++) {
 		antStr += "<td>"+ant[j]+"</td>";
 		img[j] = ant[j]*a+b;
-		imgRepStr += "<td>"+img[j]+"</td>";
+		imgRepStr += "<td><span class='reponse'>"+img[j]+"</span></td>";
 	}
-	let question = "<table class='proportion'>"+antStr+"</tr>"+imgStr+"</tr></table>";
-	let reponse = "<table class='proportion'>"+antStr+"</tr>"+imgRepStr+"</tr></table>";
+	let question = "<table class='proportion nombres'>"+antStr+"</tr>"+imgStr+"</tr></table>";
+	let reponse = "<table class='proportion nombres'>"+antStr+"</tr>"+imgRepStr+"</tr></table>";
+	return [consigne,question,reponse];	
+}
+
+//FONCTION CARRE - TABLEAU DE VALEURS
+function foncCarTabl() {
+	let a = genZ(1,20);
+	let consigne = "<div>Compléter le tableau de valeurs de la fonction définie par \\(f(x)="+a+"x^{2}\\) .</div>";
+	let ant = [];
+	let img = [];
+	let antStr = "<tr><th>\\(x\\)</th>";
+	let imgStr = "<tr><th>\\(f(x)\\)</th><td></td><td></td><td></td><td></td>";
+	let imgRepStr = "<tr><th>\\(f(x)\\)</th>";
+	for (let j=0 ; j<4 ; j++) {
+		ant[j] = genZ(0,20);
+		while (j>0 && ant[j]==ant[j-1]) {
+			ant[j] = genZ(0,20);
+		}
+	}
+	ant.sort(function(a,b) {
+		return a-b;
+	});
+	for (let j=0 ; j<4 ; j++) {
+		antStr += "<td>"+ant[j]+"</td>";
+		img[j] = a*ant[j]**2;
+		imgRepStr += "<td><span class='reponse'>"+img[j]+"</span></td>";
+	}
+	let question = "<table class='proportion nombres'>"+antStr+"</tr>"+imgStr+"</tr></table>";
+	let reponse = "<table class='proportion nombres'>"+antStr+"</tr>"+imgRepStr+"</tr></table>";
+	return [consigne,question,reponse];	
+}
+
+//FONCTION RACINE CARREE - TABLEAU DE VALEURS
+function foncRacTabl() {
+	let a = genZ(1,20);
+	let consigne = "<div>Compléter le tableau de valeurs de la fonction définie par \\(f(x)="+a+"\\sqrt{x}\\) .</div>";
+	let ant = [];
+	let img = [];
+	let antStr = "<tr><th>\\(x\\)</th>";
+	let imgStr = "<tr><th>\\(f(x)\\)</th><td></td><td></td><td></td><td></td>";
+	let imgRepStr = "<tr><th>\\(f(x)\\)</th>";
+	for (let j=0 ; j<4 ; j++) {
+		ant[j] = genEnt(0,20)**2;
+		while (j>0 && ant[j]==ant[j-1]) {
+			ant[j] = genEnt(0,20)**2;
+		}
+	}
+	ant.sort(function(a,b) {
+		return a-b;
+	});
+	for (let j=0 ; j<4 ; j++) {
+		antStr += "<td>"+ant[j]+"</td>";
+		img[j] = Math.sqrt(ant[j])*a;
+		imgRepStr += "<td><span class='reponse'>"+img[j]+"</span></td>";
+	}
+	let question = "<table class='proportion nombres'>"+antStr+"</tr>"+imgStr+"</tr></table>";
+	let reponse = "<table class='proportion nombres'>"+antStr+"</tr>"+imgRepStr+"</tr></table>";
 	return [consigne,question,reponse];	
 }
