@@ -1,0 +1,70 @@
+@page {
+	size: A5 landscape;
+	margin: 0;
+}
+html {
+	font-family: "Trebuchet MS", sans-serif;
+}
+html, body, main, #slide2, #corps, #questions {
+	width: 210mm;
+	margin: 0;
+}
+body > header {
+	display: none;
+}
+article > header {
+	background-color: #BAE7DB;
+	margin-bottom: 1mm;
+}
+.pageQuestions::before {
+	content: "Nom : ...................................................... Prénom : ...................................................... Date : ........................................";
+	font-size: 0.7em;
+}
+.pageQuestions {
+	padding-top: 5mm;
+	padding-left: 12.5mm;
+	break-after: always;
+	background: url('../images/printBG.svg');
+}
+article {
+	width: 100mm;
+	border: 2px solid #1CAF87;
+	border-radius: 3px;
+	margin: 1mm 0 1mm 0;
+	height: 42mm;
+}
+article > div {
+	padding: 0 1mm 1mm 1mm;
+	font-size: 0.7em;
+	line-height: 1.5;
+}
+article > div > .grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit,minmax(0%,1fr));
+}
+header > small > div > div > h5, header > small > div > div > h6 {
+	display: inline;
+}
+.nombres {
+	margin: 10px auto;
+	text-align: center;
+}
+.nombres div {
+	padding: 10px 0;
+}
+.proportion tr, .proportion td {
+	text-align: center;
+	border: 1px solid #1CAF87;
+}
+.proportion td, .proportion th {
+	padding: 1mm 3mm;
+}
+.proportion th {
+	background-color: #EAF7F4;
+}
+.proportion {
+	border-collapse: collapse;
+	display: block;
+	width: max-content;
+	margin: 6px auto;
+}

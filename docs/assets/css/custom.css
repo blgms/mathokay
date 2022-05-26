@@ -386,39 +386,3 @@ footer button {
 #affPage {
 	margin: auto 1rem;
 }
-
-@page {
-	size: A5 landscape;
-	margin: 0 0 0 12.5mm;
-}
-@media print {
-	html {
-		background-image: url('../images/printBG.svg');
-		background-position: right top 1mm;
-		background-size: 210mm 148mm;
-	}
-	body {
-		max-width: 100mm;
-		max-height: 148mm;
-	}
-	body > header {
-		display : none;
-	}
-	main {
-		top: 3mm;
-	}
-	article {
-		height: 45mm;
-		max-height: 45mm;
-		font-size: 0.7rem;
-	}
-	article, article header, article header h5, .proportion > tbody > tr > th, .proportion > tbody > tr > td {
-		font-size: 0.7rem;
-	}
-	.MathJax {
-		scale: 0.7;
-	}
-	.grid {
-		grid-template-columns: repeat(auto-fit,minmax(0%,1fr));
-	}
-}

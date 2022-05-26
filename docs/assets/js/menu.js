@@ -182,8 +182,14 @@ function creerExos(liste) {
 		liste[i].type = liste[i].groupe + " - " + liste[i].nom;
 		quesrep = eval(liste[i].fonc);
 		let consigne = quesrep[0], question = quesrep[1], reponse = quesrep[2];
+		if (i%3==0) {
+			cartesq += "<div class='pageQuestions'>";
+		}		
 		cartesq += "<div><article><header><small><div class='grid'><div><h5>Exercice "+(i+1)+" - "+groupes[liste[i].Gpe].nom+"</h5></div><div class='droite'><h6>"+liste[i].nom+"</h6></div></div></small></header><div>"+consigne+"</div><div>"+question+"</div></article></div>";
 		cartesr += "<div><article><header><small><div class='grid'><div><h5>Réponse "+(i+1)+" - "+groupes[liste[i].Gpe].nom+"</h5></div><div class='droite'><h6>"+liste[i].nom+"</h6></div></div></small></header><div>"+consigne+"</div><div>"+reponse+"</div></article></div>";
+	if (i%3==2 || i==liste.length-1) {
+			cartesq += "</div>";
+		}		
 	}
 	document.getElementById("questions").innerHTML = cartesq;
 	document.getElementById("reponses").innerHTML = cartesr;

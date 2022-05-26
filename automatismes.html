@@ -3,8 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="docs/assets/css/pico.min.css">
-		<link rel="stylesheet" href="docs/assets/css/custom.css">
+		<link rel="stylesheet" media="screen" href="docs/assets/css/pico.min.css">
+		<link rel="stylesheet" media="screen" href="docs/assets/css/custom.css">
+		<link rel="stylesheet" media="print" href="docs/assets/css/print.css">
 		<script type="text/javascript" src="docs/assets/js/menu.js"></script>
 		<script type="text/javascript" src="docs/assets/js/exercices.js"></script> 
 		<script type="text/javascript" src="docs/assets/js/timer.js"></script>
@@ -56,7 +57,7 @@
 					<div id="divTableOpt" class="slide" hidden>
 						<article><header>Options</header>
 							<table role="grid" id="tableOpt">
-								<tr><td><label for='nbvoulu'>Nombre d'exercices : <span id="affNb"></span><input class="toggledroite" type="range" min="1" max="10" value="3" id="nbvoulu" name="range" onchange="affNb()"></label></td></tr>
+								<tr><td><label for='nbvoulu'>Nombre d'exercices : <span id="affNb"></span><input class="toggledroite" type="range" min="1" max="12" value="3" id="nbvoulu" name="range" onchange="affNb()"></label></td></tr>
 								<tr><td><label for='switch'><input type='checkbox' id='togDoublons' name='switch' role='switch' class='toggledroite'>Autoriser les exercices de même type</label></td></tr>
 								<tr><td><label for='switch'><input type='checkbox' id='togChrono' name='switch' role='switch' class='toggledroite' onchange="compteReboursReset()">Compte à rebours<span id="timeRangeSpan" hidden><input class="toggledroite" type="range" min="10" max="600" step="10" value="300" id="timeRange" name="range" onchange="compteReboursRefresh()"></span></label></td></tr>
 							</table>
