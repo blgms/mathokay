@@ -50,28 +50,6 @@ function menu(m) {
 		}
 		document.getElementById("divTableGpe").innerHTML = exosListe;
 	}
-	if (m=="Diff") {
-		exos.sort(function(a, b) {return a.Diff-b.Diff;});
-		let b = Array.from(new Set(exos.map(a => a.Diff)));
-		for (let j in b) {
-			exosListe += "<article><header>"+diffs[b[j]].couleur+" "+diffs[b[j]].nom+"</header><table role='grid'>";
-			let c = exos.filter(obj => { return obj.Diff == b[j]; });
-			for (let i in c) {
-				let check = "";
-				if (c[i].act==true) { check=" checked"; }
-				let k = exos.indexOf(c[i]);
-				exosListe += "<tr><td><label for='switch'><input type='checkbox' id='togExo"+k+"' name='switch' role='switch' class='toggledroite' onclick='majMenu("+k+")'"+check+">"+c[i].nom+"</label></td></tr>";
-			}
-			exosListe += "</table></article>";
-		}
-		document.getElementById("divTableDiff").innerHTML = exosListe;
-	}
-	if ((m=="Opt" && menuon!="Opt") || (m!="Opt" && menuon=="Opt")) { document.getElementById("iconBtnMenuOpt").classList.toggle("iconMenu"); document.getElementById("iconBtnMenuOpt").classList.toggle("iconSelect"); };
-	document.getElementById("divTable"+menuon).hidden=!document.getElementById("divTable"+menuon).hidden;
-	document.getElementById("btnMenu"+menuon).classList.toggle("outline");
-	menuon=m;		
-	document.getElementById("divTable"+menuon).hidden=!document.getElementById("divTable"+menuon).hidden;
-	document.getElementById("btnMenu"+menuon).classList.toggle("outline");
 	MathJax.startup.defaultReady();
 }
 
@@ -167,7 +145,7 @@ function tirageExos(liste) {
 		for (let i=0 ; i<nbvoulu ; i++) {
 			let x = Math.floor(Math.random()*liste.length);
 			exosproposes[i] = liste[x];
-			if (nbexos >= nbvoulu && !document.getElementById("togDoublons").checked) {
+			if (nbexos >= nbvoulu) {
 				liste.splice(x,1);
 			}
 		}
@@ -180,12 +158,12 @@ function creerExos(liste) {
 	var cartesq = "", cartesr = "";
 	for (let i=0 ; i<liste.length ; i++) {
 		liste[i].type = liste[i].groupe + " - " + liste[i].nom;
-		quesrep = eval(liste[i].fonc);
+		quesrep = eval(liste[i].fonc+liste[i].nbAuto+")");
 		let consigne = quesrep[0], question = quesrep[1], reponse = quesrep[2];
 		if (i%3==0) {
 			cartesq += "<div class='pageQuestions'>";
 		}		
-		cartesq += "<div><article><header><small><div class='grid'><div><h5>Exercice "+(i+1)+" - "+groupes[liste[i].Gpe].nom+"</h5></div><div class='droite'><h6>"+liste[i].nom+"</h6></div></div></small></header><div>"+consigne+"</div><div>"+question+"</div></article></div>";
+		cartesq += "<div class='divQuestion'><article><header><small><div class='grid'><div><h5>Exercice "+(i+1)+" - "+groupes[liste[i].Gpe].nom+"</h5></div><div class='droite'><h6>"+liste[i].nom+"</h6></div></div></small></header><div>"+consigne+"</div><div>"+question+"</div></article></div>";
 		cartesr += "<div><article><header><small><div class='grid'><div><h5>Réponse "+(i+1)+" - "+groupes[liste[i].Gpe].nom+"</h5></div><div class='droite'><h6>"+liste[i].nom+"</h6></div></div></small></header><div>"+consigne+"</div><div>"+reponse+"</div></article></div>";
 	if (i%3==2 || i==liste.length-1) {
 			cartesq += "</div>";

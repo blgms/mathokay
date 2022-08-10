@@ -21,58 +21,58 @@ var diffs = [
 ];
 
 var exos = [
-	{"act": false, "Gpe": 0, "Diff": 0, "fonc": "arrondis()", "nom": "Arrondir des nombres"},
-	{"act": false, "Gpe": 0, "Diff": 0, "fonc": "compNombres()", "nom": "Comparer des nombres"},
-	/*{"act": false, "Gpe": 0, "Diff": 0, "fonc": "compFrac()", "nom": "Comparer des fractions"},*/
-	{"act": false, "Gpe": 0, "Diff": 1, "fonc": "scienti()", "nom": "Passer en écriture scientifique"},
-	{"act": false, "Gpe": 0, "Diff": 1, "fonc": "scientideci()", "nom": "Passer en écriture décimale"},
-	{"act": false, "Gpe": 1, "Diff": 0,  "fonc": "tablesmulti()", "nom": "Tables de multiplication"},
-	{"act": false, "Gpe": 1, "Diff": 0,  "fonc": "puiss10()", "nom": "Multiplier/diviser par 10, 100, 1000"},
-	{"act": false, "Gpe": 2, "Diff": 0,  "fonc": "unites(1)", "nom": "Longueurs, masses, volumes (L)..."},
-	{"act": false, "Gpe": 2, "Diff": 2,  "fonc": "unites(2)", "nom": "Aires, volumes (m³)"},
-	{"act": false, "Gpe": 2, "Diff": 1,  "fonc": "durees(1)", "nom": "Durées (facile)"},
-	{"act": false, "Gpe": 2, "Diff": 2,  "fonc": "durees(2)", "nom": "Durées (moyen)"},
-	{"act": false, "Gpe": 2, "Diff": 3,  "fonc": "durees(3)", "nom": "Durées (difficile)"},
-	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "tabprop()", "nom": "Vérification"},
-	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "quatprop()", "nom": "Calcul de 4e proportionnelle"},
-	{"act": false, "Gpe": 3, "Diff": 1,  "fonc": "echelle()", "nom": "Échelles"},
-	{"act": false, "Gpe": 4, "Diff": 1,  "fonc": "fracsimp()", "nom": "Simplification"},
-	{"act": false, "Gpe": 4, "Diff": 2,  "fonc": "fraccalc()", "nom": "Calculs avec des fractions"},
-	{"act": false, "Gpe": 5, "Diff": 1,  "fonc": "equa1d(1)", "nom": "Forme \\(ax=d\\)"},
-	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(2)", "nom": "Forme \\(ax+b=d\\)"},
-	{"act": false, "Gpe": 5, "Diff": 2,  "fonc": "equa1d(3)", "nom": "Forme \\(ax+b=cx+d\\)"},
-	{"act": false, "Gpe": 5, "Diff": 3,  "fonc": "equa2d()", "nom": "Second degré"},
-	{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statFreq()", "nom": "Calculs de fréquences/pourcentages"},
-	{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMoy()", "nom": "Calcul de moyenne"},
-	{"act": false, "Gpe": 6, "Diff": 2,  "fonc": "statMoyP()", "nom": "Calcul de moyenne pondérée"},
-	{"act": false, "Gpe": 6, "Diff": 1,  "fonc": "statMed()", "nom": "Détermination de médiane"},
-	{"act": false, "Gpe": 7, "Diff": 1,  "fonc": "foncAffTabl()", "nom": "Tableau de valeurs : fonction affine ou linéaire"},
-	{"act": false, "Gpe": 7, "Diff": 2,  "fonc": "foncCarTabl()", "nom": "Tableau de valeurs : fonction carré"},
-	{"act": false, "Gpe": 7, "Diff": 2,  "fonc": "foncRacTabl()", "nom": "Tableau de valeurs : fonction racine carrée"},
-	/*{"act": false, "Gpe": 7, "Diff": 1,  "fonc": "foncVar()", "nom": "Compléter un tableau de variations"},*/
-	/*{"act": false, "Gpe": 8, "Diff": 1,  "fonc": "geoAire()", "nom": "Calculer une aire"},*/
-	/*{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "geoVol()", "nom": "Calculer un volume"},*/
-	/*{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "geoThal()", "nom": "Théorème de Thalès"},*/
-	/*{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "geoPyth()", "nom": "Théorème de Pythagore"},*/
-	/*{"act": false, "Gpe": 9, "Diff": 2,  "fonc": "suitAri()", "nom": "Retrouver les termes d'une suite arithmétique"},*/
-	/*{"act": false, "Gpe": 9, "Diff": 2,  "fonc": "suitAriR()", "nom": "Retrouver la raison d'une suite arithmétique"},*/
-	/*{"act": false, "Gpe": 9, "Diff": 3,  "fonc": "suitAriVerif()", "nom": "Vérifier si une suite est arithmétique"},*/
-	/*{"act": false, "Gpe": 9, "Diff": 4,  "fonc": "suitAriN()", "nom": "\\(n\\)-ième terme d'une suite arithmétique"},*/
-	/*{"act": false, "Gpe": 9, "Diff": 2,  "fonc": "suitGeo()", "nom": "Retrouver les termes d'une suite géométrique"},*/
-	/*{"act": false, "Gpe": 9, "Diff": 2,  "fonc": "suitGeoQ()", "nom": "Retrouver la raison d'une suite géométrique"},*/
-	/*{"act": false, "Gpe": 9, "Diff": 3,  "fonc": "suitGeoVerif()", "nom": "Vérifier si une suite est géométrique"},*/
-	/*{"act": false, "Gpe": 9, "Diff": 4,  "fonc": "suitGeoN()", "nom": "\\(n\\)-ième terme d'une suite géométrique"},*/
+	{"act": false, "Gpe": 0, "Diff": 0, "nbAuto": 3, "fonc": "arrondis(", "nom": "Arrondir des nombres"},
+	{"act": false, "Gpe": 0, "Diff": 0, "nbAuto": 3, "fonc": "compNombres(", "nom": "Comparer des nombres"},
+	{"act": false, "Gpe": 0, "Diff": 1, "nbAuto": 3, "fonc": "scienti(", "nom": "Passer en écriture scientifique"},
+	{"act": false, "Gpe": 0, "Diff": 1, "nbAuto": 3, "fonc": "scientideci(", "nom": "Passer en écriture décimale"},
+	{"act": false, "Gpe": 1, "Diff": 0, "nbAuto": 3, "fonc": "tablesmulti(", "nom": "Tables de multiplication"},
+	{"act": false, "Gpe": 1, "Diff": 0, "nbAuto": 3, "fonc": "puiss10(", "nom": "Multiplier/diviser par 10, 100, 1000"},
+	{"act": false, "Gpe": 2, "Diff": 0, "nbAuto": 1, "fonc": "unites(1,", "nom": "Longueurs, masses, volumes (L)..."},
+	{"act": false, "Gpe": 2, "Diff": 2, "nbAuto": 1, "fonc": "unites(2,", "nom": "Aires, volumes (m³)"},
+	{"act": false, "Gpe": 2, "Diff": 1, "nbAuto": 1, "fonc": "durees(1,", "nom": "Durées (facile)"},
+	{"act": false, "Gpe": 2, "Diff": 2, "nbAuto": 1, "fonc": "durees(2,", "nom": "Durées (moyen)"},
+	{"act": false, "Gpe": 2, "Diff": 3, "nbAuto": 1, "fonc": "durees(3,", "nom": "Durées (difficile)"},
+	{"act": false, "Gpe": 3, "Diff": 1, "nbAuto": 1, "fonc": "tabprop(", "nom": "Vérification"},
+	{"act": false, "Gpe": 3, "Diff": 1, "nbAuto": 1, "fonc": "quatprop(", "nom": "Calcul de 4e proportionnelle"},
+	{"act": false, "Gpe": 3, "Diff": 1, "nbAuto": 3, "fonc": "echelle(", "nom": "Échelles"},
+	/*{"act": false, "Gpe": 4, "Diff": 0, "nbAuto": 3, "fonc": "compFrac(", "nom": "Comparer des fractions"},*/
+	{"act": false, "Gpe": 4, "Diff": 1, "nbAuto": 3, "fonc": "fracsimp(", "nom": "Simplification"},
+	{"act": false, "Gpe": 4, "Diff": 2, "nbAuto": 3, "fonc": "fraccalc(", "nom": "Calculs avec des fractions"},
+	{"act": false, "Gpe": 5, "Diff": 1, "nbAuto": 1, "fonc": "equa1d(1,", "nom": "Forme \\(ax=d\\)"},
+	{"act": false, "Gpe": 5, "Diff": 2, "nbAuto": 1, "fonc": "equa1d(2,", "nom": "Forme \\(ax+b=d\\)"},
+	{"act": false, "Gpe": 5, "Diff": 2, "nbAuto": 1, "fonc": "equa1d(3,", "nom": "Forme \\(ax+b=cx+d\\)"},
+	{"act": false, "Gpe": 5, "Diff": 3, "nbAuto": 1, "fonc": "equa2d(", "nom": "Second degré"},
+	{"act": false, "Gpe": 6, "Diff": 1, "nbAuto": 1, "fonc": "statFreq(", "nom": "Calculs de fréquences/pourcentages"},
+	{"act": false, "Gpe": 6, "Diff": 1, "nbAuto": 1, "fonc": "statMoy(", "nom": "Calcul de moyenne"},
+	{"act": false, "Gpe": 6, "Diff": 2, "nbAuto": 1, "fonc": "statMoyP(", "nom": "Calcul de moyenne pondérée"},
+	{"act": false, "Gpe": 6, "Diff": 1, "nbAuto": 1, "fonc": "statMed(", "nom": "Détermination de médiane"},
+	{"act": false, "Gpe": 7, "Diff": 1, "nbAuto": 1, "fonc": "foncAffTabl(", "nom": "Tableau de valeurs : fonction affine ou linéaire"},
+	{"act": false, "Gpe": 7, "Diff": 2, "nbAuto": 1, "fonc": "foncCarTabl(", "nom": "Tableau de valeurs : fonction carré"},
+	{"act": false, "Gpe": 7, "Diff": 2, "nbAuto": 1, "fonc": "foncRacTabl(", "nom": "Tableau de valeurs : fonction racine carrée"},
+	/*{"act": false, "Gpe": 7, "Diff": 1, "nbAuto": 1,  "fonc": "foncVar()", "nom": "Compléter un tableau de variations"},*/
+	/*{"act": false, "Gpe": 8, "Diff": 1, "nbAuto": 1,  "fonc": "geoAire()", "nom": "Calculer une aire"},*/
+	/*{"act": false, "Gpe": 8, "Diff": 2, "nbAuto": 1,  "fonc": "geoVol()", "nom": "Calculer un volume"},*/
+	/*{"act": false, "Gpe": 8, "Diff": 2, "nbAuto": 1,  "fonc": "geoThal()", "nom": "Théorème de Thalès"},*/
+	/*{"act": false, "Gpe": 8, "Diff": 2, "nbAuto": 1,  "fonc": "geoPyth()", "nom": "Théorème de Pythagore"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 2, "nbAuto": 1,  "fonc": "suitAri()", "nom": "Retrouver les termes d'une suite arithmétique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 2, "nbAuto": 1,  "fonc": "suitAriR()", "nom": "Retrouver la raison d'une suite arithmétique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 3, "nbAuto": 1,  "fonc": "suitAriVerif()", "nom": "Vérifier si une suite est arithmétique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 4, "nbAuto": 1,  "fonc": "suitAriN()", "nom": "\\(n\\)-ième terme d'une suite arithmétique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 2, "nbAuto": 1,  "fonc": "suitGeo()", "nom": "Retrouver les termes d'une suite géométrique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 2, "nbAuto": 1,  "fonc": "suitGeoQ()", "nom": "Retrouver la raison d'une suite géométrique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 3, "nbAuto": 1,  "fonc": "suitGeoVerif()", "nom": "Vérifier si une suite est géométrique"},*/
+	/*{"act": false, "Gpe": 9, "Diff": 4, "nbAuto": 1,  "fonc": "suitGeoN()", "nom": "\\(n\\)-ième terme d'une suite géométrique"},*/
 ];
 
 //NOMBRES
 //ARRONDIS DE DECIMAUX
-function arrondis() {
+function arrondis(nEx) {
 	let ordre = ["à l'unité","au dixième","au centième","au millième"];
 	let nOrdre = Math.floor(Math.random()*ordre.length);
 	let consigne = "Arrondir <b>"+ordre[nOrdre]+"</b>.";
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
-	for (let j=1;j<4;j++) {
+	for (let j=0;j<nEx;j++) {
 		let a = Math.floor(Math.random()*100000);
 		let x = (Math.round(a/(10**(4-nOrdre))))/(10**nOrdre);
 		a = (a/10000);
@@ -85,11 +85,11 @@ function arrondis() {
 }
 
 //COMPARAISON DE NOMBRES
-function compNombres() {
+function compNombres(nEx) {
 	let consigne = "Compléter avec les symboles \\(<\\) ou \\(>\\) :";
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
-	for (let j=1;j<4;j++) {
+	for (let j=0;j<nEx;j++) {
 		let a = genZ(0,1000);
 		let b = a + genZ(1,1)*10**genEnt(0,2);
 		let c = 10**genEnt(0,3);
@@ -110,11 +110,11 @@ function compNombres() {
 }
 
 //PASSER EN ECRITURE SCIENTIFIQUE
-function scienti() {
+function scienti(nEx) {
 	let consigne = "Convertir en écriture scientifique :";
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
-	for (let j=1;j<4;j++) {
+	for (let j=0;j<nEx;j++) {
 		let nb = Math.floor(Math.random()*9000+1000)/1000;
 		let npuis = Math.ceil(Math.random()*6);
 		let signpuis = Math.sign(Math.random()-0.5);
@@ -140,11 +140,11 @@ function scienti() {
 }
 
 //PASSER EN ECRITURE DECIMALE
-function scientideci() {
+function scientideci(nEx) {
 	let consigne = "Convertir en écriture décimale :";
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
-	for (let j=1;j<4;j++) {
+	for (let j=0;j<nEx;j++) {
 		let nb = Math.floor(Math.random()*9000+1000)/1000;
 		let npuis = Math.ceil(Math.random()*6);
 		let signpuis = Math.sign(Math.random()-0.5);
@@ -170,11 +170,11 @@ function scientideci() {
 
 //CALCUL MENTAL
 //TABLES DE MULTIPLICATION
-function tablesmulti() {
+function tablesmulti(nEx) {
 	let consigne = "Calculer <b>de tête :</b>"
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
-	for (let j=1;j<4;j++) {
+	for (let j=0;j<nEx;j++) {
 		let n1 = Math.ceil(Math.random()*10);
 		let n2 = Math.ceil(Math.random()*10);
 		let quest = n1+"\\times"+n2;
@@ -188,11 +188,11 @@ function tablesmulti() {
 }
 
 //PUISSANCES DE 10
-function puiss10() {
+function puiss10(nEx) {
 	let consigne = "Calculer <b>de tête</b> :";
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
-	for (let j=1;j<4;j++) {
+	for (let j=00;j<nEx;j++) {
 		let num = Math.floor(Math.random()*1000);
 		let coeff = 10**Math.ceil(Math.random()*3);
 		let op = Math.round(Math.random());
@@ -214,7 +214,7 @@ function puiss10() {
 
 //UNITES
 //CONVERSION UNITES
-function unites(exo) {
+function unites(exo,nEx) {
 	let unites = [];
 	let base;
 	if (exo==1) {
@@ -254,7 +254,7 @@ function unites(exo) {
 }
 
 //CONVERSION UNITES DE DUREE
-function durees(exo) {
+function durees(exo,nEx) {
 	let grand;
 	if (exo==1) {
 		grand = { "unites":["s","min"], "lim":[3600, 60]};
@@ -297,7 +297,7 @@ function durees(exo) {
 
 //PROPORTIONNALITE
 //TABLEAUX DE PROPORTIONNALITE
-function tabprop() {
+function tabprop(nEx) {
 	let prop = ["C'est un tableau de proportionnalité.","Ce n'est <b>pas</b> un tableau de proportionnalité."];
 	let on = genEnt(0,1);
 	let reponse = "<div class='reponse'>"+prop[on]+"</div>";
@@ -319,7 +319,7 @@ function tabprop() {
 }
 
 //QUATRIEME PROPORTIONNELLE
-function quatprop() {
+function quatprop(nEx) {
 	let quellevaleur = genEnt(0,3);
 	let nba = genEnt(1,90);
 	let nbb = genEnt(1,100);
@@ -335,14 +335,14 @@ function quatprop() {
 }
 
 //ECHELLES
-function echelle() {
+function echelle(nEx) {
 	let echList = [2, 3, 10, 20, 25, 50, 100];
 	let ech = echList[genEnt(0,echList.length-1)];
 	if (ech > 10) { var unit = "", fact = 1000; } else { var unit = "c", fact = 10; }
 	let consigne = "<div>Sur un plan à l'échelle <b>1:"+ech+"</b>, on relève les cotes suivantes :</div>";
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid reponse centre'>";
-	for (let j=1;j<4;j++) {
+	for (let j=0;j<nEx;j++) {
 		let quest = genEnt(40,250);
 		let rep = quest*ech/fact;
 		question += "<div>\\("+quest+"\\,\\text{mm}\\)</div>";
@@ -355,11 +355,11 @@ function echelle() {
 
 //FRACTIONS
 //SIMPLIFICATION FRACTIONS
-function fracsimp() {
+function fracsimp(nEx) {
 	let consigne = "<div>Si c'est possible, simplifier :</div>";
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
-	for (let j=1;j<4;j++) {
+	for (let j=0;j<nEx;j++) {
 		let nbs = [];
 		let a = genEnt(1,5);
 		for (let i=0;i<2;i++) {
@@ -378,11 +378,11 @@ function fracsimp() {
 }
 
 //CALCULS FRACTIONS
-function fraccalc() {
+function fraccalc(nEx) {
 	let consigne = "<div>Calculer :</div>"
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
-	for (let j=0;j<3;j++) {
+	for (let j=0;j<nEx;j++) {
 		let nbs = [];
 		for (let i=0;i<4;i++) {
 			nbs[i]=genEnt(1,10);
@@ -409,7 +409,7 @@ function fraccalc() {
 }
 
 //EQUATIONS DU 1ER DEGRE
-function equa1d(type) {
+function equa1d(type,nEx) {
 	let nbs = [0,0,0,0];
 	while (nbs[0]==nbs[2] || nbs[1]==nbs[3]) {
 		nbs[0] = genZ(1,10);
@@ -441,7 +441,7 @@ function equa1d(type) {
 }
 
 //EQUATIONS DU 2ND DEGRE
-function equa2d() {
+function equa2d(nEx) {
 	let n=tripletsD(-5,5)[genEnt(0,151)];
 	let a=n[0],b=n[1],c=n[2];
 	let na="",nb="",nc="";
@@ -468,7 +468,7 @@ function equa2d() {
 }
 
 //CALCUL DE FREQUENCE/POURCENTAGE
-function statFreq() {
+function statFreq(nEx) {
 	let consigne = "<div>Calculer, en %, les fréquences (arrondies à l'unité) correspondant à ces effectifs.</div>";
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
@@ -488,7 +488,7 @@ function statFreq() {
 }
 
 //CALCUL DE MOYENNE SIMPLE
-function statMoy() {
+function statMoy(nEx) {
 	let consigne = "<div>Calculer la moyenne de ces valeurs (arrondir au dixième si nécessaire).</div>";
 	let N = genEnt(4,8);
 	let x = genEnt(0,50);
@@ -507,7 +507,7 @@ function statMoy() {
 }
 
 //CALCUL DE MOYENNE PONDÉRÉE
-function statMoyP() {
+function statMoyP(nEx) {
 	let consigne = "<div>Calculer la moyenne de ces valeurs (arrondir au dixième si nécessaire).</div>";
 	let valeurs = "<tr><th>\\(x_i\\)</th>";
 	let effectifs = "<tr><th>\\(n_i\\)</th>";
@@ -528,7 +528,7 @@ function statMoyP() {
 }
 
 //CALCUL DE MEDIANE
-function statMed() {
+function statMed(nEx) {
 	let consigne = "<div>Déterminer la médiane de ces valeurs.</div>";
 	let N = genEnt(4,8);
 	let nb = [];
@@ -555,7 +555,7 @@ function statMed() {
 }
 
 //FONCTION AFFINE - TABLEAU DE VALEURS
-function foncAffTabl() {
+function foncAffTabl(nEx) {
 	let a = genZ(1,20);
 	let b = genEnt(0,2);
 	if (b != 0) {
@@ -587,7 +587,7 @@ function foncAffTabl() {
 }
 
 //FONCTION CARRE - TABLEAU DE VALEURS
-function foncCarTabl() {
+function foncCarTabl(nEx) {
 	let a = genZ(1,20);
 	let consigne = "<div>Compléter le tableau de valeurs de la fonction définie par \\(f(x)="+a+"x^{2}\\) .</div>";
 	let ant = [];
@@ -615,7 +615,7 @@ function foncCarTabl() {
 }
 
 //FONCTION RACINE CARREE - TABLEAU DE VALEURS
-function foncRacTabl() {
+function foncRacTabl(nEx) {
 	let a = genZ(1,20);
 	let consigne = "<div>Compléter le tableau de valeurs de la fonction définie par \\(f(x)="+a+"\\sqrt{x}\\) .</div>";
 	let ant = [];

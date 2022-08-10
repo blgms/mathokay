@@ -61,12 +61,10 @@ function compteReboursReset() {
 	if (document.getElementById("togChrono").checked==true) {
 		document.getElementById("liLogo").hidden=true;
 		document.getElementById("divChrono").hidden=false;
-		document.getElementById("timeRangeSpan").hidden=false;
 		compteReboursRefresh();
 	} else {
 		document.getElementById("liLogo").hidden=false;
 		document.getElementById("divChrono").hidden=true;
-		document.getElementById("timeRangeSpan").hidden=true;
 	}
 }
 

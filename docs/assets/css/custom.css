@@ -1,35 +1,8 @@
-/* Light-green Light scheme (Default) */
-/* Can be forced with data-theme="light" */
-[data-theme="light"],
-:root:not([data-theme="dark"]) {
+:root {
   --primary: #7cb342;
   --primary-hover: #689f38;
   --primary-focus: rgba(124, 179, 66, 0.125);
   --primary-inverse: #FFF;
-}
-
-/* Light-green Dark scheme (Auto) */
-/* Automatically enabled if user has Dark mode enabled */
-@media only screen and (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --primary: #7cb342;
-    --primary-hover: #8bc34a;
-    --primary-focus: rgba(124, 179, 66, 0.25);
-    --primary-inverse: #FFF;
-  }
-}
-
-/* Light-green Dark scheme (Forced) */
-/* Enabled if forced with data-theme="dark" */
-[data-theme="dark"] {
-  --primary: #7cb342;
-  --primary-hover: #8bc34a;
-  --primary-focus: rgba(124, 179, 66, 0.25);
-  --primary-inverse: #FFF;
-}
-
-/* Light-green (Common styles) */
-:root {
   --form-element-active-border-color: var(--primary);
   --form-element-focus-color: var(--primary-focus);
   --switch-color: var(--primary-inverse);
@@ -116,17 +89,6 @@ body > header {
 	z-index: 1;
 }
 
-@media (prefers-color-scheme: dark) {
-	body > header, article > header {
-		background-color: #1f2532;
-	}
-	.gitHubLogo {
-		background-image: url('../images/GitHub-Mark-Light-32px.png');
-		background-repeat: no-repeat;
-		background-size: 1em;
-		padding-left: 1.1em;
-	}
-}
 @media (prefers-color-scheme: light) {
 	body > header, article > header {
 		background-color: #f5f5ff;
@@ -147,10 +109,11 @@ body > header {
 	background-image: url("../images/logo128.png");
 	background-repeat: no-repeat;
 	background-size: contain;
+	overflow: hidden;
 	margin: 0;
 	padding-left: 2.5rem;
 	line-height:1;
-	animation: affChrono 0.3s ease-out;
+	animation: affFondu 0.3s ease-out;
 }
 #divChrono button {
 	margin: 0;
@@ -158,11 +121,11 @@ body > header {
 	line-height: 1.6rem;
 	font-size: 1.2em;
 	width: 7rem;
-	animation: affChrono 0.3s ease-in-out;
+	animation: affFondu 0.3s ease-in-out;
 }
-@keyframes affChrono {
-  0% { opacity: 0; max-width: 0px; }
-  100% { opacity: 1; max-width: 7rem; }
+@keyframes affFondu {
+  0% { opacity: 0;}
+  100% { opacity: 1;}
 }
 #chrono {
 	font-weight: 900;
@@ -196,8 +159,7 @@ main {
 .slide {
     grid-area: 1/1;
     display: block;
-    transition: opacity .2s 0s cubic-bezier(.5, 0, .5, 1);
-    transition-property: opacity max-height;
+    animation: affFondu 0.3s ease-out;
 }
 .slide[hidden] {
     transition-delay: 0;

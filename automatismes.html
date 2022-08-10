@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" media="screen" href="docs/assets/css/pico.min.css">
+		<link rel="stylesheet" media="screen" href="docs/assets/css/pico.css">
 		<link rel="stylesheet" media="screen" href="docs/assets/css/custom.css">
 		<link rel="stylesheet" media="print" href="docs/assets/css/print.css">
 		<script type="text/javascript" src="docs/assets/js/menu.js"></script>
@@ -45,24 +45,15 @@
 		<main class="container pad6">
 			<div id="corps" class="slider">
 				<div id="slide1" class="slide">
-					<div id="divBtnCat">
-						<div class="divBtnCatCont">
-							<div class="divBtnCat1"><button id="btnMenuGpe" onclick="menu('Gpe')">Thèmes</button></div>
-							<div class="divBtnCat2"><button id="btnMenuDiff" class="outline" onclick="menu('Diff')">Difficulté</button></div>
-							<div class="divBtnCat3"><button id="btnMenuOpt" class="outline" onclick="menu('Opt')"><img id="iconBtnMenuOpt" class="icon18 iconMenu" src="docs/assets/images/settings.svg" /></button></div>
-						</div>
-					</div>
-					<div id="divTableGpe" class="slide"></div>
-					<div id="divTableDiff" class="slide" hidden></div>
-					<div id="divTableOpt" class="slide" hidden>
+					<div id="divTableOpt">
 						<article><header>Options</header>
 							<table role="grid" id="tableOpt">
 								<tr><td><label for='nbvoulu'>Nombre d'exercices : <span id="affNb"></span><input class="toggledroite" type="range" min="1" max="12" value="3" id="nbvoulu" name="range" onchange="affNb()"></label></td></tr>
-								<tr><td><label for='switch'><input type='checkbox' id='togDoublons' name='switch' role='switch' class='toggledroite'>Autoriser les exercices de même type</label></td></tr>
-								<tr><td><label for='switch'><input type='checkbox' id='togChrono' name='switch' role='switch' class='toggledroite' onchange="compteReboursReset()">Compte à rebours<span id="timeRangeSpan" hidden><input class="toggledroite" type="range" min="10" max="600" step="10" value="300" id="timeRange" name="range" onchange="compteReboursRefresh()"></span></label></td></tr>
+								<tr><td><label for='switch'><input type='checkbox' id='togChrono' name='switch' role='switch' class='toggledroite' onchange="compteReboursReset()">Compte à rebours<span id="timeRangeSpan"><input class="toggledroite" type="range" min="10" max="600" step="10" value="300" id="timeRange" name="range" onchange="compteReboursRefresh()"></span></label></td></tr>
 							</table>
 						</article>
 					</div>
+					<div id="divTableGpe"></div>
 				</div>
 				<div id="slide2" class="slide" hidden>
 					<div id="questions"></div>

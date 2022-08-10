@@ -1,9 +1,10 @@
+@import url("https://fonts.googleapis.com/css?family=Neucha|Patrick+Hand+SC");
 @page {
 	size: A5 landscape;
 	margin: 0;
 }
 html {
-	font-family: "Trebuchet MS", sans-serif;
+	font-family: "Neucha", sans-serif;
 }
 html, body, main, #slide2, #corps, #questions {
 	width: 210mm;
@@ -24,14 +25,26 @@ article > header {
 	padding-top: 5mm;
 	padding-left: 12.5mm;
 	break-after: always;
-	background: url('../images/printBG.svg');
+}
+.divQuestion {
+	padding: 1mm 0 1mm 0;
+	border-bottom : black 1px solid;
+	margin-right: 3mm;
+}
+.divQuestion::after {
+	background: url('../images/printBG.svg') no-repeat;
+	content: " ";
+	display: inline-block;
+	width: 91mm;
+	height: 42mm;
+	margin-left: 2mm;
 }
 article {
 	width: 100mm;
 	border: 2px solid #1CAF87;
 	border-radius: 3px;
-	margin: 1mm 0 1mm 0;
 	height: 42mm;
+	float: left;
 }
 article > div {
 	padding: 0 1mm 1mm 1mm;
