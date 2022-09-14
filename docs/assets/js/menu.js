@@ -18,7 +18,7 @@ var slon = 1;
 var menuon = "Gpe";
 
 /*LANCEMENT DE L'APPLI ET AFFICHAGE DU MENU*/
-function demarrage() {
+function demarrageAuto() {
 	const slide2 = document.getElementById("slide2");
 	const slide3 = document.getElementById("slide3");
 	const centerScreen = document.getElementById("centerScreen");
@@ -26,36 +26,54 @@ function demarrage() {
 	const btnCompteRebours = document.getElementById("btnCompteRebours");
 	elChrono = document.getElementById("chrono");
 	document.getElementById("togChrono").checked=false;
-	menu("Gpe");
+	menu("auto");
 	affNb();
+	verifActif();
+}
+
+function demarrageFiches() {
+	const centerScreen = document.getElementById("centerScreen");
+	const divPause = document.getElementById("divPause");
+	menu("fiches");
 	verifActif();
 }
 
 /*CREATION OU CHANGEMENT DE MENU DE SELECTION*/
 function menu(m) {
 	let exosListe = "";
-	if (m=="Gpe") {
-		exos.sort(function(a, b) {return a.Gpe-b.Gpe;});
-		let b = Array.from(new Set(exos.map(a => a.Gpe)));
-		for (let j in b) {
-			exosListe += "<article><header>"+groupes[b[j]].nom+"</header><table role='grid'>";
-			let c = exos.filter(obj => { return obj.Gpe == b[j]; });
-			for (let i in c) {
-				let check = "";
-				if (c[i].act==true) { check=" checked"; }
-				let k = exos.indexOf(c[i]);
+	exos.sort(function(a, b) {return a.Gpe-b.Gpe;});
+	let b = Array.from(new Set(exos.map(a => a.Gpe)));
+	for (let j in b) {
+		exosListe += "<article><header>"+groupes[b[j]].nom+"</header><table role='grid'>";
+		let c = exos.filter(obj => { return obj.Gpe == b[j]; });
+		for (let i in c) {
+			let check = "";
+			if (c[i].act==true) { check=" checked"; }
+			let k = exos.indexOf(c[i]);
+			if (m=="auto") {
 				exosListe += "<tr><td><label for='switch'><input type='checkbox' id='togExo"+k+"' name='switch' role='switch' class='toggledroite' onclick='majMenu("+k+")'"+check+">"+diffs[c[i].Diff].couleur+" "+c[i].nom+"</label></td></tr>";
 			}
-			exosListe += "</table></article>";
+			if (m=="fiches") {
+				exosListe += "<tr><td><label for='switch'>"+diffs[c[i].Diff].couleur+" "+c[i].nom+"</label></td></tr>";
+			}
 		}
-		document.getElementById("divTableGpe").innerHTML = exosListe;
+		exosListe += "</table></article>";
 	}
+	document.getElementById("divTableGpe").innerHTML = exosListe;
 	MathJax.startup.defaultReady();
 }
 
 /*MISE A JOUR AUTO MENU*/
 function majMenu(n) {
 	exos[n].act=!exos[n].act;
+	verifActif();
+}
+function majFiches(n) {
+	if (exos[n].nbFiches==0) {
+		exos[n].act=false;
+	} else {
+		exos[n].act=true;
+	}
 	verifActif();
 }
 

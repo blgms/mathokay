@@ -13,7 +13,7 @@ async function exportHtml() {
 	let date = [new Date()];
 	date.push(date[0].getFullYear(), date[0].getMonth()+1, date[0].getDate());
 	let css = "";
-	await fetch("https://blgms.github.io/mathokay/docs/assets/css/pico.min.css")
+	await fetch("https://blgms.github.io/mathokay/docs/assets/css/pico.css")
 	.then(function(response) {
 		return response.text();
 	})
