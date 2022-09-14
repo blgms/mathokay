@@ -31,13 +31,6 @@ function demarrageAuto() {
 	verifActif();
 }
 
-function demarrageFiches() {
-	const centerScreen = document.getElementById("centerScreen");
-	const divPause = document.getElementById("divPause");
-	menu("fiches");
-	verifActif();
-}
-
 /*CREATION OU CHANGEMENT DE MENU DE SELECTION*/
 function menu(m) {
 	let exosListe = "";
