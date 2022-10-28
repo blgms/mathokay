@@ -169,7 +169,7 @@ function creerExos(liste) {
 	var cartesq = "", cartesr = "";
 	for (let i=0 ; i<liste.length ; i++) {
 		liste[i].type = liste[i].groupe + " - " + liste[i].nom;
-		quesrep = eval(liste[i].fonc+liste[i].nbAuto+")");
+		quesrep = eval(liste[i].fonc+")");
 		let consigne = quesrep[0], question = quesrep[1], reponse = quesrep[2];
 		if (i%3==0) {
 			cartesq += "<div class='pageQuestions'>";

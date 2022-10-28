@@ -1,6 +1,6 @@
 //FONCTIONS ANNEXES
 //GENERER UN ENTIER SUR [a;b]
-function genEnt(a,b) {
+function genN(a,b) {
 	return (Math.floor(Math.random()*(b+1-a))+a);
 }
 
@@ -70,6 +70,33 @@ function tripletsD(inf,sup) {
 		}
 	}
 	return liste;
+}
+
+//GENERATION D'UNE SUITE ARITHMETIQUE [Sn, u1, u2, ..., un]
+function genSuitAri(u1,r,n) {
+	let u = [u1, u1];
+	for (let i=2; i<n+1; i++) {
+		u.push(u[i-1]+r);
+		u[0]+=u[i];
+	}
+	return u;
+}
+
+//GENERATION D'UNE SUITE GEOMETRIQUE [Sn, u1, u2, ..., un]
+function genSuitGeo(u1,q,n) {
+	let u = [u1, u1];
+	for (let i=2; i<n+1; i++) {
+		let m=10**i;
+		u.push(Math.round((u[i-1]*m)*(q*m))/(m**2));
+		if (Number.isInteger(q)) {
+			u[i]=Math.round(u[i]);
+		}
+		u[0]+=u[i];
+	}
+	for (let i=0; i<u.length; i++) {
+		u[i]=pointVirg(u[i].toString());
+	}
+	return u;
 }
 
 //REMPLACEMENT DES POINTS PAR DES VIRGULES

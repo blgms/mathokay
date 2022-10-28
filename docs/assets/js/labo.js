@@ -55,3 +55,14 @@ function reflexBtn() {
 		document.getElementById("reflex").innerHTML = "Je suis prêt !";
 	}
 }
+
+
+//EQUATIONS
+function equations() {
+	document.getElementById("artExpHead").innerHTML = "Équations";
+	document.getElementById("expConsigne").innerHTML = "Sélectionner un type d'équation puis la résoudre.";
+	document.getElementById("expMilieu").innerHTML = "<div id='btnEquations'><button onclick='equaGen(1)'>ax=b</button><button onclick='equaGen(2)'>ax+b=c</button><button onclick='equaGen(3)'>ax+b=cx+d</button></div><div id='affEquation'></div>";
+}
+function equaGen(n) {
+	
+}
