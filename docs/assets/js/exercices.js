@@ -435,17 +435,7 @@ function equa1d(type) {
 		}
 		nbs[3] = genZ(1,10);
 	}
-	let equation = nbs[0]+"x";
-	if (type>1) {
-		if (nbs[1]<0) {equation += "-";} else {equation += "+";}
-		equation += Math.abs(nbs[1]);
-	}
-	equation += "=";
-	if (type>2) {
-		equation += nbs[2]+"x";
-	}
-	if (nbs[3]<0) {equation += "-";} else if (type==3) {equation += "+";}
-	equation += Math.abs(nbs[3]);
+	let equation = equaStr(nbs);
 	let x = (nbs[3]-nbs[1])/(nbs[0]-nbs[2]);
 	if (!Number.isInteger(x)) {x=chainefrac(simpl(nbs[3]-nbs[1],nbs[0]-nbs[2]));}
 	let question = "<div>Résoudre l'équation.</div>";

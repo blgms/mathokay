@@ -116,3 +116,29 @@ function strPlus(a) {
 		return "+"+a;
 	}
 }
+
+//ECRITURE D'UNE EQUATION
+function equaStr(nbs) {
+	let equation = "<div class='nombres'>\\(";
+	if (nbs[0] != 0) {
+		if (nbs[0]<0) {equation += "-";}
+		if (nbs[0]!=1) { equation += Math.abs(nbs[0]); }
+		equation += "x";
+	}
+	if (nbs[1] != 0) {
+		if (nbs[1]<0) {equation += "-";} else { if (nbs[0]!=0) { equation += "+"; } }
+		equation += Math.abs(nbs[1]);
+	}
+	equation += "=";
+	if (nbs[2] != 0) {
+		if (nbs[2]<0) {equation += "-";}
+		if (Math.abs(nbs[2])!=1) { equation += Math.abs(nbs[2]); }
+		equation += "x";
+	}
+	if (nbs[3] != 0) {
+		if (nbs[3]<0) {equation += "-";} else { if (nbs[2]!=0) { equation += "+"; } }
+		equation += Math.abs(nbs[3]);
+	}
+	equation += "\\)</div>";
+	return equation;
+}

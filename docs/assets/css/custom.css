@@ -337,7 +337,6 @@ footer button {
 }
 
 #artExp {
-	display: table-cell;
 	height: calc(100vh - 7.5em);
 	vertical-align: middle;
 }
