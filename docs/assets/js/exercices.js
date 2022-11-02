@@ -439,8 +439,8 @@ function equa1d(type) {
 	let x = (nbs[3]-nbs[1])/(nbs[0]-nbs[2]);
 	if (!Number.isInteger(x)) {x=chainefrac(simpl(nbs[3]-nbs[1],nbs[0]-nbs[2]));}
 	let question = "<div>Résoudre l'équation.</div>";
-	let consigne = "<div class='nombres'>\\("+equation+"\\)</div>";	
-	let reponse = "<div class='nombres reponse'>\\(x="+x+"\\)</div>";
+	let consigne = "<div class='nombres'>"+equation+"</div>";	
+	let reponse = "<div class='nombres reponse'>x="+x+"</div>";
 	return [consigne,question,reponse];
 }
 
