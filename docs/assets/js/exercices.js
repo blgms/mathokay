@@ -53,7 +53,9 @@ var exos = [
 	/*{"act": false, "Gpe": 8, "Diff": 1,  "fonc": "geoAire(", "nom": "Calculer une aire"},*/
 	/*{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "geoVol(", "nom": "Calculer un volume"},*/
 	/*{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "geoThal(", "nom": "Théorème de Thalès"},*/
-	/*{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "geoPyth(", "nom": "Théorème de Pythagore"},*/
+	{"act": false, "Gpe": 8, "Diff": 1,  "fonc": "pythagore(1", "nom": "Relation de Pythagore (1)"},
+	{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "pythagore(2", "nom": "Relation de Pythagore (2)"},
+	{"act": true, "Gpe": 8, "Diff": 2,  "fonc": "pythagore(3", "nom": "Calcul avec Pythagore"},
 	{"act": false, "Gpe": 9, "Diff": 1,  "fonc": "suitAriR(", "nom": "Arithmétique : Calculer la raison"},
 	{"act": false, "Gpe": 9, "Diff": 2,  "fonc": "suitAriVerif(", "nom": "Arithmétique : Vérification"},
 	{"act": false, "Gpe": 9, "Diff": 2,  "fonc": "suitAriTermesR(", "nom": "Arithmétique : \\(n\\)-ième terme (raison connue)"},
@@ -95,8 +97,8 @@ function compNombres() {
 	let reponse = "<div class='grid nombres reponse'>";
 	for (let j=0;j<3;j++) {
 		let a = genZ(0,1000);
-		let b = a + genZ(1,1)*10**genN(0,2);
-		let c = 10**genN(0,3);
+		let b = a + genZ(1,1)*10**randint(0,2);
+		let c = 10**randint(0,3);
 		let s = genZ(1,1);
 		a = s*a/c; b = s*b/c;
 		let r = "";
@@ -239,16 +241,16 @@ function unites(exo) {
 		];
 	}
 	/*choix de l'unité de départ et de l'unité d'arrivée*/
-	let grand = unites[genN(0,unites.length-1)];
+	let grand = unites[randint(0,unites.length-1)];
 	let a = grand.div.length-1;
-	let nudep = genN(0,a);
-	let nuarr = genN(0,a);
+	let nudep = randint(0,a);
+	let nuarr = randint(0,a);
 	while (nuarr==nudep) {
-		nuarr = genN(0,a);
+		nuarr = randint(0,a);
 	}
 	let udep = grand.div[nudep]+grand.grandeur;
 	let uarr = grand.div[nuarr]+grand.grandeur;
-	let nbm = genN(1,999)*100;
+	let nbm = randint(1,999)*100;
 	let nbdep = nbm/(10**((a-nudep)*grand.facteur));
 	let rep = nbm/(10**((a-nuarr)*grand.facteur));
 	let consigne = "<div>Convertir...</div>";
@@ -306,13 +308,13 @@ function tabprop() {
 	let consigne = "<div>Indiquer si les grandeurs ci-dessous sont proportionnelles.</div>";
 	let question = "", reponse = "";
 	let prop = ["C'est","Ce n'est <b>pas</b>"];
-	let on = genN(0,1);
+	let on = randint(0,1);
 	let nbs = [];
-	let coeff = genN(1,10);
+	let coeff = randint(1,10);
 	for (let i=0;i<3;i++) {
-		nbs[i] = genN(1,100);
+		nbs[i] = randint(1,100);
 		if (on == 1 && i > 0) {
-			coeff = coeff+(i-1)+genN(0,1);
+			coeff = coeff+(i-1)+randint(0,1);
 		}
 		nbs[3+i] = nbs[i]*coeff;
 	}
@@ -329,10 +331,10 @@ function tabprop() {
 function quatprop() {
 	let consigne = "<div>Retrouver la valeur manquante en utilisant la proportionnalité.</div>";
 	let question="", reponse="";
-	let quellevaleur = genN(0,3);
-	let nba = genN(1,90);
-	let nbb = genN(1,100);
-	let coeff = genN(2,10);
+	let quellevaleur = randint(0,3);
+	let nba = randint(1,90);
+	let nbb = randint(1,100);
+	let coeff = randint(2,10);
 	let nbc = nba*coeff;
 	let nbd = nbb*coeff;
 	let nbs = [nba, nbb, nbc, nbd];
@@ -349,13 +351,13 @@ function echelle() {
 	let consigne = "";
 	let question="", reponse="";
 	let echList = [2, 3, 10, 20, 25, 50, 100];
-	let ech = echList[genN(0,echList.length-1)];
+	let ech = echList[randint(0,echList.length-1)];
 	if (ech > 10) { var unit = "", fact = 1000; } else { var unit = "c", fact = 10; }
 	question += "<div>Sur un plan à l'échelle <b>1:"+ech+"</b>, on relève les cotes suivantes :</div><div class='grid nombres'>";
 	reponse += "<div>Sur un plan à l'échelle <b>1:"+ech+"</b> :</div><div class='grid nombres'>";
 	let mesures = "", reelles="";
 	for (let j=0;j<3;j++) {
-		let quest = genN(40,250);
+		let quest = randint(40,250);
 		let rep = quest*ech/fact;
 		mesures += "<div>\\("+quest+"\\,\\text{mm}\\)</div>";
 		reelles += "<div>\\("+pointVirg(rep.toString())+"\\,\\text{"+unit+"m}\\)</div>";
@@ -375,9 +377,9 @@ function fracsimp() {
 	let reponse = "<div class='grid nombres reponse'>";
 	for (let j=0;j<3;j++) {
 		let nbs = [];
-		let a = genN(1,5);
+		let a = randint(1,5);
 		for (let i=0;i<2;i++) {
-			nbs[i]=genN(1,20)*a;
+			nbs[i]=randint(1,20)*a;
 		}
 		let fracres = simpl(nbs[0],nbs[1]);
 		/*création des chaînes*/
@@ -399,11 +401,11 @@ function fraccalc() {
 	for (let j=0;j<3;j++) {
 		let nbs = [];
 		for (let i=0;i<4;i++) {
-			nbs[i]=genN(1,10);
+			nbs[i]=randint(1,10);
 		}
 		/*choix aléatoire de l'opération*/
 		let ops = ["+","-","\\times","\\div"];
-		let nbop = genN(0,3);
+		let nbop = randint(0,3);
 		let op = ops[nbop];
 		/*calcul du dénominateur du résultat*/
 		let den = [ppcm(nbs[1],nbs[3]) , ppcm(nbs[1],nbs[3]) , nbs[1]*nbs[3], nbs[1]*nbs[2]];
@@ -446,7 +448,7 @@ function equa1d(type) {
 
 //EQUATIONS DU 2ND DEGRE
 function equa2d() {
-	let n=tripletsD(-5,5)[genN(0,151)];
+	let n=tripletsD(-5,5)[randint(0,151)];
 	let a=n[0],b=n[1],c=n[2];
 	let na="",nb="",nc="";
 	if (a==-1) { na +="-"; } else if (a!=1) { na += a; }
@@ -477,8 +479,8 @@ function statFreq() {
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
 	for (let j=1;j<4;j++) {
-		let N=genN(20,500);
-		let n=genN(0,N);
+		let N=randint(20,500);
+		let n=randint(0,N);
 		let f=n*100/N;
 		let eg=(Number.isInteger(f))? "=" : "\\simeq";
 		f=Math.round(f);
@@ -494,12 +496,12 @@ function statFreq() {
 //CALCUL DE MOYENNE SIMPLE
 function statMoy() {
 	let consigne = "<div>Calculer la moyenne de ces valeurs (arrondir au dixième si nécessaire).</div>";
-	let N = genN(4,8);
-	let x = genN(0,50);
+	let N = randint(4,8);
+	let x = randint(0,50);
 	let S = x;
 	let question = "<div class='nombres'>\\("+x;
 	for (let j=1 ; j<N ; j++) {
-		x = genN(0,50);
+		x = randint(0,50);
 		S += x;
 		question += " ; "+x;
 	}
@@ -516,9 +518,9 @@ function statMoyP() {
 	let valeurs = "<tr><th>\\(x_i\\)</th>";
 	let effectifs = "<tr><th>\\(n_i\\)</th>";
 	let N=0, S=0;
-	for (let j=0 ; j<genN(3,5) ; j++) {
-		let x = genN(0,50);
-		let n = genN(2,20);
+	for (let j=0 ; j<randint(3,5) ; j++) {
+		let x = randint(0,50);
+		let n = randint(2,20);
 		valeurs += "<td>\\("+x+"\\)</td>";
 		effectifs += "<td>\\("+n+"\\)</td>";
 		S += x*n;
@@ -534,12 +536,12 @@ function statMoyP() {
 //CALCUL DE MEDIANE
 function statMed() {
 	let consigne = "<div>Déterminer la médiane de ces valeurs.</div>";
-	let N = genN(4,8);
+	let N = randint(4,8);
 	let nb = [];
 	let med;
 	let question = "<div class='nombres'>\\(";
 	for (let j=0 ; j<N ; j++) {
-		nb[j] = genN(0,50);
+		nb[j] = randint(0,50);
 		question += nb[j];
 		if (j<N-1) {
 			question += " ; ";
@@ -561,7 +563,7 @@ function statMed() {
 //FONCTION AFFINE - TABLEAU DE VALEURS
 function foncAffTabl() {
 	let a = genZ(1,20);
-	let b = genN(0,2);
+	let b = randint(0,2);
 	if (b != 0) {
 		b = genZ(1,20);
 	}
@@ -628,9 +630,9 @@ function foncRacTabl() {
 	let imgStr = "<tr><th>\\(f(x)\\)</th><td></td><td></td><td></td><td></td>";
 	let imgRepStr = "<tr><th>\\(f(x)\\)</th>";
 	for (let j=0 ; j<4 ; j++) {
-		ant[j] = genN(0,20)**2;
+		ant[j] = randint(0,20)**2;
 		while (j>0 && ant[j]==ant[j-1]) {
-			ant[j] = genN(0,20)**2;
+			ant[j] = randint(0,20)**2;
 		}
 	}
 	ant.sort(function(a,b) {
@@ -647,11 +649,79 @@ function foncRacTabl() {
 }
 
 
+//GEOMETRIE
+//Théorème de Pythagore
+function pythagore(exo) {
+	document.getElementById("consigne"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
+	let taille = randint(5,20);
+	let board = JXG.JSXGraph.initBoard("box"+idCarte, {boundingbox: [-taille, taille, taille, -taille], keepaspectratio:true, showCopyright:false, shownavigation:false});
+	let alpha = randint(0,360)*Math.PI/180,
+		beta = alpha+randint(40,140)*Math.PI/180,
+		r = 4*taille/5,
+		coord = [
+			[r*Math.cos(alpha),r*Math.sin(alpha),"p0"],
+			[r*Math.cos(Math.PI+alpha),r*Math.sin(Math.PI+alpha),"p1"],
+			[r*Math.cos(beta),r*Math.sin(beta),"p2"]
+		].sort(() => Math.random() - 0.5);
+	let cerise = {
+			strokeColor: '#901B77',
+			fillColor: '#CA147A',
+			size: '1'
+		},
+		A = board.create('point', [coord[0][0],coord[0][1]], cerise),
+		B = board.create('point', [coord[1][0],coord[1][1]], cerise),
+		C = board.create('point', [coord[2][0],coord[2][1]], cerise),
+		pol = board.create('polygon',[A,B,C], {
+			fillColor: '#FFFF00',
+			lines: {
+				strokeWidth: 2,
+				strokeColor: '#009256'
+			}
+		});
+	// pts : [lettre, pX, x, y]
+	let pts = [
+		["A","B","C"],
+		[coord[0][2],coord[1][2],coord[2][2]],
+		[coord[0][0],coord[1][0],coord[2][0]],
+		[coord[0][1],coord[1][1],coord[2][1]]
+		];
+	//[lettre, x, y]
+	let M = [pts[0][pts[1].indexOf("p0")], pts[2][pts[1].indexOf("p0")], pts[3][pts[1].indexOf("p0")]],
+		N = [pts[0][pts[1].indexOf("p1")], pts[2][pts[1].indexOf("p1")], pts[3][pts[1].indexOf("p1")]],
+		P = [pts[0][pts[1].indexOf("p2")], pts[2][pts[1].indexOf("p2")], pts[3][pts[1].indexOf("p2")]];
+	let m = sortString(N[0]+P[0]), n = sortString(M[0]+P[0]), p = sortString(M[0]+N[0]);
+	//calcul des longueurs des côtés
+	let cotes = [
+		[m, p+"²&nbsp;-&nbsp;"+n+"²", Math.round(10*Math.sqrt((P[1]-N[1])**2+(P[2]-N[2])**2))/10 ],
+		[n, p+"²&nbsp;-&nbsp;"+m+"²", Math.round(10*Math.sqrt((P[1]-M[1])**2+(P[2]-M[2])**2))/10 ],
+		[p, m+"²&nbsp;+&nbsp;"+n+"²", Math.round(20*r)/10 ]
+	];
+	//calcul des réponses arrondies au dixième
+	cotes[0].push(Math.round(10*Math.sqrt(cotes[2][2]**2-cotes[1][2]**2))/10);
+	cotes[1].push(Math.round(10*Math.sqrt(cotes[2][2]**2-cotes[0][2]**2))/10);
+	cotes[2].push(Math.round(10*Math.sqrt(cotes[0][2]**2+cotes[1][2]**2))/10);
+	let consigne = "", question, reponse;
+	if (exo == 1) {
+		question = "Écrire la relation permettant de calculer la longueur \\("+cotes[2][0]+"\\) dans ce triangle rectangle.";
+		reponse = "<div class='nombres reponse'>\\("+cotes[2][0]+"²&nbsp;=&nbsp;"+cotes[2][1]+"\\)</div>";
+	} else if (exo == 2) {
+		let n = randint(0,1);
+		question = "Écrire la relation permettant de calculer la longueur \\("+cotes[n][0]+"\\) dans ce triangle rectangle.";
+		reponse = "<div class='nombres reponse'>\\("+cotes[n][0]+"²&nbsp;=&nbsp;"+cotes[n][1]+"\\)</div>";
+	} else if (exo == 3) {
+		cotes.sort(() => Math.random() - 0.5);
+		question = "\\("+cotes[1][0]+"="+pointVirg(cotes[1][3].toString())+"\\) et \\("+cotes[2][0]+"="+pointVirg(cotes[2][3].toString())+"\\). Calculer la longueur \\("+cotes[0][0]+"\\) arrondie au dixième.";
+		reponse = "<div class='nombres reponse'>\\("+cotes[0][0]+"&nbsp;=&nbsp;"+pointVirg(cotes[0][3].toString())+"\\)</div>";
+	}
+	return [consigne,question,reponse];
+}
+
+
 //SUITES ARITHMETIQUES
 //Raison d'une suite arithmétique
 function suitAriR() {
 	let r = genZ(0,100);
-	let n = genN(6,20);
+	let n = randint(6,20);
 	let u = genSuitAri(genZ(0,200),r,n);
 	let consigne = "Voici plusieurs termes consécutifs d'une suite arithmétique. Donner sa raison \\(r\\).";
 	let question = "<div class='nombres'>\\(u_{"+(n-3)+"}="+u[n-3]+"\\qquad u_{"+(n-2)+"}="+u[n-2]+"\\qquad u_{"+(n-1)+"}="+u[n-1]+"\\qquad u_{"+n+"}="+u[n]+"\\)</div>";
@@ -663,7 +733,7 @@ function suitAriR() {
 function suitAriVerif() {
 	let r = genZ(0,100);
 	let u = genSuitAri(genZ(0,200),r,4);
-	let dec = genN(0,1);
+	let dec = randint(0,1);
 	for (let i=2; i<5; i++) {
 		u[i]=u[i]+dec*genZ(0,3);
 	}
@@ -681,7 +751,7 @@ function suitAriVerif() {
 //n-ième terme d'une suite arithmétique (avec raison)
 function suitAriTermesR() {
 	let r = genZ(0,100);
-	let n = genN(6,20);
+	let n = randint(6,20);
 	let u = genSuitAri(genZ(0,200),r,n);
 	let consigne = "Voici les premiers termes d'une suite arithmétique \\((u_n)\\) de raison \\(r="+r+"\\). Déterminer la valeur de \\(u_{"+n+"}\\).";
 	let question = "<div class='nombres'>\\(u_1="+u[1]+"\\qquad u_2="+u[2]+"\\qquad u_3="+u[3]+"\\qquad u_4="+u[4]+"\\)</div>";
@@ -692,7 +762,7 @@ function suitAriTermesR() {
 //n-ième terme d'une suite arithmétique (sans raison)
 function suitAriTermes() {
 	let r = genZ(0,100);
-	let n = genN(6,20);
+	let n = randint(6,20);
 	let u = genSuitAri(genZ(0,200),r,n);
 	let consigne = "Voici les premiers termes d'une suite arithmétique \\((u_n)\\). Déterminer la valeur de \\(u_{"+n+"}\\).";
 	let question = "<div class='nombres'>\\(u_1="+u[1]+"\\qquad u_2="+u[2]+"\\qquad u_3="+u[3]+"\\qquad u_4="+u[4]+"\\)</div>";
@@ -703,7 +773,7 @@ function suitAriTermes() {
 //Somme des n premiers termes d'une suite arithmétique (avec n-ième terme)
 function suitAriSommeUn() {
 	let r = genZ(0,100);
-	let n = genN(6,20);
+	let n = randint(6,20);
 	let u = genSuitAri(genZ(0,200),r,n);
 	let consigne = "Calculer la somme des "+n+" premiers termes de la suite arithmétique définie par :";
 	let question = "<div class='nombres'>\\(u_1="+u[1]+"\\qquad u_{"+n+"}="+u[n]+"\\qquad r="+r+"\\)</div>";
@@ -714,7 +784,7 @@ function suitAriSommeUn() {
 //Somme des n premiers termes d'une suite arithmétique (sans n-ième terme)
 function suitAriSomme() {
 	let r = genZ(0,100);
-	let n = genN(6,20);
+	let n = randint(6,20);
 	let u = genSuitAri(genZ(0,200),r,n);
 	let consigne = "Calculer le "+n+"e terme, puis la somme des "+n+" premiers termes de la suite arithmétique définie par :";
 	let question = "<div class='nombres'>\\(u_1="+u[1]+"\\qquad r="+r+"\\)</div>";
@@ -726,7 +796,7 @@ function suitAriSomme() {
 //SUITES GEOMETRIQUES
 //Raison d'une suite géométrique
 function suitGeoQ() {
-	let decq = genN(0,1);
+	let decq = randint(0,1);
 	let q = decq*genZ(1,19)/10+(1-decq)*genZ(2,10);
 	let u = genSuitGeo(genZ(1,200),q,4);
 	let consigne = "Voici les premiers termes d'une suite géométrique. Donner sa raison \\(q\\).";
@@ -738,9 +808,9 @@ function suitGeoQ() {
 //Vérifier si une suite est bien géométrique.
 function suitGeoVerif() {
 	let u1 = genZ(1,99);
-	let decq = genN(0,1);
+	let decq = randint(0,1);
 	let q = decq*genZ(1,19)/10+(1-decq)*genZ(2,10);
-	let dec = 10+genN(0,1)*genZ(1,2);
+	let dec = 10+randint(0,1)*genZ(1,2);
 	let u = [u1, u1];
 	for (let i=2; i<5; i++) {
 		let m=1;
@@ -766,9 +836,9 @@ function suitGeoVerif() {
 
 //n-ième terme d'une suite géométrique (avec raison)
 function suitGeoTermesR() {
-	let decq = genN(0,1);
+	let decq = randint(0,1);
 	let q = decq*genZ(1,19)/10+(1-decq)*genZ(2,10);
-	let n = genN(5,8);
+	let n = randint(5,8);
 	let u = genSuitGeo(genZ(1,99),q,n);
 	let consigne = "Voici les premiers termes d'une suite géométrique \\((u_n)\\) de raison \\(q="+pointVirg(q.toString())+"\\). Déterminer la valeur de \\(u_{"+n+"}\\).";
 	let question = "<div class='nombres'>\\(u_1="+u[1]+"\\qquad u_2="+u[2]+"\\qquad u_3="+u[3]+"\\)</div>";
@@ -778,9 +848,9 @@ function suitGeoTermesR() {
 
 //n-ième terme d'une suite arithmétique (sans raison)
 function suitGeoTermes() {
-	let decq = genN(0,1);
+	let decq = randint(0,1);
 	let q = decq*genZ(1,19)/10+(1-decq)*genZ(2,10);
-	let n = genN(5,8);
+	let n = randint(5,8);
 	let u = genSuitGeo(genZ(1,99),q,n);
 	let consigne = "Voici les premiers termes d'une suite géométrique \\((u_n)\\). Déterminer la valeur de \\(u_{"+n+"}\\).";
 	let question = "<div class='nombres'>\\(u_1="+u[1]+"\\qquad u_2="+u[2]+"\\qquad u_3="+u[3]+"\\)</div>";
@@ -790,9 +860,9 @@ function suitGeoTermes() {
 
 //Somme des n premiers termes d'une suite arithmétique (avec n-ième terme)
 function suitGeoSommeUn() {
-	let decq = genN(0,1);
+	let decq = randint(0,1);
 	let q = decq*genZ(1,19)/10+(1-decq)*genZ(2,10);
-	let n = genN(5,8);
+	let n = randint(5,8);
 	let u = genSuitGeo(genZ(1,99),q,n);
 	let consigne = "Calculer la somme des "+n+" premiers termes de la suite géométrique définie par :";
 	let question = "<div class='nombres'>\\(u_1="+u[1]+"\\qquad q="+pointVirg(q.toString())+"\\)</div>";
@@ -802,9 +872,9 @@ function suitGeoSommeUn() {
 
 //Somme des n premiers termes d'une suite arithmétique (sans raison)
 function suitGeoSomme() {
-	let decq = genN(0,1);
+	let decq = randint(0,1);
 	let q = decq*genZ(1,19)/10+(1-decq)*genZ(2,10);
-	let n = genN(5,8);
+	let n = randint(5,8);
 	let u = genSuitGeo(genZ(1,99),q,n);
 	let consigne = "Calculer la raison \\(q\\) puis la somme des "+n+" premiers termes de la suite géométrique commençant par :";
 	let question = "<div class='nombres'>\\(u_1="+u[1]+"\\qquad u_2="+u[2]+"\\qquad u_3="+u[3]+"\\)</div>";

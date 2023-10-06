@@ -347,3 +347,10 @@ footer button {
 #affPage {
 	margin: auto 1rem;
 }
+
+.jxgbox {
+	margin: 0 auto!important;
+	border-style: none!important;
+	width: 10em;
+	height: 10em;
+}

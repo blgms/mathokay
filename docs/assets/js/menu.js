@@ -16,6 +16,7 @@ const btns = [
 	
 var slon = 1;
 var menuon = "Gpe";
+var idCarte = 0;
 
 /*LANCEMENT DE L'APPLI ET AFFICHAGE DU MENU*/
 function demarrageAuto() {
@@ -43,12 +44,7 @@ function menu(m) {
 			let check = "";
 			if (c[i].act==true) { check=" checked"; }
 			let k = exos.indexOf(c[i]);
-			if (m=="auto") {
-				exosListe += "<tr><td><label for='switch'><input type='checkbox' id='togExo"+k+"' name='switch' role='switch' class='toggledroite' onclick='majMenu("+k+")'"+check+">"+diffs[c[i].Diff].couleur+" "+c[i].nom+"</label></td></tr>";
-			}
-			if (m=="fiches") {
-				exosListe += "<tr><td><label for='switch'>"+diffs[c[i].Diff].couleur+" "+c[i].nom+"</label></td></tr>";
-			}
+			exosListe += "<tr><td><label for='switch'><input type='checkbox' id='togExo"+k+"' name='switch' role='switch' class='toggledroite' onclick='majMenu("+k+")'"+check+">"+diffs[c[i].Diff].couleur+" "+c[i].nom+"</label></td></tr>";
 		}
 		exosListe += "</table></article>";
 	}
@@ -61,15 +57,6 @@ function majMenu(n) {
 	exos[n].act=!exos[n].act;
 	verifActif();
 }
-function majFiches(n) {
-	if (exos[n].nbFiches==0) {
-		exos[n].act=false;
-	} else {
-		exos[n].act=true;
-	}
-	verifActif();
-}
-
 /*TRANSITION ET DECLENCHEMENT DU COMPTE A REBOURS*/
 function slider(sl) {
 	if (sl!=slon) {
@@ -166,21 +153,24 @@ function tirageExos(liste) {
 
 /*CREATION DES EXOS*/
 function creerExos(liste) {
-	var cartesq = "", cartesr = "";
-	for (let i=0 ; i<liste.length ; i++) {
-		liste[i].type = liste[i].groupe + " - " + liste[i].nom;
-		quesrep = eval(liste[i].fonc+")");
-		let consigne = quesrep[0], question = quesrep[1], reponse = quesrep[2];
-		if (i%3==0) {
-			cartesq += "<div class='pageQuestions'>";
-		}		
-		cartesq += "<div class='divQuestion'><article><header><small><div class='grid'><div><h5>Exercice "+(i+1)+" - "+groupes[liste[i].Gpe].nom+"</h5></div><div class='droite'><h6>"+liste[i].nom+"</h6></div></div></small></header><div>"+consigne+"</div><div>"+question+"</div></article></div>";
-		cartesr += "<div><article><header><small><div class='grid'><div><h5>Réponse "+(i+1)+" - "+groupes[liste[i].Gpe].nom+"</h5></div><div class='droite'><h6>"+liste[i].nom+"</h6></div></div></small></header><div>"+consigne+"</div><div>"+reponse+"</div></article></div>";
-	if (i%3==2 || i==liste.length-1) {
-			cartesq += "</div>";
-		}		
+	let elq = document.getElementById('questions');
+	let elr = document.getElementById('reponses');
+	elq.innerHTML = ""; elr.innerHTML = "";
+	for (idCarte=0 ; idCarte<liste.length ; idCarte++) {
+		liste[idCarte].type = liste[idCarte].groupe + " - " + liste[idCarte].nom;
+		if (idCarte%3==0) {
+			elq.innerHTML += "<div class='pageQuestions'>";
+		}
+		elq.innerHTML += "<div class='divQuestion'><article><header><small><div class='grid'><div><h5>Exercice "+(idCarte+1)+" - "+groupes[liste[idCarte].Gpe].nom+"</h5></div><div class='droite'><h6>"+liste[idCarte].nom+"</h6></div></div></small></header><div id='consigne"+idCarte+"'></div><div id='question"+idCarte+"'></div></article></div>";
+		elr.innerHTML += "<div><article><header><small><div class='grid'><div><h5>Réponse "+(idCarte+1)+" - "+groupes[liste[idCarte].Gpe].nom+"</h5></div><div class='droite'><h6>"+liste[idCarte].nom+"</h6></div></div></small></header><div id='consigneR"+idCarte+"'></div><div id='reponse"+idCarte+"'></div></article></div>";
+		infos = eval(liste[idCarte].fonc+")");
+		document.getElementById("consigne"+idCarte).innerHTML += infos[0];
+		document.getElementById("consigneR"+idCarte).innerHTML += document.getElementById("consigne"+idCarte).innerHTML;
+		document.getElementById("question"+idCarte).innerHTML += infos[1];
+		document.getElementById("reponse"+idCarte).innerHTML += infos[2];
+		if (idCarte%3==2 || idCarte==liste.length-1) {
+			elq.innerHTML += "</div>";
+		}
 	}
-	document.getElementById("questions").innerHTML = cartesq;
-	document.getElementById("reponses").innerHTML = cartesr;
 	if (document.getElementById("togChrono").checked==true) { timerGo(); } else { slider(2); }
 }

@@ -1,7 +1,12 @@
 //FONCTIONS ANNEXES
 //GENERER UN ENTIER SUR [a;b]
-function genN(a,b) {
+function randint(a,b) {
 	return (Math.floor(Math.random()*(b+1-a))+a);
+}
+
+//GENERER ALEATOIREMENT 1 ou -1
+function randoppose() {
+	return Math.round(Math.random())*2-1;
 }
 
 //GENERER UN ENTIER RELATIF NON NUL SUR [-b;-a]U[a;b]
@@ -72,6 +77,20 @@ function tripletsD(inf,sup) {
 	return liste;
 }
 
+//RECHERCHE DES TRIPLETS PYTHAGORICIENS tels que k² = i² + j²
+function tripletsPyth(a,b) {
+	let triplets = [];
+	for (i=a; i<=b; i++) {
+		for (j=1; j<=b; j++) {
+			let k = Math.sqrt(i**2+j**2)
+			if (Number.isInteger(k)) {
+				triplets.push([i,j,k]);
+			}
+		}
+	}
+	return triplets;
+}
+
 //GENERATION D'UNE SUITE ARITHMETIQUE [Sn, u1, u2, ..., un]
 function genSuitAri(u1,r,n) {
 	let u = [u1, u1];
@@ -98,6 +117,19 @@ function genSuitGeo(u1,q,n) {
 	}
 	return u;
 }
+
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
+let sortString = (stringg) => {
+    return stringg.split("").sort().join("");
+};
 
 //REMPLACEMENT DES POINTS PAR DES VIRGULES
 function pointVirg(str) {
