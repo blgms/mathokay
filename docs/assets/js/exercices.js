@@ -55,7 +55,7 @@ var exos = [
 	/*{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "geoThal(", "nom": "Théorème de Thalès"},*/
 	{"act": false, "Gpe": 8, "Diff": 1,  "fonc": "pythagore(1", "nom": "Relation de Pythagore (1)"},
 	{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "pythagore(2", "nom": "Relation de Pythagore (2)"},
-	{"act": true, "Gpe": 8, "Diff": 2,  "fonc": "pythagore(3", "nom": "Calcul avec Pythagore"},
+	{"act": false, "Gpe": 8, "Diff": 2,  "fonc": "pythagore(3", "nom": "Calcul avec Pythagore"},
 	{"act": false, "Gpe": 9, "Diff": 1,  "fonc": "suitAriR(", "nom": "Arithmétique : Calculer la raison"},
 	{"act": false, "Gpe": 9, "Diff": 2,  "fonc": "suitAriVerif(", "nom": "Arithmétique : Vérification"},
 	{"act": false, "Gpe": 9, "Diff": 2,  "fonc": "suitAriTermesR(", "nom": "Arithmétique : \\(n\\)-ième terme (raison connue)"},
