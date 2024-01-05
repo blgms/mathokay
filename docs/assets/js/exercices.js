@@ -10,6 +10,7 @@ var groupes = [
 	/*7*/{"nom": "Fonctions"},
 	/*8*/{"nom": "Géométrie"},
 	/*9*/{"nom": "Suites"},
+	/*10*/{"nom": "Repérage"}
 ];
 
 var diffs = [
@@ -26,16 +27,22 @@ var exos = [
 	{"act": false, "Gpe": 0, "Diff": 1, "fonc": "scienti(", "nom": "Passer en écriture scientifique"},
 	{"act": false, "Gpe": 0, "Diff": 1, "fonc": "scientideci(", "nom": "Passer en écriture décimale"},
 	{"act": false, "Gpe": 1, "Diff": 0, "fonc": "tablesmulti(", "nom": "Tables de multiplication"},
-	{"act": false, "Gpe": 1, "Diff": 0, "fonc": "puiss10(", "nom": "Multiplier/diviser par 10, 100, 1000"},
+	{"act": false, "Gpe": 1, "Diff": 0, "fonc": "puiss10(", "nom": "Multiplier/diviser par des puissances de 10"},
 	{"act": false, "Gpe": 2, "Diff": 0, "fonc": "unites(1", "nom": "Longueurs, masses, volumes (L)..."},
 	{"act": false, "Gpe": 2, "Diff": 2, "fonc": "unites(2", "nom": "Aires, volumes (m³)"},
 	{"act": false, "Gpe": 2, "Diff": 1, "fonc": "durees(1", "nom": "Durées (facile)"},
 	{"act": false, "Gpe": 2, "Diff": 2, "fonc": "durees(2", "nom": "Durées (moyen)"},
 	{"act": false, "Gpe": 2, "Diff": 3, "fonc": "durees(3", "nom": "Durées (difficile)"},
 	{"act": false, "Gpe": 3, "Diff": 1, "fonc": "tabprop(", "nom": "Vérification"},
+	{"act": false, "Gpe": 3, "Diff": 1, "fonc": "tabPropCoeff(", "nom": "Coefficient de proportionnalité"},
 	{"act": false, "Gpe": 3, "Diff": 1, "fonc": "quatprop(", "nom": "Calcul de 4e proportionnelle"},
 	{"act": false, "Gpe": 3, "Diff": 1, "fonc": "echelle(", "nom": "Échelles"},
+	{"act": false, "Gpe": 3, "Diff": 1, "fonc": "calcPourcent(", "nom": "Calculs de pourcentages"},
+	{"act": false, "Gpe": 3, "Diff": 1, "fonc": "tauxPourcent(", "nom": "Taux de variation"},
 	/*{"act": false, "Gpe": 4, "Diff": 0, "fonc": "compFrac(", "nom": "Comparer des fractions"},*/
+	{"act": false, "Gpe": 4, "Diff": 1, "fonc": "fracdec(", "nom": "Fraction vers nombre décimal"},
+	{"act": false, "Gpe": 4, "Diff": 1, "fonc": "decfrac(", "nom": "Nombre décimal vers fraction"},
+	{"act": false, "Gpe": 4, "Diff": 1, "fonc": "fraccomp(", "nom": "Comparaison de fractions"},
 	{"act": false, "Gpe": 4, "Diff": 1, "fonc": "fracsimp(", "nom": "Simplification"},
 	{"act": false, "Gpe": 4, "Diff": 2, "fonc": "fraccalc(", "nom": "Calculs avec des fractions"},
 	{"act": false, "Gpe": 5, "Diff": 1, "fonc": "equa1d(1", "nom": "Forme \\(ax=d\\)"},
@@ -67,7 +74,10 @@ var exos = [
 	{"act": false, "Gpe": 9, "Diff": 4,  "fonc": "suitGeoTermesR(", "nom": "Géométrique : \\(n\\)-ième terme (raison connue)"},
 	{"act": false, "Gpe": 9, "Diff": 4,  "fonc": "suitGeoTermes(", "nom": "Géométrique : \\(n\\)-ième terme (raison inconnue)"},
 	{"act": false, "Gpe": 9, "Diff": 3,  "fonc": "suitGeoSommeUn(", "nom": "Géométrique : Somme des \\(n\\) premiers termes (raison connue)"},
-	{"act": false, "Gpe": 9, "Diff": 4,  "fonc": "suitGeoSomme(", "nom": "Géométrique : raison et somme des \\(n\\) premiers termes"}
+	{"act": false, "Gpe": 9, "Diff": 4,  "fonc": "suitGeoSomme(", "nom": "Géométrique : raison et somme des \\(n\\) premiers termes"},
+	{"act": false, "Gpe": 10, "Diff": 1,  "fonc": "lectPts(", "nom": "Lecture de coordonnées de points"},
+	{"act": false, "Gpe": 10, "Diff": 2,  "fonc": "coeffDir(", "nom": "Coefficient directeur d'une droite"},
+	{"act": false, "Gpe": 10, "Diff": 2,  "fonc": "lectVec(", "nom": "Lecture de coordonnée d'un vecteur du plan"}
 ];
 
 //NOMBRES
@@ -198,20 +208,25 @@ function puiss10() {
 	let consigne = "Calculer <b>de tête</b> :";
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
-	for (let j=00;j<3;j++) {
-		let num = Math.floor(Math.random()*1000);
-		let coeff = 10**Math.ceil(Math.random()*3);
-		let op = Math.round(Math.random());
+	for (let j=0;j<3;j++) {
+		let num = randint(1,1000);
+		let cf1 = 10**randint(0,2);
+		let a = num/cf1;
+		let puiss = randint(1,3);
+		let cf2 = 10**puiss
+		let signPuiss = randoppose();
+		let b = 10**(puiss*signPuiss);				
 		let quest,rep;
+		let op = randint(0,1);
 		if (op==0) {
-			quest = chainefrac([num,coeff]);
-			rep = num/coeff;
+			quest = chainefrac([a,b]);
+			rep = (signPuiss===1)? (num/b*cf2)/(cf1*cf2) : (num*cf2)/cf1;
 		} else {
-			quest = num+"\\times"+coeff;
-			rep = num*coeff;
+			quest = a+"\\times"+b;
+			rep = (signPuiss===1)? (num*b)/cf1 : num/(cf1*cf2);
 		}
-		question += "<div>\\("+quest+"\\)</div>";
-		reponse += "<div>\\("+quest+"="+pointVirg(rep.toString())+"\\)</div>";
+		question += "<div>\\("+pointVirg(quest)+"\\)</div>";
+		reponse += "<div>\\("+pointVirg(rep.toString())+"\\)</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
@@ -346,6 +361,26 @@ function quatprop() {
 	return [consigne,question,reponse];
 }
 
+//COEFFICIENT DE PROPORTIONNALITE
+function tabPropCoeff() {
+	let consigne = "<div>Donner le coefficient de proportionnalité du tableau suivant.</div>";
+	let question = "", reponse = "";
+	let on = randint(0,1);
+	let nbs = [];
+	let coeff = randint(1,10);
+	for (let i=0;i<3;i++) {
+		nbs[i] = randint(1,100);
+		nbs[3+i] = nbs[i]*coeff;
+	}
+	for (let i=0;i<6;i++) {
+		nbs[i] = "\\("+nbs[i]+"\\)";
+	}
+	let tabl = "<table class='proportion'><tr><th>A</th><td>"+nbs[0]+"</td><td>"+nbs[1]+"</td><td>"+nbs[2]+"</td></tr><tr><th>B</th><td>"+nbs[3]+"</td><td>"+nbs[4]+"</td><td>"+nbs[5]+"</td></tr></table>";
+	question += tabl;
+	reponse += "<div class='nombres reponse'>Le coefficient de proportionnalité est égal à \\("+coeff+"\\).</div>";
+	return [consigne,question,reponse];
+}
+
 //ECHELLES
 function echelle() {
 	let consigne = "";
@@ -367,8 +402,98 @@ function echelle() {
 	return [consigne,question,reponse];
 }
 
+//POURCENTAGES
+//Calcul de 10%, 20%...
+function calcPourcent() {
+	let L = [15, 20, 25, 30, 35, 40, 45];
+	let p = [10, 5, L[randint(0,L.length-1)]];
+	let consigne = "Effectuer les calculs suivants :";
+	let a = randint(0,100)*10;
+	let q = "", r = "";
+	for (i in p) {
+		q += "<div>"+p[i].toString()+"% de "+a.toString()+"</div>";
+		r += "<div>\\("+pointVirg((p[i]*a/100).toString())+"\\)</div>";
+	}
+	let question = "<div class='nombres'>"+q+"</div>"
+	let reponse = "<div class='reponse nombres'>"+pointVirg(r.toString())+"</div>";
+	return [consigne,question,reponse];
+}
+
+//Taux d'augmentation
+function tauxPourcent() {
+	let consigne = "<div>Retrouver le coefficient multiplicateur associé à une</div>";
+	let a = randoppose();
+	let p = randint(0,90);
+	let question = (a===1) ? "<div class='nombres'>augmentation de \\("+p+" \\%\\).</div>" : "<div class='nombres'>diminution de \\("+p+" \\%\\).</div>"
+	let reponse = "<div class='reponse nombres'>\\("+pointVirg(((100+a*p)/100).toString())+"\\)</div>";
+	return [consigne,question,reponse];
+}
+
 //FRACTIONS
+//FRACTIONS vers DECIMAL
+function fracdec() {
+	let consigne = "<div>Donner la forme décimale des fractions suivantes :</div>";
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
+	let La = [1, 2, 3, 4, 5, 10, 20, 25];
+	let Lb = [2, 4, 5, 10, 20, 25, 50, 100];
+	for (i=0 ; i<3 ; i++) {
+		let a = La[randint(0,La.length-1)], b = Lb[randint(0,Lb.length-1)];
+		let frac = chainefrac([a,b]);
+		question += "<div>\\("+frac+"\\)</div>";
+		reponse += "<div>\\("+frac+"="+pointVirg((a/b).toString())+"\\)</div>";
+	}
+	question += "</div>";
+	reponse += "</div>";
+	return [consigne,question,reponse];
+}
+
+//DECIMAL vers FRACTION
+function decfrac() {
+	let consigne = "<div>Écrire ces nombres sous forme de fractions irréductibles :</div>";
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
+	let La = [1, 2, 3, 4, 5, 10, 20, 25];
+	let Lb = [2, 4, 5, 10, 20, 25, 50, 100];
+	for (i=0 ; i<3 ; i++) {
+		let a = 1, b = 1;
+		while (a == b || Number.isInteger(a/b)) {
+			a = La[randint(0,La.length-1)], b = Lb[randint(0,Lb.length-1)];
+		}
+		let nbs = simpl(a,b);		
+		let frac = chainefrac(nbs);
+		question += "<div>\\("+pointVirg((a/b).toString())+"\\)</div>";
+		reponse += "<div>\\("+pointVirg((a/b).toString())+"="+frac+"\\)</div>";
+	}
+	question += "</div>";
+	reponse += "</div>";
+	return [consigne,question,reponse];
+}
+
 //COMPARAISON DE FRACTIONS
+function fraccomp() {
+	let consigne = "Compléter avec les symboles \\(<\\) ou \\(>\\) :";
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
+	let La = [1, 2, 3, 4, 5, 10, 20, 25];
+	let Lb = [2, 4, 5, 10, 20, 25];
+	for (i=0 ; i<3 ; i++) {
+		let a = 1, b = 1, c = 1, d = 1;
+		while (a == b || Number.isInteger(a/b)) {
+			a = La[randint(0,La.length-1)], b = Lb[randint(0,Lb.length-1)];
+		}
+		while (c == d || Number.isInteger(c/d)) {
+			c = La[randint(0,La.length-1)], d = Lb[randint(0,Lb.length-1)];
+		}		
+		let frac1 = chainefrac([a,b]), frac2 = chainefrac([c,d]);
+		let r = (a/b < c/d)? "<" : ">";
+		question += "<div>\\("+frac1+"\\,\\,\\text{...}\\,\\,"+frac2+"\\)</div>";
+		reponse += "<div>\\("+frac1+"\\,\\,"+r+"\\,\\,"+frac2+"\\)</div>";
+	}
+	question += "</div>";
+	reponse += "</div>";
+	return [consigne,question,reponse];
+}
 
 //SIMPLIFICATION FRACTIONS
 function fracsimp() {
@@ -880,4 +1005,68 @@ function suitGeoSomme() {
 	let question = "<div class='nombres'>\\(u_1="+u[1]+"\\qquad u_2="+u[2]+"\\qquad u_3="+u[3]+"\\)</div>";
 	let reponse = question+"<div class='nombres reponse'>\\(q="+q+"\\qquad S_{"+n+"}="+u[0]+"\\)</div>";
 	return [consigne,question,reponse];	
+}
+
+//REPERAGE ET VECTEURS
+//Coordonnées de points
+function lectPts() {
+	let pts = [
+		[randint(-6,6)/2, randint(-6,6)/2],
+		[randint(-6,6)/2, randint(-6,6)/2]
+	];
+	document.getElementById("question"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
+	let board = graphique([-3.5, 3.5, 3.5, -3.5]);
+	let cerise = {
+			strokeColor: '#901B77',
+			fillColor: '#CA147A',
+			size: '1'
+		},
+		A = board.create('point', [pts[0][0],pts[0][1]], cerise),
+		B = board.create('point', [pts[1][0],pts[1][1]], cerise);
+	let consigne = "Donner les coordonnées des points \\(A\\) et \\(B\\)."
+	let reponse = "<div class='grid nombres reponse'>\\(A("+pointVirg(pts[0][0].toString())+";"+pointVirg(pts[0][1].toString())+")\\)<br>\\(B("+pointVirg(pts[1][0].toString())+";"+pointVirg(pts[1][1].toString())+")\\)";
+	return [consigne,"",reponse];
+}
+
+//Coefficient directeur
+function coeffDir() {
+	let pts = [
+		[randint(0,2), randint(-3,3)],
+		[randint(3,5), randint(-3,3)]
+	];
+	while (pts[1][0] == pts[0][0]) { pts[1][0] = randint(-4,4); }
+	document.getElementById("question"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
+	let board = graphique([-1, 3.5, 6, -3.5]);
+	let cerise = {
+			strokeColor: '#901B77',
+			fillColor: '#CA147A',
+			size: '1'
+		},
+		A = board.create('point', [pts[0][0],pts[0][1]], cerise),
+		B = board.create('point', [pts[1][0],pts[1][1]], cerise),
+		d = board.create('line', [A, B], cerise);
+	let consigne = "Calculer la pente de la droite \\((AB)\\)."
+	let reponse = "<div class='grid nombres reponse'>\\( a="+ pointVirg( (Math.round(((pts[1][1]-pts[0][1])/(pts[1][0]-pts[0][0])*100))/100).toString() ) +" \\)"
+	return [consigne,"",reponse];
+}
+
+//Coordonnées de vecteurs du plan
+function lectVec() {
+	let pts = [
+		[randint(-4,4), randint(-4,4)],
+		[randint(-4,4), randint(-4,4)]
+	];
+	document.getElementById("question"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
+	let board = graphique([-5, 5, 5, -5]);
+	let cerise = {
+			strokeColor: '#901B77',
+			fillColor: '#CA147A',
+			size: '1'
+		},
+		A = board.create('point', [pts[0][0],pts[0][1]], cerise),
+		B = board.create('point', [pts[1][0],pts[1][1]], cerise);
+	var vAB = board.create('line',[[pts[0][0],pts[0][1]], [pts[1][0],pts[1][1]] ],{straightFirst:false, straightLast:false, lastArrow:true});
+	let consigne = "Donner les coordonnées du vecteur \\( \\vec{AB} \\).";
+	let reponse = "<div class='grid nombres reponse'>\\( \\vec{AB} = \\binom{"+pointVirg((pts[1][0]-pts[0][0]).toString())+"}{"+pointVirg((pts[1][1]-pts[0][1]).toString())+"} \\)";
+	return [consigne,"",reponse];
 }

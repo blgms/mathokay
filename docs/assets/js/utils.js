@@ -174,3 +174,12 @@ function equaStr(nbs) {
 	equation += "\\)</div>";
 	return equation;
 }
+
+//Création d'un repère orthonormé
+function graphique(lim) {
+	return JXG.JSXGraph.initBoard("box"+idCarte, {boundingbox: lim, axis:true, keepaspectratio:true, showCopyright:false, shownavigation:false, defaultAxes: {
+			x: { ticks: { minorTicks:1, ticksDistance: 1, insertTicks: true } },
+			y: { ticks: { minorTicks:1, ticksDistance: 1, insertTicks: true } }
+		}
+		});
+}
